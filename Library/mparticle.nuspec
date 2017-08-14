@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+   <metadata minClientVersion="2.8.1">
+       <id>mParticle.Xamarin</id>
+       <version>1.0.0</version>
+       <title>mParticle Xamarin SDK</title>
+       <authors>Wasi Haider, Sam Dozor, mParticle Inc.</authors>
+       <owners>mParticle Inc.</owners>
+       <licenseUrl>https://github.com/mparticle/mparticle-xamarin-sdk</licenseUrl>
+       <projectUrl>https://github.com/mparticle/mparticle-xamarin-sdk</projectUrl>
+       <requireLicenseAcceptance>false</requireLicenseAcceptance>
+       <iconUrl>https://static.mparticle.com/sdk/nuget_logo.png</iconUrl>
+       <description>
+         mParticle Xamarin SDK
+       </description>
+       <summary>
+         mParticle Xamarin SDK
+       </summary>
+       <tags>mparticle, analytics, marketing, xamarin, xamarin.forms, android, ios, plugin for xamarin</tags>
+    <dependencies>
+      <group targetFramework="net">
+      </group>
+      <group targetFramework="MonoAndroid10">
+      </group>
+      <group targetFramework="Xamarin.iOS10">
+      </group>
+       <group targetFramework="portable-net45+win+wpa81+wp80">
+      </group>
+    </dependencies>
+   </metadata>
+   <files>
+
+     <!--Core-->
+     <file src="mParticle.Xamarin/bin/Release/mParticle.*" target="lib/portable-net45+win+wpa81+wp80" />
+     
+     <!--Xamarin.Android-->
+     <file src="mParticle.Xamarin.Android/bin/Release/mParticle.*" target="lib/MonoAndroid10" />
+     
+     <!--Xamarin.iOS-->
+     <file src="mParticle.Xamarin.iOS/bin/Release/mParticle.*" target="lib/Xamarin.iOS10" />
+
+
+   </files>
+</package>
