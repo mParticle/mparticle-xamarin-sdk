@@ -37,6 +37,8 @@ namespace mParticle.Xamarin.iOSBinding
 		string TransactionId { get; set; }
 	}
 
+    
+
 	// @interface MPIHasher : NSObject
 	[BaseType(typeof(NSObject))]
 	[Protocol]
@@ -265,6 +267,12 @@ namespace mParticle.Xamarin.iOSBinding
 		[Export("addProduct:")]
 		void AddProduct(MPProduct product);
 
+        // - (void)addAllProducts:(nonnull NSArray<MPProduct *> *)products shouldLogEvents:(BOOL)shouldLogEvents;
+        [Export("addAllProducts:shouldLogEvents:")]
+        void AddAllProducts(NSArray<MPProduct> products, bool shouldLogEvents);
+
+        // -(
+
 		// -(void)clear;
 		[Export("clear")]
 		void Clear();
@@ -364,6 +372,67 @@ namespace mParticle.Xamarin.iOSBinding
 		[Export("refundTransactionAttributes:clearCart:")]
 		void RefundTransactionAttributes(MPTransactionAttributes transactionAttributes, bool clearCart);
 	}
+
+    //@interface MPIdentityApiResult : NSObject
+    [BaseType(typeof(NSObject))]
+    [Protocol]
+    interface MPIdentityApiResult
+    {
+        // @property(nonatomic, strong, readwrite, nonnull) MParticleUser* user;
+        [Export("user", ArgumentSemantic.Strong)]
+        MParticleUser User { get; set; }
+
+    }
+
+    //typedef void (^MPIdentityApiResultCallback)(MPIdentityApiResult* _Nullable apiResult, NSError * _Nullable error);
+    delegate void MPIdentityApiResultCallback([NullAllowed]MPIdentityApiResult apiResult, NSError error);
+
+    // @interface MPIdentity : NSObject
+    [BaseType(typeof(NSObject))]
+    [Protocol]
+    interface MPIdentityApi
+    {
+
+        // @property(nonatomic, strong, readonly, nullable) MParticleUser* currentUser;
+        [Export("currentUser")]
+        [return: NullAllowed]
+        MParticleUser CurrentUser();
+
+        // - (void) identify:(MPIdentityApiRequest*) identifyRequest completion:(nullable MPIdentityApiResultCallback) completion;
+        [Export("identify:completion:")]
+        void Identify(MPIdentityApiRequest request, MPIdentityApiResultCallback callback);
+
+        // - (void) identifyWithCompletion:(nullable MPIdentityApiResultCallback) completion;
+        [Export("identify:")]
+        void Identify(MPIdentityApiResultCallback callback);
+
+
+        // - (void) login:(MPIdentityApiRequest*) loginRequest completion:(nullable MPIdentityApiResultCallback) completion;
+        [Export("login:completion:")]
+        void Login(MPIdentityApiRequest request, MPIdentityApiResultCallback callback);
+
+
+        // - (void) loginWithCompletion:(nullable MPIdentityApiResultCallback) completion;
+        [Export("login:")]
+        void Login(MPIdentityApiResultCallback callback);
+
+        // - (void) logout:(MPIdentityApiRequest*) logoutRequest completion:(nullable MPIdentityApiResultCallback) completion;
+        [Export("logout:completion:")]
+        void Logout(MPIdentityApiRequest request, MPIdentityApiResultCallback callback);
+
+        // - (void) logoutWithCompletion:(nullable MPIdentityApiResultCallback) completion;
+        [Export("logout:")]
+        void Logout(MPIdentityApiResultCallback callback);
+
+        // - (void) modify:(MPIdentityApiRequest*) modifyRequest completion:(nullable MPIdentityApiResultCallback) completion;
+        [Export("modify:completion:")]
+        void Modify(MPIdentityApiRequest request, MPIdentityApiResultCallback callback);
+    }
+
+    public static class IdentityListenerString
+    {
+        public const string MParticleIdentityStateChangeListenerNotification = "mParticleIdentityStateChangeListenerNotification";
+    }
 
 	// @interface MPDateFormatter : NSObject
 	[BaseType(typeof(NSObject))]
@@ -629,6 +698,169 @@ namespace mParticle.Xamarin.iOSBinding
 		bool CaseInsensitiveContainsObject(string @object);
 	}
 
+
+    //@interface MPAttributionResult : NSObject
+    [BaseType(typeof(NSObject))]
+    [Protocol]
+    interface MPAttributionResult
+    {
+        // @property(nonatomic) NSDictionary* linkInfo;
+        [Export("linkInfo", ArgumentSemantic.Strong)]
+        NSDictionary LinkInfo { get; set; }
+
+        // @property(nonatomic, readonly) NSNumber* kitCode;
+        [Export("kitCode", ArgumentSemantic.Strong)]
+        NSNumber KitCode { get; }
+
+        // @property(nonatomic, readonly) NSString* kitName;
+        [Export("kitName", ArgumentSemantic.Strong)]
+        NSString KitName { get; }
+    }
+
+    //@interface MParticleUser : NSObject
+    [BaseType(typeof(NSObject))]
+    [Protocol]
+    interface MParticleUser
+    {
+        // @property(readonly, strong, nonnull) NSNumber* userId;
+        [Export("userId", ArgumentSemantic.Strong)]
+        NSNumber UserId { get; set; }
+
+        // @property(readonly, strong, nonnull) NSDictionary<MPUserIdentity*, NSString*>* userIdentities;
+        [Export("userIdentities", ArgumentSemantic.Strong)]
+        NSDictionary<NSNumber, NSString> UserIdentities { get; set; }
+
+        // @property(readwrite, strong, nonnull) NSDictionary<NSString*, id>* userAttributes;
+        [Export("userAttributes", ArgumentSemantic.Strong)]
+        NSDictionary<NSString, NSObject> UserAttributes { get; set; }
+
+        // @property(readonly, strong, nonnull) MPCart* cart;
+        [Export("cart", ArgumentSemantic.Strong)]
+        MPCart Cart { get; set; }
+
+        // - (nullable NSNumber *)incrementUserAttribute:(NSString*) key byValue:(NSNumber*) value;
+        [Export("incrementUserAttributes:value:")]
+        NSNumber IncrementUserAttribute(NSString key, NSNumber value);
+
+        // - (void) setUserAttribute:(NSString*) key value:(nullable id) value;
+        [Export("setUserAttribute:value:")]
+        void SetUserAttribute(NSString key, NSObject value);
+
+        // - (void) setUserAttributeList:(NSString*) key values:(nullable NSArray<NSString*> *)values;
+        [Export("setUserAttributeList:values:")]
+        void SetUserAttributeList(NSString key, NSArray<NSString> values);
+
+        // - (void) setUserTag:(NSString*) tag;
+        [Export("setUserTag:")]
+        void SetUserTag(NSString tag);
+
+        // - (void) removeUserAttribute:(NSString*) key;
+        [Export("removeUserAttribute:")]
+        void RemoveUserAttribute(NSString key);
+
+        // -(void)userSegments:(NSTimeInterval)timeout endpointId:(NSString * _Nonnull)endpointId completionHandler:(MPUserSegmentsHandler _Nonnull)completionHandler;
+        [Export("userSegments:endpointId:completionHandler:")]
+        void UserSegments(double timeout, string endpointId, MPUserSegmentsHandler completionHandler);
+
+    }
+
+    // @property(nonatomic, copy, nullable) void (^onUserAlias)(MParticleUser* previousUser, MParticleUser* newUser);
+    delegate void OnUserAlias(MParticleUser previousUser, MParticleUser newUser);
+
+
+    // @interface MPIdentityApiRequest : NSObject
+    [BaseType(typeof(NSObject))]
+    [Protocol]
+    interface MPIdentityApiRequest
+    {
+        // + (MPIdentityApiRequest*) requestWithEmptyUser;
+        [Static]
+        [Export("requestWithEmptyUser")]
+        MPIdentityApiRequest RequestWithEmptyUser();
+
+        // + (MPIdentityApiRequest*) requestWithUser:(MParticleUser*) user;
+        [Static]
+        [Export("requestWithUser:", ArgumentSemantic.Strong)]
+        MPIdentityApiRequest RequestWithUser(MParticleUser user);
+
+        // @property(nonatomic, strong, nullable) NSString* email;
+        [Export("email", ArgumentSemantic.Strong)]
+        string Email { get; set; }
+
+        // @property(nonatomic, strong, nullable) NSString* customerId;
+        [Export("customerId", ArgumentSemantic.Strong)]
+        string CustomerId { get; set; }
+
+        // @property(nonatomic, strong, nullable, readonly) NSMutableDictionary* userIdentities;
+        [Export("userIdentities", ArgumentSemantic.Strong)]
+        NSMutableDictionary<NSNumber, NSString> UserIdentities { get; }
+
+        [Export("onUserAlias")]
+        OnUserAlias OnUserAlias { set; }
+
+    }
+
+    // @interface MParticleOptions : NSObject
+    [BaseType(typeof(NSObject))]
+    [Protocol]
+    interface MParticleOptions
+    {
+        // @property(nonatomic, strong, readwrite) NSString* apiKey;
+        [Export("apiKey", ArgumentSemantic.Strong)]
+        string ApiKey { get; set; }
+
+        // @property(nonatomic, strong, readwrite) NSString* apiSecret;
+        [Export("apiSecret", ArgumentSemantic.Strong)]
+        string ApiSecret { get; set; }
+
+        // @property(nonatomic, strong, readwrite) NSString* sharedGroupID;
+        [Export("sharedGroupID", ArgumentSemantic.Strong)]
+        string SharedGroupId { get; set; }
+
+        // @property(nonatomic, unsafe_unretained, readwrite) MPInstallationType installType;
+        [Export("installType", ArgumentSemantic.Assign)]
+        MPInstallationType InstallType { get; set; }
+
+        // @property(nonatomic, strong, readwrite) MPIdentityApiRequest* identifyRequest;
+        [Export("identifyRequest", ArgumentSemantic.Strong)]
+        MPIdentityApiRequest IdentifyRequest { get; set; }
+
+        // @property(nonatomic, unsafe_unretained, readwrite) MPEnvironment environment;
+        [Export("environment", ArgumentSemantic.Assign)]
+        MPEnvironment Environment { get; set; }
+
+        // @property(nonatomic, unsafe_unretained, readwrite) BOOL proxyAppDelegate;
+        [Export("proxyAppDelegate", ArgumentSemantic.Assign)]
+        bool ProxyAppDelegate { get; set; }
+
+        // @property(nonatomic, unsafe_unretained, readwrite) BOOL automaticSessionTracking;
+        [Export("automaticSessionTracking", ArgumentSemantic.Assign)]
+        bool AutomaticSessionTracking { get; set; }
+
+        // @property(atomic, strong, nullable) NSString* customUserAgent;
+        [Export("customUserAgent", ArgumentSemantic.Strong)]
+        string CustomUserAgent { get; set; }
+
+        // @property(atomic, unsafe_unretained, readwrite) BOOL collectUserAgent;
+        [Export("collectUserAgent", ArgumentSemantic.Assign)]
+        bool CollectUserAgent { get; set; }
+
+        // @property(nonatomic, copy) void (^onIdentifyComplete)(MPIdentityApiResult* _Nullable apiResult, NSError *_Nullable error);
+        [Export("onIdentifyComplete")]
+        OnIdentifyComplete OnIdentifyComplete { set; }
+
+        // @property(nonatomic, copy) void (^onAttributionComplete)(MPAttributionResult* _Nullable attributionResult, NSError *_Nullable error);
+        [Export("onAttributionComplete")]
+        OnAttributionCompleted OnAttributionCompleted { set; }
+
+    }
+
+    // void (^onIdentifyComplete)(MPIdentityApiResult* _Nullable apiResult, NSError *_Nullable error);
+    delegate void OnIdentifyComplete([NullAllowed] MPIdentityApiResult request, [NullAllowed] NSError error);
+
+    // void (^onAttributionComplete)(MPAttributionResult* _Nullable attributionResult, NSError *_Nullable error);
+    delegate void OnAttributionCompleted([NullAllowed] MPAttributionResult attributionResult, [NullAllowed] NSError error);
+
 	// @interface MParticle : NSObject
 	[BaseType(typeof(NSObject))]
 	[Protocol]
@@ -641,6 +873,10 @@ namespace mParticle.Xamarin.iOSBinding
 		// @property (readonly, nonatomic, strong) MPCommerce * _Nonnull commerce;
 		[Export("commerce", ArgumentSemantic.Strong)]
 		MPCommerce Commerce { get; }
+
+        // @property (readonly, nonatomic, strong) MPIdentityApi * _Nonnull commerce;
+        [Export("identity", ArgumentSemantic.Strong)]
+        MPIdentityApi Identity { get; }
 
 		// @property (nonatomic, unsafe_unretained) BOOL debugMode;
 		[Export("debugMode")]
@@ -662,10 +898,6 @@ namespace mParticle.Xamarin.iOSBinding
 		[Export("logLevel", ArgumentSemantic.Assign)]
 		MPILogLevel LogLevel { get; set; }
 
-		// @property (readonly, nonatomic, unsafe_unretained) BOOL measuringNetworkPerformance;
-		[Export("measuringNetworkPerformance")]
-		bool MeasuringNetworkPerformance { get; }
-
 		// @property (readwrite, nonatomic, unsafe_unretained) BOOL optOut;
 		[Export("optOut")]
 		bool OptOut { get; set; }
@@ -673,6 +905,14 @@ namespace mParticle.Xamarin.iOSBinding
 		// @property (readonly, nonatomic, unsafe_unretained) BOOL proxiedAppDelegate;
 		[NullAllowed, Export("proxiedAppDelegate", ArgumentSemantic.Assign)]
 		NSObject WeakProxiedAppDelegate { get; }
+
+        // @property (nonatomic, unsafe_unretained) BOOL automaticSessionTracking;
+        [Export("automaticSessionTracking", ArgumentSemantic.Assign)]
+        bool AutomaticSessionTracking { get; }
+
+        // @property (atomic, strong, nullable) NSString *customUserAgent;
+        [Export("customUserAgent", ArgumentSemantic.Strong)]
+        string CustomUserAgent { get; set; }
 
 		// @property (nonatomic, strong) NSData * _Nullable pushNotificationToken;
 		[NullAllowed, Export("pushNotificationToken", ArgumentSemantic.Strong)]
@@ -690,34 +930,22 @@ namespace mParticle.Xamarin.iOSBinding
 		[Export("uploadInterval")]
 		double UploadInterval { get; set; }
 
-		// @property (readonly, nonatomic, strong) NSDictionary<NSString *,id> * _Nullable userAttributes;
-		[NullAllowed, Export("userAttributes", ArgumentSemantic.Strong)]
-		NSDictionary<NSString, NSObject> UserAttributes { get; }
-
 		// @property (readonly, nonatomic, strong) NSString * _Nonnull version;
 		[Export("version", ArgumentSemantic.Strong)]
 		string Version { get; }
 
 		// +(instancetype _Nonnull)sharedInstance;
 		[Static]
-		[Export("sharedInstance")]
-		MParticle SharedInstance();
+        [Export("sharedInstance")]
+        MParticle SharedInstance { get; set; }
 
 		// -(void)start;
 		[Export("start")]
 		void Start();
 
-		// -(void)startWithKey:(NSString * _Nonnull)apiKey secret:(NSString * _Nonnull)secret;
-		[Export("startWithKey:secret:")]
-		void StartWithKey(string apiKey, string secret);
-
-		// -(void)startWithKey:(NSString * _Nonnull)apiKey secret:(NSString * _Nonnull)secret installationType:(MPInstallationType)installationType environment:(MPEnvironment)environment;
-		[Export("startWithKey:secret:installationType:environment:")]
-		void StartWithKey(string apiKey, string secret, MPInstallationType installationType, MPEnvironment environment);
-
-		// -(void)startWithKey:(NSString * _Nonnull)apiKey secret:(NSString * _Nonnull)secret installationType:(MPInstallationType)installationType environment:(MPEnvironment)environment proxyAppDelegate:(BOOL)proxyAppDelegate;
-		[Export("startWithKey:secret:installationType:environment:proxyAppDelegate:")]
-		void StartWithKey(string apiKey, string secret, MPInstallationType installationType, MPEnvironment environment, bool proxyAppDelegate);
+        // - (void)startWithOptions:(MParticleOptions *)options;
+        [Export("startWithOptions:")]
+        void StartWithOptions(MParticleOptions options);
 
 		// -(void)didReceiveLocalNotification:(UILocalNotification * _Nonnull)notification;
 		[Export("didReceiveLocalNotification:")]
@@ -882,14 +1110,6 @@ namespace mParticle.Xamarin.iOSBinding
 		[Export("endLocationTracking")]
 		void EndLocationTracking();
 
-		// -(void)beginMeasuringNetworkPerformance;
-		[Export("beginMeasuringNetworkPerformance")]
-		void BeginMeasuringNetworkPerformance();
-
-		// -(void)endMeasuringNetworkPerformance;
-		[Export("endMeasuringNetworkPerformance")]
-		void EndMeasuringNetworkPerformance();
-
 		// -(void)excludeURLFromNetworkPerformanceMeasuring:(NSURL * _Nonnull)url;
 		[Export("excludeURLFromNetworkPerformanceMeasuring:")]
 		void ExcludeURLFromNetworkPerformanceMeasuring(NSUrl url);
@@ -898,13 +1118,6 @@ namespace mParticle.Xamarin.iOSBinding
 		[Export("logNetworkPerformance:httpMethod:startTime:duration:bytesSent:bytesReceived:")]
 		void LogNetworkPerformance(string urlString, string httpMethod, double startTime, double duration, nuint bytesSent, nuint bytesReceived);
 
-		// -(void)preserveQueryMeasuringNetworkPerformance:(NSString * _Nonnull)queryString;
-		[Export("preserveQueryMeasuringNetworkPerformance:")]
-		void PreserveQueryMeasuringNetworkPerformance(string queryString);
-
-		// -(void)resetNetworkPerformanceExclusionsAndFilters;
-		[Export("resetNetworkPerformanceExclusionsAndFilters")]
-		void ResetNetworkPerformanceExclusionsAndFilters();
 
 		// -(NSNumber * _Nullable)incrementSessionAttribute:(NSString * _Nonnull)key byValue:(NSNumber * _Nonnull)value;
 		[Export("incrementSessionAttribute:byValue:")]
@@ -924,35 +1137,6 @@ namespace mParticle.Xamarin.iOSBinding
 		[return: NullAllowed]
 		string SurveyURL(MPSurveyProvider surveyProvider);
 
-		// -(NSNumber * _Nullable)incrementUserAttribute:(NSString * _Nonnull)key byValue:(NSNumber * _Nonnull)value;
-		[Export("incrementUserAttribute:byValue:")]
-		[return: NullAllowed]
-		NSNumber IncrementUserAttribute(string key, NSNumber value);
-
-		// -(void)logout;
-		[Export("logout")]
-		void Logout();
-
-		// -(void)setUserAttribute:(NSString * _Nonnull)key value:(id _Nullable)value;
-		[Export("setUserAttribute:value:")]
-		void SetUserAttribute(string key, [NullAllowed] NSObject value);
-
-		// -(void)setUserAttribute:(NSString * _Nonnull)key values:(NSArray<NSString *> * _Nullable)values;
-		[Export("setUserAttribute:values:")]
-		void SetUserAttribute(string key, [NullAllowed] string[] values);
-
-		// -(void)setUserIdentity:(NSString * _Nullable)identityString identityType:(MPUserIdentity)identityType;
-		[Export("setUserIdentity:identityType:")]
-		void SetUserIdentity([NullAllowed] string identityString, MPUserIdentity identityType);
-
-		// -(void)setUserTag:(NSString * _Nonnull)tag;
-		[Export("setUserTag:")]
-		void SetUserTag(string tag);
-
-		// -(void)removeUserAttribute:(NSString * _Nonnull)key;
-		[Export("removeUserAttribute:")]
-		void RemoveUserAttribute(string key);
-
 		// -(void)userNotificationCenter:(UNUserNotificationCenter * _Nonnull)center willPresentNotification:(UNNotification * _Nonnull)notification;
 		[Export("userNotificationCenter:willPresentNotification:")]
 		void UserNotificationCenter(UNUserNotificationCenter center, UNNotification notification);
@@ -960,10 +1144,6 @@ namespace mParticle.Xamarin.iOSBinding
 		// -(void)userNotificationCenter:(UNUserNotificationCenter * _Nonnull)center didReceiveNotificationResponse:(UNNotificationResponse * _Nonnull)response;
 		[Export("userNotificationCenter:didReceiveNotificationResponse:")]
 		void UserNotificationCenter(UNUserNotificationCenter center, UNNotificationResponse response);
-
-		// -(void)userSegments:(NSTimeInterval)timeout endpointId:(NSString * _Nonnull)endpointId completionHandler:(MPUserSegmentsHandler _Nonnull)completionHandler;
-		[Export("userSegments:endpointId:completionHandler:")]
-		void UserSegments(double timeout, string endpointId, MPUserSegmentsHandler completionHandler);
 
 		// -(void)initializeWebView:(UIWebView * _Nonnull)webView;
 		[Export("initializeWebView:")]

@@ -6,7 +6,8 @@
     
   <!-- Same issue as above. LogLevel field name inside LogLevel class name would be problematic-->
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle.LogLevel']/field[@name='logLevel']" name="managedName">LogLevelValue</attr>
-  
+
+    
   <!-- Was complaining about the function being public-->
   <attr path="/api/package[@name='com.mparticle.messaging']/class[@name='ProviderCloudMessage']/method[@name='buildNotification' and count(parameter)=1 and parameter[1][@type='android.content.Context']]" name="visibility">protected</attr>
 
@@ -57,7 +58,7 @@
   <attr path="/api/package[@name='com.mparticle.commerce']/class[@name='Impression']/constructor[@name='Impression' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='com.mparticle.commerce.Product']]/parameter[@type='java.lang.String']" name="name">listName</attr>
   <attr path="/api/package[@name='com.mparticle']/class[@name='MPEvent.Builder']/method[@name='parseString' and count(parameter)=1 and parameter[1][@type='java.lang.String']]/parameter[@type='java.lang.String']" name="name">builderString</attr> 
   <attr path="/api/package[@name='com.mparticle.commerce']/class[@name='TransactionAttributes']/constructor[@name='TransactionAttributes' and count(parameter)=1 and parameter[1][@type='java.lang.String']]/parameter[@type='java.lang.String']" name="name">transactionId</attr> 
-
+        
   <!-- Log* Methods -->
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='logEvent' and count(parameter)>=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='com.mparticle.MParticle.EventType']]/parameter[@name='p0']" name="name">eventName</attr>
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='logEvent']/parameter[@type='long']" name="name">eventLength</attr>
@@ -87,30 +88,16 @@
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='logPushRegistration' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String']]/parameter[@name='p1']" name="name">senderId</attr>
 
   <!-- Set/Remove Attributes, Ids and other stuff-->
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='setUserAttribute' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.Object']]/parameter[@type='java.lang.String']" name="name">key</attr>
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='setUserAttribute' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.Object']]/parameter[@type='java.lang.Object']" name="name">value</attr>
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='setUserAttributeList' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.util.List&lt;java.lang.String&gt;']]/parameter[@type='java.lang.String']" name="name">key</attr>
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='setUserAttributeList' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.util.List&lt;java.lang.String&gt;']]/parameter[@type='java.util.List&lt;java.lang.String&gt;']" name="name">attributeList</attr>
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='setUserIdentity' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='com.mparticle.MParticle.IdentityType']]/parameter[@type='java.lang.String']" name="name">id</attr>
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='setSessionAttribute' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.Object']]/parameter[@type='java.lang.String']" name="name">key</attr>
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='setSessionAttribute' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.Object']]/parameter[@type='java.lang.Object']" name="name">value</attr>
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='setUploadInterval' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@type='int']" name="name">uploadInterval</attr>
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='setUserTag' and count(parameter)=1 and parameter[1][@type='java.lang.String']]/parameter[@type='java.lang.String']" name="name">tag</attr>
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='removeUserAttribute' and count(parameter)=1 and parameter[1][@type='java.lang.String']]/parameter[@type='java.lang.String']" name="name">key</attr>
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='removeUserIdentity' and count(parameter)=1 and parameter[1][@type='java.lang.String']]/parameter[@type='java.lang.String']" name="name">id</attr>
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='removeUserTag' and count(parameter)=1 and parameter[1][@type='java.lang.String']]/parameter[@type='java.lang.String']" name="name">tag</attr>
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='getSurveyUrl' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@type='int']" name="name">kitId</attr>
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='getUserSegments' and count(parameter)=3 and parameter[1][@type='long'] and parameter[2][@type='java.lang.String'] and parameter[3][@type='com.mparticle.segmentation.SegmentListener']]/parameter[@type='long']" name="name">timeout</attr>
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='getUserSegments' and count(parameter)=3 and parameter[1][@type='long'] and parameter[2][@type='java.lang.String'] and parameter[3][@type='com.mparticle.segmentation.SegmentListener']]/parameter[@type='java.lang.String']" name="name">endpointId</attr>
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='getUserSegments' and count(parameter)=3 and parameter[1][@type='long'] and parameter[2][@type='java.lang.String'] and parameter[3][@type='com.mparticle.segmentation.SegmentListener']]/parameter[@type='com.mparticle.segmentation.SegmentListener']" name="name">listener</attr>
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='incrementSessionAttribute' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='int']]/parameter[@type='java.lang.String']" name="name">key</attr>
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='incrementSessionAttribute' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='int']]/parameter[@type='int']" name="name">value</attr>
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='incrementUserAttribute' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='int']]/parameter[@type='java.lang.String']" name="name">key</attr>
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='incrementUserAttribute' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='int']]/parameter[@type='int']" name="name">value</attr>
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='isKitActive' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@type='int']" name="name">serviceProvderId</attr>
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='isProviderActive' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@type='int']" name="name">serviceProvderId</attr>
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='leaveBreadcrumb' and count(parameter)=1 and parameter[1][@type='java.lang.String']]/parameter[@type='java.lang.String']" name="name">breadcrumb</attr>
-  
+  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticleOptions.Builder']/method[@name='pushRegistration']/paramter[@name='p0']" name="name">instanceId</attr>
+  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticleOptions.Builder']/method[@name='pushRegistration']/paramter[@name='p1']" name="name">senderId</attr>
   <!--Renaming specific types in all package/classes/methods/constructors-->
   
   <attr path="/api/package[@name='com.mparticle.commerce']/class[@name='ProductBagApi']/method[*]/parameter[@type='java.lang.String']" name="name">bagName</attr>
@@ -138,5 +125,24 @@
   <attr path="/api/package[@name='com.mparticle.commerce']" name="managedName">mParticle.Xamarin.Android.CommerceBinding</attr>
   <attr path="/api/package[@name='com.mparticle.segmentation']" name="managedName">mParticle.Xamarin.Android.SegmentationBinding</attr>
   <attr path="/api/package[@name='com.mparticle.media']" name="managedName">mParticle.Xamarin.Android.MediaBinding</attr>
+  <attr path="/api/package[@name='com.mparticle.identity']" name="managedName">mParticle.Xamarin.Android.IdentityBinding</attr>
 
+  <!-- Rename some Interface parameters -->
+  <attr path="/api/package[@name='com.mparticle']/interface[@name='AttributionListener']/method[@name='onError']/parameter[@type='com.mparticle.AttributionError']" name="name">attributionError</attr>   
+  <attr path="/api/package[@name='com.mparticle']/interface[@name='AttributionListener']/method[@name='onResult']/parameter[@type='com.mparticle.AttributionResult']" name="name">attributionResult</attr>   
+  <attr path="/api/package[@name='com.mparticle.identity']/interface[@name='UserAliasHandler']/method[@name='onUserAlias']/parameter[@name='p0']" name="name">previousUser</attr>
+  <attr path="/api/package[@name='com.mparticle.identity']/interface[@name='UserAliasHandler']/method[@name='onUserAlias']/parameter[@name='p1']" name="name">newUser</attr>
+  <attr path="/api/package[@name='com.mparticle.identity']/class[@name='IdentityStateListener']/method[@name='onUserIdentified']/parameter[@name='p0']" name="name">user</attr>
+  <attr path="/api/package[@name='com.mparticle.identity']/class[@name='TaskFailureListener']/method[@name='onFailure']/parameter[@name='p0']" name="name">result</attr>
+  <attr path="/api/package[@name='com.mparticle.identity']/class[@name='TaskSuccessListener']/method[@name='onResult']/parameter[@name='p0']" name="name">result</attr>
+
+    
+    <!-- Resolve mismatches between Java Generics and C# -->
+  <attr path="/api/package[@name='com.mparticle.identity']/class[@name='BaseIdentityTask']/method[@name='addFailureListener']" name="return">com.mparticle.MParticleTask&lt;com.mparticle.identity.IdentityApiResult&gt;</attr>
+  <attr path="/api/package[@name='com.mparticle.identity']/class[@name='BaseIdentityTask']/method[@name='addSuccessListener']" name="return">com.mparticle.MParticleTask&lt;com.mparticle.identity.IdentityApiResult&gt;</attr>
+
+  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticleTask']/method[@name='getResult']" name="return">com.mparticle.identity.IdentityApiResult</attr>
+  <attr path="/api/package[@name='com.mparticle.identity']/class[@name='BaseIdentityTask']/method[@name='getResult']" name="return">com.mparticle.identity.IdentityApiResult</attr>
+
+    
 </metadata>

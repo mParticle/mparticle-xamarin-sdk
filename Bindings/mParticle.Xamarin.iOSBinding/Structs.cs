@@ -73,16 +73,19 @@ namespace mParticle.Xamarin.iOSBinding
     [Native]
     public enum MPUserIdentity : long
     {
-        Other = 0,
-        CustomerId,
-        Facebook,
-        Twitter,
-        Google,
-        Microsoft,
-        Yahoo,
-        Email,
-        Alias,
-        FacebookCustomAudienceId
+        MPUserIdentityOther = 0,
+        MPUserIdentityCustomerId = 1,
+        MPUserIdentityFacebook = 2,
+        MPUserIdentityTwitter = 3,
+        MPUserIdentityGoogle = 4,
+        MPUserIdentityMicrosoft = 5,
+        MPUserIdentityYahoo = 6,
+        MPUserIdentityEmail = 7,
+        MPUserIdentityAlias = 8,
+        MPUserIdentityFacebookCustomAudienceId = 9,
+        MPUserIdentityOther2 = 10,
+        MPUserIdentityOther3 = 11,
+        MPUserIdentityOther4 = 12
     }
 
     [Native]

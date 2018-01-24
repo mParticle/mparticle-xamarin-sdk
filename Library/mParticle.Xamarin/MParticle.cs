@@ -3,9 +3,9 @@ namespace mParticle.Xamarin
 {
     public static class MParticle
     {
-        static Lazy<MParticleSDKBase> TTS = new Lazy<MParticleSDKBase>(() => CreateInstance(), System.Threading.LazyThreadSafetyMode.PublicationOnly);
+        static Lazy<MParticleSDK> TTS = new Lazy<MParticleSDK>(() => CreateInstance(), System.Threading.LazyThreadSafetyMode.PublicationOnly);
 
-        public static MParticleSDKBase Instance
+        public static MParticleSDK Instance
         {
             get
             {
@@ -18,12 +18,12 @@ namespace mParticle.Xamarin
             }
         }
 
-        static MParticleSDKBase CreateInstance()
+        static MParticleSDK CreateInstance()
         {
             #if PORTABLE
                 return null;
             #else
-                return new MParticleSDK();
+                return new MParticleSDKImpl();
             #endif
         }
 

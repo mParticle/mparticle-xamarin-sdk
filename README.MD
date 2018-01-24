@@ -8,6 +8,10 @@ This SDK is distributed via the public NuGet gallery: https://www.nuget.org/pack
 
 If you have both an iOS and an Android project, you should add the NuGet package to each following the Xamarin Add Package dialog. [See here](https://developer.xamarin.com/guides/cross-platform/xamarin-studio/nuget_walkthrough/) for a detailed walkthrough on using NuGet with a Xamarin project.
 
+```bash
+Install-Package mParticle.Xamarin -Version 2.0.0
+```
+
 ### mParticle Singleton
 
 The mParticle.Xamarin package contains a class file `MParticle.cs`, which exposes the mParticle API via `MParticle.Instance`.
@@ -25,12 +29,21 @@ namespace MyProject
         void Example ()
         {
          //use the correct workspace API key and secret for iOS and Android
+         string apiKey = "";
+         string apiSecret = "";
          #if __ANDROID__
-          MParticle.Instance.Initialize("REPLACE ME", "REPLACE ME");
+				apiKey = "REPLACE ME ANDROID KEY", ;
+				apiSecret = "REPLACE ME ANDROID SECRET"
          #elif __IOS__
-          MParticle.Instance.Initialize("REPLACE ME", "REPLACE ME");
-         #endif
-        }
+          		apiKey = "REPLACE ME IOS KEY", ;
+				apiSecret = "REPLACE ME IOS SECRET"         
+		 #endif
+		 	
+	 	new MParticleSDK().Initialize(new MParticleOptions()
+        {
+        	ApiKey = apiKey,
+        	ApiSecret = apiSecret
+        });
     }
 }
 ```
@@ -95,12 +108,41 @@ MParticle.Instance.LogScreenEvent
 );
 ```
 
-#### User Identities
+### Identity
+
+Version 2 of the MParticle Xamarin SDK supports the full range of Identity Sync features. For more indepth information about MParticle's Identity features, checkout either the [Android docs](http://docs.mparticle.com/developers/sdk/android/identity/) or the [iOS docs](http://docs.mparticle.com/developers/sdk/ios/identity) on the topic
+
+
+#### Accessing IdentityApi
+
+To get a reference to the IdentityApi
+
+```cs
+var identityApi = MParticle.Instance.Identity;
+```
+
+#### Updating Identities 
+
 
 User identities allow you to associate specific identifiers with the current user: 
 
 ```cs
-MParticle.Instance.SetUserIdentity("example@example.com", UserIdentity.Email);
+identityApi.CurrentUser.UserIdentities.Add(UserIdentity.CustomerId, "customerId");
+identityApi.CurrentUser.UserIdentities.Remove(UserIdentity.Email);
+
+identityApi.Modify(new IdentityApiRequest(identity.CurrentUser));
+```
+
+or
+
+```cs
+identityApi.Modify(new IdentityApiRequest() 
+                {
+                    UserIdentities = new Dictionary<UserIdentity, string>()
+                    {
+                        { UserIdentity.CustomerId, "" }
+                    }
+                });
 ```
 
 In addition to this, the underlying iOS and Android SDKs will automatically collect device IDs.
@@ -110,15 +152,44 @@ In addition to this, the underlying iOS and Android SDKs will automatically coll
 User attributes allow for free form description of a user for segmentation and analytics:
 
 ```cs
-MParticle.Instance.SetUserAttribute ("foo attribute", "bar value");
+identityApi.CurrentUser.UserAttributes.Add("foo attribute", "bar value");
 ```
 
 ```cs
-MParticle.Instance.SetUserTag("foo tag");
+identityApi.CurrentUser.SetUserTag("foo tag");
 ```
 
 ```cs
-MParticle.Instance.RemoveUserAttribute("foo attribute/tag");
+identityApi.CurrentUser.UserAttributes.Remove("foo attribute");
+```
+
+#### Identity Change Callbacks
+
+Since the IdentityApi calls `identify`, `login()`, `logout()`, and `modify` are asynchronous, you can register a callback for the results of the request
+
+```
+ identityApi.Logout()
+         .AddSuccessListener(success => Console.WriteLine(success.User.UserAttributes))
+         .AddFailureListener(failure => Console.WriteLine("HttpCode = " + failure.HttpCode + "/nErrors = " + failure.Errors));
+```
+
+#### User Aliasing
+
+When a new User is returned through and IdentityApi request, you may want to transition the SDK and data from the previous user to the new user.
+
+```
+identityApi.Login(new IdentityApiRequest()
+            {
+                UserAliasHandler = (previousUser, newUser) => 
+                {
+                    // do some stuff, but for example:
+                    var persistentAttribute = "persistent user attribute";
+                    if (previousUser.UserAttributes.ContainsKey(persistentAttribute))
+                    {
+                        newUser.UserAttributes.Add(persistentAttribute, previousUser.UserAttributes.GetValueOrDefault(persistentAttribute));
+                    }
+                }
+            });
 ```
 
 ## Kit Integrations

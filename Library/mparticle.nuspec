@@ -4,9 +4,9 @@
        <id>mParticle.Xamarin</id>
        <version>1.0.0</version>
        <title>mParticle Xamarin SDK</title>
-       <authors>Wasi Haider, Sam Dozor, mParticle Inc.</authors>
+       <authors>Wasi Haider, Sam Dozor, Will Passidomo, mParticle Inc.</authors>
        <owners>mParticle Inc.</owners>
-       <licenseUrl>https://github.com/mparticle/mparticle-xamarin-sdk</licenseUrl>
+       <licenseUrl>https://github.com/mParticle/mparticle-xamarin-sdk/blob/master/LICENSE</licenseUrl>
        <projectUrl>https://github.com/mparticle/mparticle-xamarin-sdk</projectUrl>
        <requireLicenseAcceptance>false</requireLicenseAcceptance>
        <iconUrl>https://static.mparticle.com/sdk/nuget_logo.png</iconUrl>
