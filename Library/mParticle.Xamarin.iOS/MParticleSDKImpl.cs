@@ -41,7 +41,7 @@ namespace mParticle.Xamarin
             mparticle.UploadInterval = options.UploadInterval;
             mparticle.SessionTimeout = options.SessionTimeout;
             mparticle.LogLevel = Utils.ConvertToMpLogLevel(options.LogLevel);
-            if (options.LocationTracking.Enabled)
+            if (options.LocationTracking != null && options.LocationTracking.Enabled)
             {
                 mparticle.BeginLocationTracking(options.LocationTracking.MinDistance, options.LocationTracking.MinDistance);
             }

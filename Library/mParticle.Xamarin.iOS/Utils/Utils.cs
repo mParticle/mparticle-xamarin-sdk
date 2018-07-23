@@ -68,16 +68,25 @@ namespace mParticle.Xamarin.iOS.Utils
 
         internal static iOSBinding.MParticleOptions ConvertToMpOptions(MParticleOptions options)
         {
-            return new iOSBinding.MParticleOptions()
+            var mpOptions = new iOSBinding.MParticleOptions();
+
+            mpOptions.InstallType = ConvertToMpInstallType(options.InstallType);
+            mpOptions.Environment = ConvertToMpEnvironment(options.Environment);
+            mpOptions.ApiKey = options.ApiKey;
+            mpOptions.ApiSecret = options.ApiSecret;
+            if (options.IdentifyRequest != null)
             {
-                InstallType = ConvertToMpInstallType(options.InstallType),
-                Environment = ConvertToMpEnvironment(options.Environment),
-                ApiKey = options.ApiKey,
-                ApiSecret = options.ApiSecret,
-                IdentifyRequest = ConvertToMpIdentityRequest(options.IdentifyRequest),
-                OnAttributionCompleted = ConvertToMpAttributionListener(options.AttributionListener),
-                OnIdentifyComplete = ConvertToMpIdentifyCompleteListener(options.IdentityStateListener)
-            };
+                mpOptions.IdentifyRequest = ConvertToMpIdentityRequest(options.IdentifyRequest);
+            }
+            if (options.AttributionListener != null)
+            {
+                mpOptions.OnAttributionCompleted = ConvertToMpAttributionListener(options.AttributionListener);
+            }
+            if (options.IdentityStateListener != null)
+            {
+                mpOptions.OnIdentifyComplete = ConvertToMpIdentifyCompleteListener(options.IdentityStateListener);
+            }
+            return mpOptions;
         }
 
         internal static iOSBinding.MPProduct ConvertToMpProduct(Product product)
@@ -124,14 +133,24 @@ namespace mParticle.Xamarin.iOS.Utils
 
         internal static iOSBinding.MPIdentityApiRequest ConvertToMpIdentityRequest(IdentityApiRequest request)
         {
-            var mpRequest = new iOSBinding.MPIdentityApiRequest();
-            request.UserIdentities.ToList().ForEach(pair =>
+            if (request == null)
             {
-                mpRequest.UserIdentities.Add(
-                    new NSNumber((float)(int)pair.Key),
-                    new NSString(pair.Value));
-            });
-            mpRequest.OnUserAlias = new iOSBinding.OnUserAlias((previousUser, newUser) => request.UserAliasHandler.Invoke(new MParticleUserWrapper(previousUser), new MParticleUserWrapper(newUser)));
+                return null;
+            }
+            var mpRequest = new iOSBinding.MPIdentityApiRequest();
+            if (request.UserIdentities != null)
+            {
+                request.UserIdentities.ToList().ForEach(pair =>
+                {
+                    mpRequest.UserIdentities.Add(
+                        new NSNumber((float)(int)pair.Key),
+                        new NSString(pair.Value));
+                });
+            }
+            if (request.UserAliasHandler != null)
+            {
+                mpRequest.OnUserAlias = new iOSBinding.OnUserAlias((previousUser, newUser) => request.UserAliasHandler.Invoke(new MParticleUserWrapper(previousUser), new MParticleUserWrapper(newUser)));
+            }
             return mpRequest;
         }
 
