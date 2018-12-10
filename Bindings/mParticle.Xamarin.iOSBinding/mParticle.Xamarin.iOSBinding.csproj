@@ -45,7 +45,7 @@
     <NativeReference Include="NativeLibBuild\libmParticle-Apple-SDK.a">
       <Kind>Static</Kind>
       <ForceLoad>True</ForceLoad>
-      <LinkerFlags>-lsqlite3 -lstdc++.6 -lc++</LinkerFlags>
+      <LinkerFlags>-lsqlite3 -lc++</LinkerFlags>
     </NativeReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
