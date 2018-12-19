@@ -42,10 +42,9 @@
     <ObjcBindingCoreSource Include="Structs.cs" />
   </ItemGroup>
   <ItemGroup>
-    <NativeReference Include="NativeLibBuild\libmParticle-Apple-SDK.a">
-      <Kind>Static</Kind>
-      <ForceLoad>True</ForceLoad>
-      <LinkerFlags>-lsqlite3 -lc++</LinkerFlags>
+    <NativeReference Include="mParticle_Apple_SDK.framework">
+      <Kind>Framework</Kind>
+      <SmartLink>False</SmartLink>
     </NativeReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
