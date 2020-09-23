@@ -24,9 +24,9 @@ namespace mParticle.Xamarin.iOS.Utils
             return ConvertToXamUserAttributes(_user.UserAttributes);
         }
 
-        public override Dictionary<UserIdentity, string> GetUserIdentities()
+        public override Dictionary<Identity, string> GetIdentities()
         {
-            return ConvertToXamUserIdentities(_user.UserIdentities);
+            return ConvertToXamIdentities(_user.Identities);
         }
 
         public override void SetUserAttribute(string key, string val)
@@ -61,15 +61,15 @@ namespace mParticle.Xamarin.iOS.Utils
             return stringMap;
         }
 
-        private Dictionary<UserIdentity, string> ConvertToXamUserIdentities(NSDictionary<NSNumber, NSString> dict)
+        private Dictionary<Identity, string> ConvertToXamIdentities(NSDictionary<NSNumber, NSString> dict)
         {
-            Dictionary<UserIdentity, string> stringMap = new Dictionary<UserIdentity, string>();
+            Dictionary<Identity, string> stringMap = new Dictionary<Identity, string>();
             dict.Keys.ToList().ForEach(key =>
             {
                 NSString val = null;
                 if (dict.TryGetValue(key, out val))
                 {
-                    stringMap.Add((UserIdentity)Enum.Parse(typeof(UserIdentity), key.ToString()), val);
+                    stringMap.Add((Identity)Enum.Parse(typeof(Identity), key.ToString()), val);
                 }
             }
             );
