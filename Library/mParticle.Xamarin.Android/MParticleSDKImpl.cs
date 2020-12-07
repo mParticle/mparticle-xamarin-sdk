@@ -37,14 +37,26 @@ namespace mParticle.Xamarin
             Android.CommerceBinding.CommerceEvent.Builder bindingCommerceEventBuilder = null;
 
             if (commerceEvent.ProductAction > 0 && commerceEvent.Products != null && commerceEvent.Products.Length > 0)
+            {
                 bindingCommerceEventBuilder = new Android.CommerceBinding.CommerceEvent.Builder(Utils.ConvertToMpProductAction(commerceEvent.ProductAction), Utils.ConvertToMpProduct(commerceEvent.Products[0]));
-
+                var temp = new List<Product>(commerceEvent.Products);
+                temp.RemoveAt(0);
+                commerceEvent.Products = temp.ToArray();
+            }
             else if (commerceEvent.Promotions != null && commerceEvent.Promotions.Length > 0)
+            {
                 bindingCommerceEventBuilder = new Android.CommerceBinding.CommerceEvent.Builder(Utils.ConvertToMpPromotionAction(commerceEvent.PromotionAction), Utils.ConvertToMpPromotion(commerceEvent.Promotions[0]));
-
+                var temp = new List<Promotion>(commerceEvent.Promotions);
+                temp.RemoveAt(0);
+                commerceEvent.Promotions = temp.ToArray();
+            }
             else
+            {
                 bindingCommerceEventBuilder = new Android.CommerceBinding.CommerceEvent.Builder(Utils.ConvertToMpImpression(commerceEvent.Impressions[0]));
-
+                var temp = new List<Impression>(commerceEvent.Impressions);
+                temp.RemoveAt(0);
+                commerceEvent.Impressions = temp.ToArray();
+            }
 
             if (bindingCommerceEventBuilder == null)
                 return;
