@@ -4,6 +4,7 @@ using Foundation;
 using ObjCRuntime;
 using UIKit;
 using UserNotifications;
+using WebKit;
 
 namespace mParticle.Xamarin.iOSBinding
 {
@@ -1148,6 +1149,10 @@ namespace mParticle.Xamarin.iOSBinding
 		// -(void)initializeWebView:(UIWebView * _Nonnull)webView;
 		[Export("initializeWebView:")]
 		void InitializeWebView(UIWebView webView);
+
+		// - (void)initializeWKWebView:(WKWebView *)webView;
+		[Export("initializeWKWebView:")]
+		void InitializeWKWebView(WKWebView webView);
 
 		// -(BOOL)isMParticleWebViewSdkUrl:(NSURL * _Nonnull)requestUrl;
 		[Export("isMParticleWebViewSdkUrl:")]

@@ -1,0 +1,25 @@
+name: Xamarin CI
+
+on:
+  push:
+
+jobs:
+  Android:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Android
+      run: |
+        nuget restore
+        cd Samples/mParticle.Xamarin.Android.Sample
+        msbuild
+        
+  iOS:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: iOS
+      run: |
+        nuget restore
+        cd Samples/mParticle.Xamarin.iOS.Sample
+        msbuild

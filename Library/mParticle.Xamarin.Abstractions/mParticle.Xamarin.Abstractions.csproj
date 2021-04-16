@@ -33,7 +33,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Json">
-      <HintPath>..\..\packages\System.Json.4.4.0\lib\netstandard1.0\System.Json.dll</HintPath>
+      <HintPath>..\..\packages\System.Json.4.7.1\lib\netstandard1.0\System.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
