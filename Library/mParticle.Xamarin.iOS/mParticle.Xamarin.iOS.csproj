@@ -26,7 +26,7 @@
     <MtouchFastDev>true</MtouchFastDev>
     <IOSDebuggerPort>58669</IOSDebuggerPort>
     <DeviceSpecificBuild>false</DeviceSpecificBuild>
-    <MtouchLink></MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
     <MtouchHttpClientHandler></MtouchHttpClientHandler>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">

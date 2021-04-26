@@ -1,5 +1,3 @@
-#import "MPCart.h"
-#import "MPCommerce.h"
 #import "MPCommerceEvent.h"
 #import "MPCommerceEventInstruction.h"
 #import "MPCommerceEvent+Dictionary.h"
@@ -22,6 +20,8 @@
 #import "MPKitAPI.h"
 #import "MPConsentState.h"
 #import "MPGDPRConsent.h"
+#import "MPCCPAConsent.h"
+#import "MPListenerController.h"
 #import <UIKit/UIKit.h>
 
 #if TARGET_OS_IOS == 1
@@ -77,12 +77,82 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface MPNetworkOptions : NSObject
 
+/**
+Allows you to override the default configuration host.
+*/
 @property (nonatomic) NSString *configHost;
+/**
+Defaults to false. If set true the configHost above with overwrite the subdirectory of the URL in addition to the host.
+*/
+@property (nonatomic) BOOL overridesConfigSubdirectory;
+
+/**
+Allows you to override the default event host.
+*/
 @property (nonatomic) NSString *eventsHost;
+/**
+Defaults to false. If set true the eventsHost above with overwrite the subdirectory of the URL in addition to the host.
+*/
+@property (nonatomic) BOOL overridesEventsSubdirectory;
+
+/**
+Allows you to override the default identity host.
+*/
 @property (nonatomic) NSString *identityHost;
+/**
+Defaults to false. If set true the identityHost above with overwrite the subdirectory of the URL in addition to the host.
+*/
+@property (nonatomic) BOOL overridesIdentitySubdirectory;
+
+/**
+Allows you to override the default alias host.
+*/
+@property (nonatomic) NSString *aliasHost;
+/**
+Defaults to false. If set true the aliasHost above with overwrite the subdirectory of the URL in addition to the host.
+*/
+@property (nonatomic) BOOL overridesAliasSubdirectory;
+
 @property (nonatomic) NSArray<NSData *> *certificates;
 
 @property (nonatomic) BOOL pinningDisabledInDevelopment;
+/**
+Defaults to false. Prevents the eventsHost above from overwriting the alias endpoint.
+*/
+@property (nonatomic) BOOL eventsOnly;
+
+@end
+
+/**
+ Planning settings for kit blocking
+ */
+@interface MPDataPlanOptions : NSObject
+/**
+ Data Plan.
+ 
+ Data plan value (JSON schema) for blocking data to kits.
+ */
+@property (nonatomic, strong, readwrite, nullable) NSDictionary *dataPlan;
+
+/**
+ Whether to block unplanned events from being sent to kits, default false
+ */
+@property (nonatomic, assign, readwrite) BOOL blockEvents;
+
+/**
+ Whether to block unplanned event attributes from being sent to kits, default false
+ */
+@property (nonatomic, assign, readwrite) BOOL blockEventAttributes;
+
+/**
+ Whether to block unplanned user attributes from being sent to kits, default false
+ */
+@property (nonatomic, assign, readwrite) BOOL blockUserAttributes;
+
+/**
+ Whether to block unplanned user identities from being sent to kits, default false
+ */
+@property (nonatomic, assign, readwrite) BOOL blockUserIdentities;
 
 @end
 
@@ -150,12 +220,30 @@ NS_ASSUME_NONNULL_BEGIN
 /*
  Whether the SDK should automatically attempt to measure sessions. Ignored in App Extensions.
  
- If set to YES, the SDK will start a timer when the app enters the background and will end the session if a
+ If set to YES (the default), the SDK will start a timer when the app enters the background and will end the session if a
  user leaves the app for a configurable number of seconds without bringing it back to foreground.
  
  Note that the above behavior does not apply to apps with long-running background sessions.
+ 
+ Also note that the SDK will still start a session automatically when startWithOptions is called, even if automaticSessionTracking is disabled, unless `shouldBeginSession` is also set to NO.
+ @see shouldBeginSession
  */
 @property (nonatomic, unsafe_unretained, readwrite) BOOL automaticSessionTracking;
+
+/*
+ Whether the SDK should start a session on SDK init. (Defaults to YES.)
+ 
+ The behavior of this flag does not change depending on whether automatic session tracking is enabled.
+ 
+ If set to YES, the SDK will start session immediately when you call `startWithOptions:`
+ If set to NO, the SDK will not create a session as as result of `startWithOptions:` being called.
+ 
+ If your application can be launched into the background, you will want to set this to NO in that situation to avoid spurious sessions that do not correspond to user activity.
+ You can detect being launched into the background from within `didFinishLaunchingWithOptions:` based on whether `launchOptions[UIApplicationLaunchOptionsRemoteNotificationsKey]["content-available"]` exists and is set to the `NSNumber` value `@1`.
+ 
+ Note that even if this flag is set to NO, the SDK will still create sessions as a result of other application lifecycle events, unless `automaticSessionTracking` is also set to NO.
+ */
+@property (nonatomic, unsafe_unretained, readwrite) BOOL shouldBeginSession;
 
 /*
  The browser user agent.
@@ -164,27 +252,33 @@ NS_ASSUME_NONNULL_BEGIN
  a webview to collect this, and wish to avoid the performance cost of duplicate work, (or if you need to customize
  the value) you can pass this into the SDK as a string.
  */
-@property (atomic, strong, nullable) NSString *customUserAgent;
+@property (nonatomic, strong, nullable) NSString *customUserAgent;
 
 /*
  Whether browser user agent should be collected by the SDK. This value is ignored (always NO) if you specify a non-nil custom user agent.
  */
-@property (atomic, unsafe_unretained, readwrite) BOOL collectUserAgent;
+@property (nonatomic, unsafe_unretained, readwrite) BOOL collectUserAgent;
+
+/*
+ Default user agent to be sent in case collecting the browser user agent fails repeatedly, times out or the APIs are unavailable.
+ (Ignored if `customUserAgent` is set.) By default, a value of the form "mParticle Apple SDK/<SDK Version>" will be used as a fallback.
+ */
+@property (nonatomic, unsafe_unretained, readwrite) NSString *defaultAgent;
 
 /*
  Whether the SDK should attempt to collect Apple Search Ads attribution information. Defaults to YES
  */
-@property (atomic, unsafe_unretained, readwrite) BOOL collectSearchAdsAttribution;
+@property (nonatomic, unsafe_unretained, readwrite) BOOL collectSearchAdsAttribution;
 
 /**
  Determines whether the mParticle Apple SDK will automatically track Remote and Local Notification events. Defaults to YES
  */
-@property (atomic, unsafe_unretained, readwrite) BOOL trackNotifications;
+@property (nonatomic, unsafe_unretained, readwrite) BOOL trackNotifications;
 
 /*
  This value is not currently read by the SDK and should not be used at this time.
  */
-@property (atomic, unsafe_unretained, readwrite) BOOL startKitsAsync;
+@property (nonatomic, unsafe_unretained, readwrite) BOOL startKitsAsync;
 
 /*
  Log level. (Defaults to 'None'.)
@@ -194,7 +288,7 @@ NS_ASSUME_NONNULL_BEGIN
  By default the SDK will produce no output. If you modify this for your development builds, please consider using
  a preprocessor directive or similar mechanism to ensure your change is not accidentally applied in production.
  */
-@property (atomic, unsafe_unretained, readwrite) MPILogLevel logLevel;
+@property (nonatomic, unsafe_unretained, readwrite) MPILogLevel logLevel;
 
 /**
  Upload interval.
@@ -202,7 +296,14 @@ NS_ASSUME_NONNULL_BEGIN
  Batches of data are sent periodically to the mParticle servers at the rate defined by this property. Batches are also uploaded
  when the application is sent to the background.
  */
-@property (atomic, unsafe_unretained, readwrite) NSTimeInterval uploadInterval;
+@property (nonatomic, unsafe_unretained, readwrite) NSTimeInterval uploadInterval;
+
+/**
+ Session timeout.
+ 
+ Sets the user session timeout interval. A session is ended if the app goes into the background for longer than the session timeout interval or when more than 1000 events are logged.
+ */
+@property (nonatomic, unsafe_unretained, readwrite) NSTimeInterval sessionTimeout;
 
 /**
  Allows you to override the default HTTPS hosts and certificates used by the SDK, if required.
@@ -216,7 +317,40 @@ NS_ASSUME_NONNULL_BEGIN
  
  Allows you to record one or more consent purposes and whether or not the user agreed to each one.
  */
-@property (atomic, strong, nullable) MPConsentState *consentState;
+@property (nonatomic, strong, nullable) MPConsentState *consentState;
+
+/**
+ Data Plan ID.
+ 
+ If set, this informs the SDK of which data plan each event is supposed to conform to.
+ */
+@property (nonatomic, strong, readwrite, nullable) NSString *dataPlanId;
+
+/**
+ Data Plan Version.
+ 
+ If set, this informs the SDK of which version of the data plan each event is supposed to conform to.
+ */
+@property (nonatomic, strong, readwrite, nullable) NSNumber *dataPlanVersion;
+
+/**
+ Data Plan Options.
+ 
+ Settings for blocking data to kits
+ */
+@property (nonatomic, strong, readwrite, nullable) MPDataPlanOptions *dataPlanOptions;
+
+/**
+ Set the App Tracking Transparency Authorization Status upon starting the SDK.
+ Only sets a new state if it has changed.
+ */
+@property (nonatomic, strong, readwrite, nullable) NSNumber *attStatus;
+
+/**
+ Set the App Tracking Transparency Authorization Status timestamp upon starting the SDK.
+ Requires @attStatus to be set and is only set if the authorization state is different from the stored state.
+ */
+@property (nonatomic, strong, readwrite, nullable) NSNumber *attStatusTimestampMillis;
 
 /**
  Identify callback.
@@ -257,35 +391,21 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark Properties
 
 /**
- This property is an instance of MPCommerce. It is used to execute transactional operations on the shopping cart.
- @see MPCommerce
- @see MPCart
- */
-@property (nonatomic, strong, readonly) MPCommerce *commerce;
-
-/**
  This property is an instance of MPIdentityApi. It allows tracking login, logout, and identity changes.
  @see MPIdentityApi
  @see MParticleUser
  */
-@property (nonatomic, strong, readonly) MPIdentityApi *identity;
+@property (nonatomic, strong, readonly) MPIdentityApi * identity;
 
 /**
- Forwards setting/resetting the debug mode for third party kits.
- This is a write only property.
- */
-@property (nonatomic, unsafe_unretained) BOOL debugMode;
-- (BOOL)debugMode UNAVAILABLE_ATTRIBUTE;
-
-/**
- Enables or disables log outputs to the console. If set to YES development logs will be output to the
+ If set to YES development logs will be output to the
  console, if set to NO the development logs will be suppressed. This property works in conjunction with
  the environment property. If the environment is Production, consoleLogging will always be NO,
  regardless of the value you assign to it.
  @see environment
  @see logLevel
  */
-@property (nonatomic, unsafe_unretained) BOOL consoleLogging;
+@property (nonatomic, unsafe_unretained, readonly) BOOL consoleLogging DEPRECATED_MSG_ATTRIBUTE("set logLevel on MParticleOptions instead");
 
 /**
  The environment property returns the running SDK environment: Development or Production.
@@ -302,8 +422,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Specifies the log level output to the console while the app is under development: none, error, warning, and debug.
- If consoleLogging is set to false, the log level will be set to none automatically. When the environment is
- Production, the log level will always be none, regardless of the value you assign to it.
+ When the environment is Production, the log level will always be none, regardless of the value you assign to it.
  @see environment
  */
 @property (nonatomic, unsafe_unretained) MPILogLevel logLevel;
@@ -325,8 +444,15 @@ NS_ASSUME_NONNULL_BEGIN
  A flag indicating whether the mParticle Apple SDK is using
  automated Session tracking.
  @see MParticleOptions
+ @see shouldBeginSession
  */
 @property (nonatomic, unsafe_unretained, readonly) BOOL automaticSessionTracking;
+
+/**
+ A flag indicating whether the SDK should start a session on SDK init. (Defaults to YES.)
+ @see MParticleOptions
+ */
+@property (nonatomic, unsafe_unretained, readwrite) BOOL shouldBeginSession;
 
 /**
  The current session. You can access properties for Session ID and UUID.
@@ -336,20 +462,20 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Gets/Sets the user agent to a custom value.
  */
-@property (atomic, strong, nullable) NSString *customUserAgent;
+@property (atomic, strong, nullable, readonly) NSString *customUserAgent;
 
 /**
- Determines whether the mParticle Apple SDK will instantiate a UIWebView in order to collect the browser user agent.
+ Determines whether the mParticle Apple SDK will instantiate a webview in order to collect the browser user agent.
  This value is required by attribution providers for fingerprint identification, when device IDs are not available.
  If you disable this flag, consider populating the user agent via the customUserAgent property above if you are using
  an attribution provider (such as Kochava or Tune) via mParticle. Defaults to YES
  */
-@property (atomic, unsafe_unretained, readwrite) BOOL collectUserAgent;
+@property (atomic, unsafe_unretained, readonly) BOOL collectUserAgent;
 
 /*
  Determines whether the SDK will attempt to collect Apple Search Ads attribution information. Defaults to YES
  */
-@property (atomic, unsafe_unretained, readwrite) BOOL collectSearchAdsAttribution;
+@property (atomic, unsafe_unretained, readonly) BOOL collectSearchAdsAttribution;
 
 /**
  Allows you to proxy SDK traffic by overriding the default network endpoints and certificates used by the SDK.
@@ -370,10 +496,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (atomic, unsafe_unretained, readonly) BOOL trackNotifications;
 
 /**
- Gets/Sets the user session timeout interval. A session is ended if the app goes into the background for longer than the session timeout interval or
- when more than 1000 events are logged.
+ Gets the user session timeout interval. A session is ended if the app goes into the background for longer than the session timeout interval or when more than 1000 events are logged.
  */
-@property (nonatomic, unsafe_unretained, readwrite) NSTimeInterval sessionTimeout;
+@property (nonatomic, unsafe_unretained, readonly) NSTimeInterval sessionTimeout;
 
 /**
  Unique identifier for this app running on this device. This unique identifier is synchronized with the mParticle servers.
@@ -387,14 +512,28 @@ NS_ASSUME_NONNULL_BEGIN
  Batches of data are sent periodically to the mParticle servers at the rate defined by the uploadInterval. Batches are also uploaded
  when the application is sent to the background or before they are terminated.
  */
-@property (nonatomic, unsafe_unretained, readwrite) NSTimeInterval uploadInterval;
-
-
+@property (nonatomic, unsafe_unretained, readonly) NSTimeInterval uploadInterval;
 
 /**
  mParticle Apple SDK version
  */
 @property (nonatomic, strong, readonly) NSString *version;
+
+/**
+ Data plan id
+ */
+@property (nonatomic, strong, readonly) NSString *dataPlanId;
+
+/**
+ Data plan version
+ */
+@property (nonatomic, strong, readonly) NSNumber *dataPlanVersion;
+
+/**
+ Sets data plan options for kit blocking
+ @see MParticleOptions
+ */
+@property (nonatomic, readonly) MPDataPlanOptions *dataPlanOptions;
 
 #pragma mark - Initialization
 
@@ -403,11 +542,6 @@ NS_ASSUME_NONNULL_BEGIN
  @returns the Singleton instance of the MParticle class.
  */
 + (instancetype)sharedInstance;
-
-/**
- *
- */
-- (void)start;
 
 /**
  Starts the SDK with your API key and secret and installation type.
@@ -489,7 +623,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param restorationHandler A block to execute if your app creates objects to perform the task.
  @see proxiedAppDelegate
  */
-- (BOOL)continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:(void(^ _Nonnull)(NSArray * _Nullable restorableObjects))restorationHandler;
+- (BOOL)continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:(void(^ _Nonnull)(NSArray<id<UIUserActivityRestoring>> * __nullable restorableObjects))restorationHandler;
 
 /**
  This method will permanently remove ALL MParticle data from the device, including MParticle UserDefaults and Database, it will also halt any further upload or download behavior that may be prepared
@@ -537,12 +671,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Logs an event. This is one of the most fundamental methods of the SDK. You can define all the characteristics
- of an event (name, type, attributes, etc) in an instance of MPEvent and pass that instance to this method to
- log its data to the mParticle SDK.
- @param event An instance of MPEvent
+ of an event in an instance of MPEvent, MPCommerceEvent, or any other subclass of MPBaseEvent and pass that instance to this
+ method to log its data to the mParticle SDK.
+ @param event An instance of a subclass of MPBaseEvent (e.g MPEvent, MPCommerceEvent)
  @see MPEvent
+ @see MPCommerceEvent
  */
-- (void)logEvent:(MPEvent *)event;
+- (void)logEvent:(MPBaseEvent *)event;
 
 /**
  Logs an event. This is a convenience method for logging simple events; internally it creates an instance of MPEvent
@@ -555,7 +690,6 @@ NS_ASSUME_NONNULL_BEGIN
  @see logEvent:
  */
 - (void)logEvent:(NSString *)eventName eventType:(MPEventType)eventType eventInfo:(nullable NSDictionary<NSString *, id> *)eventInfo;
-
 /**
  Logs a screen event. You can define all the characteristics of a screen event (name, attributes, etc) in an
  instance of MPEvent and pass that instance to this method to log its data to the mParticle SDK.
@@ -574,6 +708,15 @@ NS_ASSUME_NONNULL_BEGIN
  @see logScreenEvent:
  */
 - (void)logScreen:(NSString *)screenName eventInfo:(nullable NSDictionary<NSString *, id> *)eventInfo;
+
+/**
+ Sets the ATT Authorization state with the supplied timestamp, or uses the current time if none is supplied.
+ @param status The authorization state of ATT, determines whether the user has approved access to app-related data that can be used for tracking the user or the device.
+ @param attStatusTimestampMillis The time at which the authorization status change. If not supplied, current time will be used.
+ @see MPCurrentEpochInMilliseconds - Please provide the timestamp in milliseconds
+ @see MPIdentityIOSAdvertiserId
+ */
+- (void)setATTStatus:(MPATTAuthorizationStatus)status withATTStatusTimestampMillis:(nullable NSNumber *)attStatusTimestampMillis;
 
 #pragma mark - Attribution
 /**
@@ -636,13 +779,23 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)logException:(NSException *)exception topmostContext:(nullable id)topmostContext;
 
+/**
+ Logs a crash report with additional exception information.
+ @param message An error message to associate with the crash which occurred
+ @param stackTrace The stack trace from the crash which occurred
+ @param plCrashReport Plausible Labs crash report file (required not nil)
+ */
+- (void)logCrash:(nullable NSString *)message
+      stackTrace:(nullable NSString *)stackTrace
+   plCrashReport:(NSString *)plCrashReport;
+
 #pragma mark - eCommerce Transactions
 /**
  Logs a commerce event.
  @param commerceEvent An instance of MPCommerceEvent
  @see MPCommerceEvent
  */
-- (void)logCommerceEvent:(MPCommerceEvent *)commerceEvent;
+- (void)logCommerceEvent:(MPCommerceEvent *)commerceEvent DEPRECATED_MSG_ATTRIBUTE("Replace calls to `logCommerceEvent:` with `logEvent:`");
 
 /**
  Increases the LTV (LifeTime Value) amount of a user.
@@ -842,7 +995,17 @@ NS_ASSUME_NONNULL_BEGIN
  @param key The attribute key
  @param value The attribute value
  */
-- (void)setSessionAttribute:(NSString *)key value:(id)value;
+- (void)setSessionAttribute:(NSString *)key value:(nullable id)value;
+
+/**
+ Manually begins a new session. Calling this method is a no-op if a session already exists.
+ */
+- (void)beginSession;
+
+/**
+ Manually ends the current session. Calling this method is a no-op if no session exists.
+ */
+- (void)endSession;
 
 /**
  Force uploads queued messages to mParticle.
@@ -879,32 +1042,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Web Views
 #if TARGET_OS_IOS == 1
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 /**
- Updates isIOS flag to true in JS API via given webview.
- @param webView The web view to be initialized
- */
-- (void)initializeWebView:(UIWebView *)webView;
-#pragma clang diagnostic pop
-
-/**
- Updates isIOS flag to true in JS API via given webview.
+ Create a bridge between the mParticle web SDK and iOS SDK.
+ 
+ This API will add a persistent [WKScriptMessageHandler](https://developer.apple.com/documentation/webkit/wkscriptmessagehandler) to the given `WKWebView`, signaling to the mParticle web SDK that it should delegate all API calls out to the native iOS SDK, rather than sending API calls directly. Note that this handler will persist across page loads.
  @param webView The web view to be initialized
  */
 - (void)initializeWKWebView:(WKWebView *)webView;
 
 /**
- Verifies if the url is mParticle sdk url i.e mp-sdk://
- @param requestUrl The request URL
+ Create a bridge between the mParticle web SDK and iOS SDK.
+ 
+ This API will add a persistent [WKScriptMessageHandler](https://developer.apple.com/documentation/webkit/wkscriptmessagehandler) to the given `WKWebView`, signaling to the mParticle web SDK that it should delegate all API calls out to the native iOS SDK, rather than sending API calls directly. Note that this handler will persist across page loads.
+ @param webView The web view to be initialized
+ @param bridgeName The name of the webview bridge
  */
-- (BOOL)isMParticleWebViewSdkUrl:(NSURL *)requestUrl;
-
-/**
- Process log event from hybrid apps that are using iOS UIWebView or WKWebView control.
- @param requestUrl The request URL
- */
-- (void)processWebViewLogEvent:(NSURL *)requestUrl;
+- (void)initializeWKWebView:(WKWebView *)webView bridgeName:(nullable NSString *)bridgeName;
 
 #pragma mark - Manual Notification logging
 /**
@@ -915,7 +1068,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Logs a Notification event for a notification that has been reviewed and acted upon. This is a convenience method for manually logging Notification events; Set trackNotifications to false on MParticleOptions to disable automatic tracking of Notifications and only set Notification manually:
  */
-- (void)logNotificationOpenedWithUserInfo:(nonnull NSDictionary *)userInfo;
+- (void)logNotificationOpenedWithUserInfo:(nonnull NSDictionary *)userInfo andActionIdentifier:(nullable NSString *)actionIdentifier;
 
 #endif
 

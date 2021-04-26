@@ -727,9 +727,9 @@ namespace mParticle.Xamarin.iOSBinding
         [Export("userId", ArgumentSemantic.Strong)]
         NSNumber UserId { get; set; }
 
-        // @property(readonly, strong, nonnull) NSDictionary<MPUserIdentity*, NSString*>* userIdentities;
-        [Export("userIdentities", ArgumentSemantic.Strong)]
-        NSDictionary<NSNumber, NSString> UserIdentities { get; set; }
+		// @property (readonly, strong, nonnull) NSDictionary<NSNumber *, NSString *> *identities;
+		[Export("identities", ArgumentSemantic.Strong)]
+        NSDictionary<NSNumber, NSString> identities { get; set; }
 
         // @property(readwrite, strong, nonnull) NSDictionary<NSString*, id>* userAttributes;
         [Export("userAttributes", ArgumentSemantic.Strong)]
@@ -792,17 +792,18 @@ namespace mParticle.Xamarin.iOSBinding
         [Export("customerId", ArgumentSemantic.Strong)]
         string CustomerId { get; set; }
 
-        // @property(nonatomic, strong, nullable, readonly) NSMutableDictionary* userIdentities;
-        [Export("userIdentities", ArgumentSemantic.Strong)]
-        NSMutableDictionary<NSNumber, NSString> UserIdentities { get; }
+		// @property (nonatomic, strong, nullable, readonly) NSDictionary *identities;
+		[Export("identities", ArgumentSemantic.Strong)]
+        NSDictionary<NSNumber, NSString> Identities { get; }
 
-        [Export("onUserAlias")]
-        OnUserAlias OnUserAlias { set; }
+		// - (void) setIdentity:(nullable NSString *)identityString identityType:(MPIdentity) identityType;
+		[Export("setIdentity:identityType:")]
+		void SetIdentity([NullAllowed] NSString identityString, MPUserIdentity identityType);
 
-    }
+	}
 
-    // @interface MParticleOptions : NSObject
-    [BaseType(typeof(NSObject))]
+	// @interface MParticleOptions : NSObject
+	[BaseType(typeof(NSObject))]
     [Protocol]
     interface MParticleOptions
     {
@@ -919,17 +920,17 @@ namespace mParticle.Xamarin.iOSBinding
 		[NullAllowed, Export("pushNotificationToken", ArgumentSemantic.Strong)]
 		NSData PushNotificationToken { get; set; }
 
-		// @property (readwrite, nonatomic, unsafe_unretained) NSTimeInterval sessionTimeout;
+		// @property (nonatomic, unsafe_unretained, readonly) NSTimeInterval sessionTimeout;
 		[Export("sessionTimeout")]
-		double SessionTimeout { get; set; }
+		double SessionTimeout { get; }
 
 		// @property (readonly, nonatomic, strong) NSString * _Nullable uniqueIdentifier;
 		[NullAllowed, Export("uniqueIdentifier", ArgumentSemantic.Strong)]
 		string UniqueIdentifier { get; }
 
-		// @property (readwrite, nonatomic, unsafe_unretained) NSTimeInterval uploadInterval;
+		// @property(nonatomic, unsafe_unretained, readwrite) NSTimeInterval uploadInterval;
 		[Export("uploadInterval")]
-		double UploadInterval { get; set; }
+		double UploadInterval { get; }
 
 		// @property (readonly, nonatomic, strong) NSString * _Nonnull version;
 		[Export("version", ArgumentSemantic.Strong)]
@@ -1016,6 +1017,10 @@ namespace mParticle.Xamarin.iOSBinding
 		// -(void)logScreen:(NSString * _Nonnull)screenName eventInfo:(NSDictionary<NSString *,id> * _Nullable)eventInfo;
 		[Export("logScreen:eventInfo:")]
 		void LogScreen(string screenName, [NullAllowed] NSDictionary<NSString, NSObject> eventInfo);
+
+		// -(void)setATTStatus:(MPATTAuthorizationStatus)status withATTStatusTimestampMillis:(NSNumber *)attStatusTimestampMillis;
+		[Export("setATTStatus:withATTStatusTimestampMillis:")]
+		void setATTStatus(MPATTAuthorizationStatus status, [NullAllowed] NSNumber attStatusTimestampMillis);
 
 		// -(void)checkForDeferredDeepLinkWithCompletionHandler:(void (^ _Nonnull)(NSDictionary * _Nullable, NSError * _Nullable))completionHandler;
 		[Export("checkForDeferredDeepLinkWithCompletionHandler:")]

@@ -38,8 +38,6 @@ namespace mParticle.Xamarin
             }
             iOSBinding.MParticle.SharedInstance.StartWithOptions(Utils.ConvertToMpOptions(options));
             var mparticle = iOSBinding.MParticle.SharedInstance;
-            mparticle.UploadInterval = options.UploadInterval;
-            mparticle.SessionTimeout = options.SessionTimeout;
             mparticle.LogLevel = Utils.ConvertToMpLogLevel(options.LogLevel);
             if (options.LocationTracking != null && options.LocationTracking.Enabled)
             {
