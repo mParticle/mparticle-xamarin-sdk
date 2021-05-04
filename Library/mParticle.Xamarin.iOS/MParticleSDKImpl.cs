@@ -178,6 +178,11 @@ namespace mParticle.Xamarin
             iOSBinding.MParticle.SharedInstance.LogScreen(screenName, ConvertToNSDictionary<NSString, NSObject>(eventInfo));
         }
 
+        public override void SetATTStatus(MPATTAuthorizationStatus status, long? attStatusTimestampMillis)
+        {
+            iOSBinding.MParticle.SharedInstance.setATTStatus((iOSBinding.MPATTAuthorizationStatus)status, attStatusTimestampMillis);
+        }
+
         public override void SetOptOut(bool optOut)
         {
             iOSBinding.MParticle.SharedInstance.OptOut = optOut;
