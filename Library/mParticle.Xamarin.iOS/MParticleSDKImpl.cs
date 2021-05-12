@@ -38,8 +38,6 @@ namespace mParticle.Xamarin
             }
             iOSBinding.MParticle.SharedInstance.StartWithOptions(Utils.ConvertToMpOptions(options));
             var mparticle = iOSBinding.MParticle.SharedInstance;
-            mparticle.UploadInterval = options.UploadInterval;
-            mparticle.SessionTimeout = options.SessionTimeout;
             mparticle.LogLevel = Utils.ConvertToMpLogLevel(options.LogLevel);
             if (options.LocationTracking != null && options.LocationTracking.Enabled)
             {
@@ -178,6 +176,11 @@ namespace mParticle.Xamarin
         public override void LogScreen(string screenName, Dictionary<string, string> eventInfo)
         {
             iOSBinding.MParticle.SharedInstance.LogScreen(screenName, ConvertToNSDictionary<NSString, NSObject>(eventInfo));
+        }
+
+        public override void SetATTStatus(MPATTAuthorizationStatus status, long? attStatusTimestampMillis)
+        {
+            iOSBinding.MParticle.SharedInstance.setATTStatus((iOSBinding.MPATTAuthorizationStatus)status, attStatusTimestampMillis);
         }
 
         public override void SetOptOut(bool optOut)

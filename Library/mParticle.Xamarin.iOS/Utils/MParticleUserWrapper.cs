@@ -26,7 +26,7 @@ namespace mParticle.Xamarin.iOS.Utils
 
         public override Dictionary<UserIdentity, string> GetUserIdentities()
         {
-            return ConvertToXamIdentities(_user.UserIdentities);
+            return ConvertToXamIdentities(_user.identities);
         }
 
         public override void SetUserAttribute(string key, string val)

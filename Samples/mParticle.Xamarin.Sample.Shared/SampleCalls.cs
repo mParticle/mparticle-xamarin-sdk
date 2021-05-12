@@ -51,7 +51,7 @@ namespace mParticle.Xamarin.Sample.Shared
                 {
                     UserIdentities = new Dictionary<UserIdentity, string>() {
                         //{ UserIdentity.Yahoo, "tom@yahoo.com" },
-                        //{ UserIdentity.Google, "mparticle@googlemail.com" },
+                        { UserIdentity.IOSAdvertiserId, "C56A4180-65AA-42EC-A945-5FD21DEC0538" },
                         { UserIdentity.CustomerId, "Other Identity" }
                     },
                     UserAliasHandler = ((previousUser, newUser) => newUser.SetUserAttributes(previousUser.GetUserAttributes()))
@@ -117,6 +117,8 @@ namespace mParticle.Xamarin.Sample.Shared
             mparticle.LogScreen("Home Screen", new Dictionary<string, string>() { { "EventAttributeKey", "EventAttributeValue" } });
             mparticle.LogScreen("Another screen");
             mparticle.LeaveBreadcrumb("crumble");
+
+            mparticle.SetATTStatus(MPATTAuthorizationStatus.Authorized, null);
 
 #if __ANDROID__
             // This is highly discouraged and we make no guarantees about this but just to show it is possible.

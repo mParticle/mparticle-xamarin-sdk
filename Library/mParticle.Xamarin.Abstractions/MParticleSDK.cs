@@ -275,7 +275,20 @@ namespace mParticle.Xamarin
         FacebookCustomAudienceId = 9,
         Other2 = 10,
         Other3 = 11,
-        Other4 = 12
+        Other4 = 12,
+        Other5 = 13,
+        Other6 = 14,
+        Other7 = 15,
+        Other8 = 16,
+        Other9 = 17,
+        Other10 = 18,
+        MobileNumber = 19,
+        PhoneNumber2 = 20,
+        PhoneNumber3 = 21,
+        IOSAdvertiserId = 22,
+        IOSVendorId = 23,
+        PushToken = 24,
+        DeviceApplicationStamp = 25
     };
 
     public enum Environment
@@ -304,6 +317,14 @@ namespace mParticle.Xamarin
         View = 0,
         Click
     };
+
+    public enum MPATTAuthorizationStatus
+    {
+        NotDetermined = 0,
+        Restricted,
+        Denied,
+        Authorized
+    }
 
     public static class UserAttribute
     {
@@ -435,6 +456,13 @@ namespace mParticle.Xamarin
         /// <param name="screenName">Screen name.</param>
         /// <param name="eventInfo">Event info.</param>
         public abstract void LogScreen(string screenName, Dictionary<string, string> eventInfo = null);
+
+        /// <summary>
+        /// Logs the App Tracking Transparency Status.
+        /// </summary>
+        /// <param name="status">Status.</param>
+        /// <param name="attStatusTimestampMillis">ATT Status Timestamp Millis.</param>
+        public abstract void SetATTStatus(MPATTAuthorizationStatus status, long? attStatusTimestampMillis = null);
 
         /// <summary>
         /// Sets the opt out.

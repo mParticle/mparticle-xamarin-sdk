@@ -114,6 +114,10 @@ namespace mParticle.Xamarin
             AndroidBinding.MParticle.Instance.LogScreen(screenName, eventInfo);
         }
 
+        public override void SetATTStatus(MPATTAuthorizationStatus status, long? attStatusTimestampMillis)
+        {
+        }
+
         public override void SetOptOut(bool optOut)
         {
             AndroidBinding.MParticle.Instance.OptOut = new Java.Lang.Boolean(optOut);

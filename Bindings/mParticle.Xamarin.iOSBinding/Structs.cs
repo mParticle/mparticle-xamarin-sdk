@@ -71,6 +71,15 @@ namespace mParticle.Xamarin.iOSBinding
     }
 
     [Native]
+    public enum MPATTAuthorizationStatus : long
+    {
+        MPATTAuthorizationStatusNotDetermined = 0,
+        MPATTAuthorizationStatusRestricted = 1,
+        MPATTAuthorizationStatusDenied = 2,
+        MPATTAuthorizationStatusAuthorized = 3
+    }
+
+    [Native]
     public enum MPUserIdentity : long
     {
         MPUserIdentityOther = 0,
@@ -85,7 +94,20 @@ namespace mParticle.Xamarin.iOSBinding
         MPUserIdentityFacebookCustomAudienceId = 9,
         MPUserIdentityOther2 = 10,
         MPUserIdentityOther3 = 11,
-        MPUserIdentityOther4 = 12
+        MPUserIdentityOther4 = 12,
+        MPUserIdentityOther5 = 13,
+        MPUserIdentityOther6 = 14,
+        MPUserIdentityOther7 = 15,
+        MPUserIdentityOther8 = 16,
+        MPUserIdentityOther9 = 17,
+        MPUserIdentityOther10 = 18,
+        MPUserIdentityMobileNumber = 19,
+        MPUserIdentityPhoneNumber2 = 20,
+        MPUserIdentityPhoneNumber3 = 21,
+        MPUserIdentityIOSAdvertiserId = 22,
+        MPUserIdentityIOSVendorId = 23,
+        MPUserIdentityPushToken = 24,
+        MPUserIdentityDeviceApplicationStamp = 25
     }
 
     [Native]

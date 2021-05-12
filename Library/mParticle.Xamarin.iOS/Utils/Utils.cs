@@ -142,14 +142,9 @@ namespace mParticle.Xamarin.iOS.Utils
             {
                 request.UserIdentities.ToList().ForEach(pair =>
                 {
-                    mpRequest.UserIdentities.Add(
-                        new NSNumber((float)(int)pair.Key),
-                        new NSString(pair.Value));
+                    mpRequest.SetIdentity(new NSString(pair.Value), (MPUserIdentity)pair.Key);
+
                 });
-            }
-            if (request.UserAliasHandler != null)
-            {
-                mpRequest.OnUserAlias = new iOSBinding.OnUserAlias((previousUser, newUser) => request.UserAliasHandler.Invoke(new MParticleUserWrapper(previousUser), new MParticleUserWrapper(newUser)));
             }
             return mpRequest;
         }

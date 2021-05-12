@@ -31,7 +31,8 @@ typedef NS_ENUM(NSUInteger, MPEventType) {
     MPEventTypeSocial = 7,
     /** Use for other types of events not contained in this enum */
     MPEventTypeOther = 8,
-    /** 9 used to be MPEventTypeMedia. It has been discontinued */
+    /** Internal. Used when an event is related to or sourced from the Media SDK */
+    MPEventTypeMedia = 9,
     /** Internal. Used when a product is added to the cart */
     MPEventTypeAddToCart = 10,
     /** Internal. Used when a product is removed from the cart */
@@ -59,6 +60,35 @@ typedef NS_ENUM(NSUInteger, MPEventType) {
     /** Internal. Used when a product is displayed in a promotion */
     MPEventTypeImpression = 22
 };
+
+#define NSStringFromEventType( value ) \
+( \
+@{ \
+@( MPEventTypeNavigation )          : kMPEventTypeStringNavigation, \
+@( MPEventTypeLocation )            : kMPEventTypeStringLocation, \
+@( MPEventTypeSearch )              : kMPEventTypeStringSearch, \
+@( MPEventTypeTransaction )         : kMPEventTypeStringTransaction, \
+@( MPEventTypeUserContent )         : kMPEventTypeStringUserContent, \
+@( MPEventTypeUserPreference )      : kMPEventTypeStringUserPreference, \
+@( MPEventTypeSocial )              : kMPEventTypeStringSocial, \
+@( MPEventTypeOther )               : kMPEventTypeStringOther, \
+@( MPEventTypeAddToCart )           : kMPEventTypeStringProductAddToCart, \
+@( MPEventTypeRemoveFromCart )      : kMPEventTypeStringProductRemoveFromCart, \
+@( MPEventTypeCheckout )            : kMPEventTypeStringProductCheckout, \
+@( MPEventTypeCheckoutOption )      : kMPEventTypeStringProductCheckoutOption, \
+@( MPEventTypeClick )               : kMPEventTypeStringProductClick, \
+@( MPEventTypeViewDetail )          : kMPEventTypeStringProductViewDetail, \
+@( MPEventTypePurchase )            : kMPEventTypeStringProductPurchase, \
+@( MPEventTypeRefund )              : kMPEventTypeStringProductRefund, \
+@( MPEventTypePromotionView )       : kMPEventTypeStringPromotionView, \
+@( MPEventTypePromotionClick )      : kMPEventTypeStringPromotionClick, \
+@( MPEventTypeAddToWishlist )       : kMPEventTypeStringProductAddToWishlist, \
+@( MPEventTypeRemoveFromWishlist )  : kMPEventTypeStringProductRemoveFromWishlist, \
+@( MPEventTypeImpression )          : kMPEventTypeStringProductImpression, \
+@( MPEventTypeMedia )               : kMPEventTypeStringMedia, \
+} \
+[ @( value ) ] \
+)
 
 /// Installation Types
 typedef NS_ENUM(NSInteger, MPInstallationType) {
@@ -100,6 +130,7 @@ typedef NS_ENUM(NSUInteger, MPSurveyProvider) {
 };
 
 /// User Identities
+/// The identities in this enum are limited to end-user forms of identity. A new enum, MPIdentity, has been provided to cover all valid forms of identity supported by the mParticle Identity API (user identities and device identities)
 typedef NS_ENUM(NSUInteger, MPUserIdentity) {
     /** User identity other */
     MPUserIdentityOther = 0,
@@ -126,7 +157,84 @@ typedef NS_ENUM(NSUInteger, MPUserIdentity) {
     /** User identity other 3 */
     MPUserIdentityOther3,
     /** User identity other 4 */
-    MPUserIdentityOther4
+    MPUserIdentityOther4,
+    /** User identity other 5 */
+    MPUserIdentityOther5,
+    /** User identity other 6 */
+    MPUserIdentityOther6,
+    /** User identity other 7 */
+    MPUserIdentityOther7,
+    /** User identity other 8 */
+    MPUserIdentityOther8,
+    /** User identity other 9 */
+    MPUserIdentityOther9,
+    /** User identity other 10 */
+    MPUserIdentityOther10,
+    /** User identity mobile number */
+    MPUserIdentityMobileNumber,
+    /** User identity phone number 2 */
+    MPUserIdentityPhoneNumber2,
+    /** User identity phone number 3 */
+    MPUserIdentityPhoneNumber3
+};
+
+/// MP Identities
+typedef NS_ENUM(NSUInteger, MPIdentity) {
+    /** User identity other */
+    MPIdentityOther = 0,
+    /** User identity customer id. This is an id issued by your own system */
+    MPIdentityCustomerId,
+    /** User identity Facebook */
+    MPIdentityFacebook,
+    /** User identity Twitter */
+    MPIdentityTwitter,
+    /** User identity Google */
+    MPIdentityGoogle,
+    /** User identity Microsoft */
+    MPIdentityMicrosoft,
+    /** User identity Yahoo! */
+    MPIdentityYahoo,
+    /** User identity Email */
+    MPIdentityEmail,
+    /** User identity Alias */
+    MPIdentityAlias,
+    /** User identity Facebook Custom Audience Third Party Id, or User App Id */
+    MPIdentityFacebookCustomAudienceId,
+    /** User identity other 2 */
+    MPIdentityOther2,
+    /** User identity other 3 */
+    MPIdentityOther3,
+    /** User identity other 4 */
+    MPIdentityOther4,
+    /** User identity other 5 */
+    MPIdentityOther5,
+    /** User identity other 6 */
+    MPIdentityOther6,
+    /** User identity other 7 */
+    MPIdentityOther7,
+    /** User identity other 8 */
+    MPIdentityOther8,
+    /** User identity other 9 */
+    MPIdentityOther9,
+    /** User identity other 10 */
+    MPIdentityOther10,
+    /** User identity mobile number */
+    MPIdentityMobileNumber,
+    /** User identity phone number 2 */
+    MPIdentityPhoneNumber2,
+    /** User identity phone number 3 */
+    MPIdentityPhoneNumber3,
+    /** Device identity advertiser ID (IDFA)
+     When setting this, you must also provide the App Tracking Transparency status of the device
+     @see setATTStatus:withTimestamp:
+     */
+    MPIdentityIOSAdvertiserId,
+    /** Device identity vendor  */
+    MPIdentityIOSVendorId,
+    /** Device identity Push Token  */
+    MPIdentityPushToken,
+    /** Device identity Application Stamp  */
+    MPIdentityDeviceApplicationStamp
 };
 
 /// Kit Instance Codes
@@ -198,7 +306,13 @@ typedef NS_ENUM(NSUInteger, MPKitInstance) {
     /** Kit code for Taplytics */
     MPKitInstanceTaplytics = 129,
     /** Kit code for CleverTap */
-    MPKitInstanceCleverTap = 135
+    MPKitInstanceCleverTap = 135,
+    /** Kit code for Pilgrim */
+    MPKitInstancePilgrim = 211,
+    /** Kit code for Google Analytics for Firebase */
+    MPKitInstanceGoogleAnalyticsFirebase = 136,
+    /** Kit code for Blueshift */
+    MPKitInstanceBlueshift = 1144
 };
 
 /// Log Levels
@@ -254,7 +368,17 @@ typedef NS_ENUM(NSUInteger, MPMessageType) {
     /** Message type code for a user attribute change */
     MPMessageTypeUserAttributeChange = 17,
     /** Message type code for a user identity change */
-    MPMessageTypeUserIdentityChange = 18
+    MPMessageTypeUserIdentityChange = 18,
+    /** Message type code for a media event */
+    MPMessageTypeMedia = 20
+};
+
+/// Upload Types
+typedef NS_ENUM(NSUInteger, MPUploadType) {
+    /** Upload type for messages */
+    MPUploadTypeMessage = 0,
+    /** Upload type for alias requests */
+    MPUploadTypeAlias = 1
 };
 
 typedef NS_ENUM(NSUInteger, MPConnectivityErrorCode) {
@@ -276,15 +400,25 @@ typedef NS_ENUM(NSUInteger, MPIdentityErrorResponseCode) {
     /** Client side error: Device has no network connection. Request should be retried when device connectivity has been reestablished. */
     MPIdentityErrorResponseCodeClientNoConnection = 3,
     /** Client side error: SSL connection failed to be established due to invalid server certificate. mParticle performs SSL pinning - you cannot use a proxy to read traffic. */
-    MPIdentityErrorResponseCodeSSLError = 3,
+    MPIdentityErrorResponseCodeSSLError = 4,
     /** Client side error: User has enabled OptOut. */
-    MPIdentityErrorResponseCodeOptOut = 4,
+    MPIdentityErrorResponseCodeOptOut = 5,
     /** HTTP Error 401: Unauthorized. Ensure that you've initialized the mParticle SDK with a valid workspace key and secret. */
     MPIdentityErrorResponseCodeUnauthorized = 401,
     /** HTTP Error 504: Identity request should be retried */
     MPIdentityErrorResponseCodeTimeout = 504,
     /** HTTP Error 429: Identity request should be retried */
     MPIdentityErrorResponseCodeRetry = 429
+};
+
+/**
+ @see https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus
+ */
+typedef NS_ENUM(NSUInteger, MPATTAuthorizationStatus) {
+    MPATTAuthorizationStatusNotDetermined = 0,
+    MPATTAuthorizationStatusRestricted,
+    MPATTAuthorizationStatusDenied,
+    MPATTAuthorizationStatusAuthorized
 };
 
 /** Posted immediately after a new session has begun.
@@ -384,7 +518,15 @@ extern NSString * _Nonnull const mParticleEmbeddedSDKInstanceKey;
 /** Posted immediately after the user's MPID changes (or in other terms when a different user becomes active).
  */
 extern NSString * _Nonnull const mParticleIdentityStateChangeListenerNotification;
+
+/** Key to retrieve now-active user from identity state change notification's userInfo dictionary
+ */
 extern NSString * _Nonnull const mParticleUserKey;
+
+/** Key to retrieve previously-active user (if applicable) from identity state change notification's userInfo dictionary
+ */
+extern NSString * _Nonnull const mParticlePreviousUserKey;
+
 extern NSString * _Nonnull const mParticleIdentityErrorDomain;
 extern NSString * _Nonnull const mParticleIdentityErrorKey;
 
@@ -400,5 +542,11 @@ extern NSString * _Nonnull const mParticleGenderNotAvailable;
  */
 extern NSString * _Nonnull const MPKitAPIErrorDomain;
 extern NSString * _Nonnull const MPKitAPIErrorKey;
+
+@interface MPEnum : NSObject
+
++ (BOOL)isUserIdentity:(MPIdentity)identity;
+
+@end
 
 #endif
