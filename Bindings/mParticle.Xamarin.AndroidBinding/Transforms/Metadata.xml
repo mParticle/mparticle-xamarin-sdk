@@ -42,10 +42,6 @@
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='getKitInstance' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@type='int' and @name='p0']" name="name">serviceProviderId</attr>
   
   <!-- Commerce -->
-  <attr path="/api/package[@name='com.mparticle.commerce']/class[@name='Cart']/method[@name='getProduct' and count(parameter)=1 and parameter[1][@type='java.lang.String']]/parameter[@type='java.lang.String']" name="name">name</attr>
-  <attr path="/api/package[@name='com.mparticle.commerce']/class[@name='Cart']/method[@name='loadFromString' and count(parameter)=1 and parameter[1][@type='java.lang.String']]/parameter[@type='java.lang.String']" name="name">cartJson</attr>
-  <attr path="/api/package[@name='com.mparticle.commerce']/class[@name='Cart']/method[@name='remove' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@type='int']" name="name">index</attr>
-  <attr path="/api/package[@name='com.mparticle.commerce']/class[@name='Cart']/method[@name='setMaximumProductCount' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@type='int']" name="name">count</attr>
   <attr path="/api/package[@name='com.mparticle.commerce']/class[@name='CommerceApi']/method[@name='purchase' and count(parameter)=2 and parameter[1][@type='com.mparticle.commerce.TransactionAttributes'] and parameter[2][@type='boolean']]/parameter[@type='boolean']" name="name">clearCart</attr>
   <attr path="/api/package[@name='com.mparticle.commerce']/class[@name='CommerceApi']/method[@name='refund' and count(parameter)=2 and parameter[1][@type='com.mparticle.commerce.TransactionAttributes'] and parameter[2][@type='boolean']]/parameter[@type='boolean']" name="name">clearCart</attr> 
   <attr path="/api/package[@name='com.mparticle.commerce']/class[@name='CommerceApi']/method[@name='checkout' and count(parameter)=2 and parameter[1][@type='int'] and parameter[2][@type='java.lang.String']]/parameter[@type='int']" name="name">step</attr>
@@ -60,12 +56,7 @@
   <attr path="/api/package[@name='com.mparticle.commerce']/class[@name='TransactionAttributes']/constructor[@name='TransactionAttributes' and count(parameter)=1 and parameter[1][@type='java.lang.String']]/parameter[@type='java.lang.String']" name="name">transactionId</attr> 
         
   <!-- Log* Methods -->
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='logEvent' and count(parameter)>=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='com.mparticle.MParticle.EventType']]/parameter[@name='p0']" name="name">eventName</attr>
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='logEvent']/parameter[@type='long']" name="name">eventLength</attr>
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='logEvent']/parameter[@type='java.util.Map&lt;java.lang.String, java.lang.String&gt;']" name="name">eventInfo</attr>
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='logEvent' and count(parameter)=3 and parameter[1][@type='java.lang.String'] and parameter[2][@type='com.mparticle.MParticle.EventType'] and parameter[3][@type='java.lang.String']]/parameter[@type='java.lang.String' and @name='p2']" name="name">category</attr>
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='logEvent' and count(parameter)=4 and parameter[1][@type='java.lang.String'] and parameter[2][@type='com.mparticle.MParticle.EventType'] and parameter[3][@type='java.util.Map&lt;java.lang.String, java.lang.String&gt;'] and parameter[4][@type='java.lang.String']]/parameter[@type='java.lang.String' and @name='p3']" name="name">category</attr>
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='logEvent' and count(parameter)=5 and parameter[1][@type='java.lang.String'] and parameter[2][@type='com.mparticle.MParticle.EventType'] and parameter[3][@type='java.util.Map&lt;java.lang.String, java.lang.String&gt;'] and parameter[4][@type='long'] and parameter[5][@type='java.lang.String']]/parameter[@type='java.lang.String' and @name='p4']" name="name">category</attr>
+  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='logEvent' and count(parameter)=1 and parameter[1][@type='com.mparticle.MParticle.BaseEvent']]/parameter[@name='p0']" name="name">event</attr>
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='logScreen']/parameter[@type='java.lang.String']" name="name">screenname</attr>
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='logScreen']/parameter[@type='java.util.Map&lt;java.lang.String, java.lang.String&gt;']" name="name">eventData</attr>
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='logError']/parameter[@type='java.lang.String']" name="name">message</attr>
@@ -90,9 +81,6 @@
   <!-- Set/Remove Attributes, Ids and other stuff-->
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='setUploadInterval' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@type='int']" name="name">uploadInterval</attr>
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='getSurveyUrl' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@type='int']" name="name">kitId</attr>
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='getUserSegments' and count(parameter)=3 and parameter[1][@type='long'] and parameter[2][@type='java.lang.String'] and parameter[3][@type='com.mparticle.segmentation.SegmentListener']]/parameter[@type='long']" name="name">timeout</attr>
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='getUserSegments' and count(parameter)=3 and parameter[1][@type='long'] and parameter[2][@type='java.lang.String'] and parameter[3][@type='com.mparticle.segmentation.SegmentListener']]/parameter[@type='java.lang.String']" name="name">endpointId</attr>
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='getUserSegments' and count(parameter)=3 and parameter[1][@type='long'] and parameter[2][@type='java.lang.String'] and parameter[3][@type='com.mparticle.segmentation.SegmentListener']]/parameter[@type='com.mparticle.segmentation.SegmentListener']" name="name">listener</attr>
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='isKitActive' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@type='int']" name="name">serviceProvderId</attr>
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='isProviderActive' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@type='int']" name="name">serviceProvderId</attr>
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='leaveBreadcrumb' and count(parameter)=1 and parameter[1][@type='java.lang.String']]/parameter[@type='java.lang.String']" name="name">breadcrumb</attr>
@@ -123,7 +111,6 @@
   <!-- Rename the namespaces -->
   <attr path="/api/package[@name='com.mparticle']" name="managedName">mParticle.Xamarin.AndroidBinding</attr>
   <attr path="/api/package[@name='com.mparticle.commerce']" name="managedName">mParticle.Xamarin.Android.CommerceBinding</attr>
-  <attr path="/api/package[@name='com.mparticle.segmentation']" name="managedName">mParticle.Xamarin.Android.SegmentationBinding</attr>
   <attr path="/api/package[@name='com.mparticle.media']" name="managedName">mParticle.Xamarin.Android.MediaBinding</attr>
   <attr path="/api/package[@name='com.mparticle.identity']" name="managedName">mParticle.Xamarin.Android.IdentityBinding</attr>
 
