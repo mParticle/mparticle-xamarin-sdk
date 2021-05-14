@@ -17,8 +17,6 @@ namespace mParticle.Xamarin.iOS.Utils
 
         public override long Mpid => _user.UserId.LongValue;
 
-        public override ICart Cart => new CartWrapper(_user.Cart, iOSBinding.MParticle.SharedInstance.Commerce);
-
         public override Dictionary<string, string> GetUserAttributes()
         {
             return ConvertToXamUserAttributes(_user.UserAttributes);

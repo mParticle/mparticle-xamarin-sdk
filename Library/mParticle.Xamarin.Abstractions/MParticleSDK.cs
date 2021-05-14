@@ -344,7 +344,6 @@ namespace mParticle.Xamarin
     public abstract class MParticleUser
     {
         public abstract long Mpid { get; }
-        public abstract ICart Cart { get; }
 
         public abstract void SetUserTag(String tag);
 
