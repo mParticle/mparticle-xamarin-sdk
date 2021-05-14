@@ -51,7 +51,6 @@
       <Link>MParticle.cs</Link>
     </Compile>
     <Compile Include="Utils\UserAliasHandlerWrapper.cs" />
-    <Compile Include="Utils\CartApiWrapper.cs" />
     <Compile Include="Utils\IdentityApiWrapper.cs" />
     <Compile Include="Utils\Utils.cs" />
     <Compile Include="Utils\MParticleUserWrapper.cs" />

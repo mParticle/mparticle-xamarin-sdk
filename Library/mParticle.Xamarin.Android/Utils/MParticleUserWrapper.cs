@@ -6,16 +6,14 @@ namespace mParticle.Xamarin.Android.Wrappers
 {
     public class MParticleUserWrapper : MParticleUser
     {
-        private Android.IdentityBinding.MParticleUser _user;
+        private Android.IdentityBinding.IMParticleUser _user;
 
-        internal MParticleUserWrapper(Android.IdentityBinding.MParticleUser user)
+        internal MParticleUserWrapper(Android.IdentityBinding.IMParticleUser user)
         {
             _user = user;
         }
 
         public override long Mpid => _user.Id;
-
-        public override ICart Cart => new CartApiWrapper(_user.Cart);
 
         public override Dictionary<string, string> GetUserAttributes()
         {

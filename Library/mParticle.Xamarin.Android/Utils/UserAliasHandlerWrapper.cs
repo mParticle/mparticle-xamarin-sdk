@@ -12,7 +12,7 @@ namespace mParticle.Xamarin.Android.Wrappers
             _handler = handler;
         }
 
-        void IdentityBinding.IUserAliasHandler.OnUserAlias(Android.IdentityBinding.MParticleUser previousUser, Android.IdentityBinding.MParticleUser newUser)
+        void IdentityBinding.IUserAliasHandler.OnUserAlias(Android.IdentityBinding.IMParticleUser previousUser, Android.IdentityBinding.IMParticleUser newUser)
         {
             if (_handler != null)
             {
