@@ -168,7 +168,13 @@ namespace mParticle.Xamarin.Android
             {
                 foreach (var identityType in request.UserIdentities.Keys)
                 {
-                    builder.UserIdentity(AndroidBinding.MParticle.IdentityType.ValueOf(identityType.ToString()), request.UserIdentities.GetValueOrDefault(identityType));
+                    foreach (var androidIdentityType in AndroidBinding.MParticle.IdentityType.Values())
+                    {
+                        if (identityType.ToString().Equals(androidIdentityType.Name()))
+                        {
+                            builder.UserIdentity(androidIdentityType, request.UserIdentities.GetValueOrDefault(identityType));
+                        }
+                    }
                 }
             }
             if (request.UserAliasHandler != null)
