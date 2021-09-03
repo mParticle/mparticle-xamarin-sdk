@@ -64,44 +64,113 @@ namespace mParticle.Xamarin.iOSBinding
 	{
 	}
 
-	// @interface MPCommerceEvent : NSObject <NSCopying, NSCoding>
+	// @interface MPBaseEvent : NSObject <NSCopying>
 	[BaseType(typeof(NSObject))]
 	[Protocol]
-	interface MPCommerceEvent : INSCopying, INSCoding
+	interface MPBaseEvent : INSCopying
 	{
-		// @property (nonatomic, strong) NSString * _Nullable checkoutOptions;
+		// @property (nonatomic, unsafe_unretained) MPEventType type;
+		[Export("type", ArgumentSemantic.Assign)]
+		MPEventType Type { get; set; }
+
+		// - (NSString *)typeName;
+		[Export("typeName")]
+		string TypeName { get; }
+
+		// @property (nonatomic, strong, nullable) NSDictionary<NSString *, id> *customAttributes;
+		[NullAllowed, Export("customAttributes", ArgumentSemantic.Strong)]
+		NSDictionary<NSString, NSObject> CustomAttributes { get; set; }
+
+		// @property (readonly, nonatomic, strong) NSDictionary<NSString *,__kindof NSArray<NSString *> *> * _Nonnull customFlags;
+		[Export("customFlags", ArgumentSemantic.Strong)]
+		NSDictionary<NSString, NSArray<NSString>> CustomFlags { get; }
+
+		// @property (nonatomic) BOOL shouldUploadEvent;
+		[Export("shouldUploadEvent")]
+		bool ShouldUploadEvent { get; set; }
+
+		// -(void)addCustomFlag:(NSString * _Nonnull)customFlag withKey:(NSString * _Nonnull)key;
+		[Export("addCustomFlag:withKey:")]
+		void AddCustomFlag(string customFlag, string key);
+
+		// -(void)addCustomFlags:(NSArray<NSString *> * _Nonnull)customFlags withKey:(NSString * _Nonnull)key;
+		[Export("addCustomFlags:withKey:")]
+		void AddCustomFlags(string[] customFlags, string key);
+	}
+
+	// @interface MPEvent : MPBaseEvent <NSCopying>
+	[BaseType(typeof(MPBaseEvent))]
+	[Protocol]
+	interface MPEvent: INSCopying
+	{
+		// @property (nonatomic, strong, nullable) NSString *category;
+		[NullAllowed, Export("category", ArgumentSemantic.Strong)]
+		string Category { get; set; }
+
+		// @property (nonatomic, strong, nullable) NSDictionary<NSString *, id> *info DEPRECATED_MSG_ATTRIBUTE("use customAttributes instead");
+		[NullAllowed, Export("info", ArgumentSemantic.Strong)]
+		NSDictionary<NSString, NSObject> Info { get; set; }
+
+		// @property (nonatomic, strong, nonnull) NSString *name;
+		[Export("name", ArgumentSemantic.Strong)]
+		string Name { get; set; }
+
+		// @property (nonatomic, strong, nullable) NSDate *startTime;
+		[NullAllowed, Export("startTime", ArgumentSemantic.Strong)]
+		NSDate StartTime { get; set; }
+
+		// @property (nonatomic, strong, nullable) NSDate *endTime;
+		[NullAllowed, Export("endTime", ArgumentSemantic.Strong)]
+		NSDate EndTime { get; set; }
+
+		// @property (nonatomic, strong) NSNumber * _Nullable duration;
+		[NullAllowed, Export("duration", ArgumentSemantic.Strong)]
+		NSNumber Duration { get; set; }
+
+		// -(instancetype _Nullable)initWithName:(NSString * _Nonnull)name type:(MPEventType)type __attribute__((objc_designated_initializer));
+		[Export("initWithName:type:")]
+		[DesignatedInitializer]
+		IntPtr Constructor(string name, MPEventType type);
+	}
+
+	// @interface MPCommerceEvent : MPBaseEvent <NSSecureCoding>
+	[BaseType(typeof(MPBaseEvent))]
+	[Protocol]
+	interface MPCommerceEvent : INSCopying, INSSecureCoding
+	{
+		// @property (nonatomic, strong, nullable) NSString *checkoutOptions;
 		[NullAllowed, Export("checkoutOptions", ArgumentSemantic.Strong)]
 		string CheckoutOptions { get; set; }
 
-		// @property (nonatomic, strong) NSString * _Nullable currency;
+		// @property (nonatomic, strong, nullable) NSString *currency;
 		[NullAllowed, Export("currency", ArgumentSemantic.Strong)]
 		string Currency { get; set; }
 
-		// @property (readonly, nonatomic, strong) NSDictionary<NSString *,__kindof NSSet<MPProduct *> *> * _Nullable impressions;
+		// @property (nonatomic, strong, readonly, nullable) NSDictionary<NSString *, __kindof NSSet<MPProduct *> *> *impressions;
 		[NullAllowed, Export("impressions", ArgumentSemantic.Strong)]
 		NSDictionary<NSString, NSSet<MPProduct>> Impressions { get; }
 
-		// @property (readonly, nonatomic, strong) NSArray<MPProduct *> * _Nullable products;
+		// @property (nonatomic, strong, readonly, nullable) NSArray<MPProduct *> *products;
 		[NullAllowed, Export("products", ArgumentSemantic.Strong)]
 		MPProduct[] Products { get; }
 
-		// @property (nonatomic, strong) MPPromotionContainer * _Nullable promotionContainer;
+		// @property (nonatomic, strong, nullable) MPPromotionContainer *promotionContainer;
 		[NullAllowed, Export("promotionContainer", ArgumentSemantic.Strong)]
 		MPPromotionContainer PromotionContainer { get; set; }
 
-		// @property (nonatomic, strong) NSString * _Nullable productListName;
+		// @property (nonatomic, strong, nullable) NSString *productListName;
 		[NullAllowed, Export("productListName", ArgumentSemantic.Strong)]
 		string ProductListName { get; set; }
 
-		// @property (nonatomic, strong) NSString * _Nullable productListSource;
+		// @property (nonatomic, strong, nullable) NSString *productListSource;
 		[NullAllowed, Export("productListSource", ArgumentSemantic.Strong)]
 		string ProductListSource { get; set; }
 
-		// @property (nonatomic, strong) NSString * _Nullable screenName;
+		// @property (nonatomic, strong, nullable) NSString *screenName;
 		[NullAllowed, Export("screenName", ArgumentSemantic.Strong)]
 		string ScreenName { get; set; }
 
-		// @property (nonatomic, strong) MPTransactionAttributes * _Nullable transactionAttributes;
+		// @property (nonatomic, strong, nullable) MPTransactionAttributes *transactionAttributes;
 		[NullAllowed, Export("transactionAttributes", ArgumentSemantic.Strong)]
 		MPTransactionAttributes TransactionAttributes { get; set; }
 
@@ -117,48 +186,40 @@ namespace mParticle.Xamarin.iOSBinding
 		[Export("nonInteractive")]
 		bool NonInteractive { get; set; }
 
-		// -(instancetype _Nonnull)initWithAction:(MPCommerceEventAction)action product:(MPProduct * _Nullable)product;
+		// - (nonnull instancetype)initWithAction:(MPCommerceEventAction)action product:(nullable MPProduct *)product;
 		[Export("initWithAction:product:")]
 		IntPtr Constructor(MPCommerceEventAction action, [NullAllowed] MPProduct product);
 
-		// -(instancetype _Nonnull)initWithImpressionName:(NSString * _Nullable)listName product:(MPProduct * _Nullable)product;
+		// - (nonnull instancetype)initWithImpressionName:(nullable NSString *)listName product:(nullable MPProduct *)product;
 		[Export("initWithImpressionName:product:")]
 		IntPtr Constructor([NullAllowed] string listName, [NullAllowed] MPProduct product);
 
-		// -(instancetype _Nonnull)initWithPromotionContainer:(MPPromotionContainer * _Nullable)promotionContainer;
+		// - (nonnull instancetype)initWithPromotionContainer:(nullable MPPromotionContainer *)promotionContainer;
 		[Export("initWithPromotionContainer:")]
 		IntPtr Constructor([NullAllowed] MPPromotionContainer promotionContainer);
 
-		// -(void)addImpression:(MPProduct * _Nonnull)product listName:(NSString * _Nonnull)listName;
+		// - (void)addImpression:(nonnull MPProduct *)product listName:(nonnull NSString *)listName;
 		[Export("addImpression:listName:")]
 		void AddImpression(MPProduct product, string listName);
 
-		// -(void)addProduct:(MPProduct * _Nonnull)product;
+		// - (void)addProduct:(nonnull MPProduct *)product;
 		[Export("addProduct:")]
 		void AddProduct(MPProduct product);
 
-		// -(void)removeProduct:(MPProduct * _Nonnull)product;
+		// - (void)removeProduct:(nonnull MPProduct *)product;
 		[Export("removeProduct:")]
 		void RemoveProduct(MPProduct product);
 
-		// -(void)setCustomAttributes:(NSDictionary<NSString *,NSString *> * _Nullable)customAttributes;
-		[Export("setCustomAttributes:")]
-		void SetCustomAttributes([NullAllowed] NSDictionary<NSString, NSString> customAttributes);
-
-		// -(NSArray * _Nullable)allKeys;
+		// - (nullable NSArray *)allKeys DEPRECATED_MSG_ATTRIBUTE("use customAttributes.allKeys instead");
 		[NullAllowed, Export("allKeys")]
 		NSObject[] AllKeys { get; }
 
-		// -(NSUInteger)count;
-		[Export("count")]
-		nuint Count { get; }
-
-		// -(id _Nullable)objectForKeyedSubscript:(NSString *const _Nonnull)key;
+		// - (nullable id)objectForKeyedSubscript:(nonnull NSString *const)key DEPRECATED_MSG_ATTRIBUTE("use customAttributes[key] instead");
 		[Export("objectForKeyedSubscript:")]
 		[return: NullAllowed]
 		NSObject ObjectForKeyedSubscript(string key);
 
-		// -(void)setObject:(id _Nonnull)obj forKeyedSubscript:(NSString * _Nonnull)key;
+		// - (void)setObject:(nonnull id)obj forKeyedSubscript:(nonnull NSString *)key DEPRECATED_MSG_ATTRIBUTE("use customAttributes[key] = obj instead");
 		[Export("setObject:forKeyedSubscript:")]
 		void SetObject(NSObject obj, string key);
 	}
@@ -469,61 +530,6 @@ namespace mParticle.Xamarin.iOSBinding
 		[Export("stringFromDateRFC3339:")]
 		[return: NullAllowed]
 		string StringFromDateRFC3339(NSDate date);
-	}
-
-	// @interface MPEvent : NSObject <NSCopying>
-	[BaseType(typeof(NSObject))]
-	[Protocol]
-	interface MPEvent : INSCopying
-	{
-		// @property (nonatomic, strong) NSString * _Nullable category;
-		[NullAllowed, Export("category", ArgumentSemantic.Strong)]
-		string Category { get; set; }
-
-		// @property (readonly, nonatomic, strong) NSDictionary<NSString *,__kindof NSArray<NSString *> *> * _Nonnull customFlags;
-		[Export("customFlags", ArgumentSemantic.Strong)]
-		NSDictionary<NSString, NSArray<NSString>> CustomFlags { get; }
-
-		// @property (nonatomic, strong) NSNumber * _Nullable duration;
-		[NullAllowed, Export("duration", ArgumentSemantic.Strong)]
-		NSNumber Duration { get; set; }
-
-		// @property (nonatomic, strong) NSDate * _Nullable endTime;
-		[NullAllowed, Export("endTime", ArgumentSemantic.Strong)]
-		NSDate EndTime { get; set; }
-
-		// @property (nonatomic, strong) NSDictionary<NSString *,id> * _Nullable info;
-		[NullAllowed, Export("info", ArgumentSemantic.Strong)]
-		NSDictionary<NSString, NSObject> Info { get; set; }
-
-		// @property (nonatomic, strong) NSString * _Nonnull name;
-		[Export("name", ArgumentSemantic.Strong)]
-		string Name { get; set; }
-
-		// @property (nonatomic, strong) NSDate * _Nullable startTime;
-		[NullAllowed, Export("startTime", ArgumentSemantic.Strong)]
-		NSDate StartTime { get; set; }
-
-		// @property (readonly, nonatomic, strong) NSString * _Nonnull typeName;
-		[Export("typeName", ArgumentSemantic.Strong)]
-		string TypeName { get; }
-
-		// @property (nonatomic, unsafe_unretained) MPEventType type;
-		[Export("type", ArgumentSemantic.Assign)]
-		MPEventType Type { get; set; }
-
-		// -(instancetype _Nullable)initWithName:(NSString * _Nonnull)name type:(MPEventType)type __attribute__((objc_designated_initializer));
-		[Export("initWithName:type:")]
-		[DesignatedInitializer]
-		IntPtr Constructor(string name, MPEventType type);
-
-		// -(void)addCustomFlag:(NSString * _Nonnull)customFlag withKey:(NSString * _Nonnull)key;
-		[Export("addCustomFlag:withKey:")]
-		void AddCustomFlag(string customFlag, string key);
-
-		// -(void)addCustomFlags:(NSArray<NSString *> * _Nonnull)customFlags withKey:(NSString * _Nonnull)key;
-		[Export("addCustomFlags:withKey:")]
-		void AddCustomFlags(string[] customFlags, string key);
 	}
 
 	// @interface MPKitExecStatus : NSObject

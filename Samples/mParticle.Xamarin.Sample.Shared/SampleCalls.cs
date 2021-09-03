@@ -14,11 +14,11 @@ namespace mParticle.Xamarin.Sample.Shared
             string key = "";
             string secret = "";
 #if __IOS__
-            key = "b757fcf46cba0149bcf73628d440e6a7";
-            secret = "3ucgOsSxomouHiQ1ZjAFRjraJ5E4Wf007bJfO7B5qxHccRtdvdPFqE3vesg2N3Hj";
+            key = "REPLACE WITH iOS APP KEY";
+            secret = "REPLACE WITH iOS APP SECRET";
 #elif __ANDROID__
-            key = "da3b3e96cc9bad469f536fd39b1fc987";
-            secret = "dGV0TOQ7FsrCMjIlMe252cestFrJ6vAYiqnP3Mosbeo3d1NBgZMcDqx6wEG9OgxZ";
+            key = "REPLACE WITH ANDROID APP KEY";
+            secret = "REPLACE WITH ANDROID APP SECRET";
 #endif
             OnUserIdentified _identityStateListener = null;
             _identityStateListener = newUser =>
@@ -51,7 +51,9 @@ namespace mParticle.Xamarin.Sample.Shared
                 {
                     UserIdentities = new Dictionary<UserIdentity, string>() {
                         //{ UserIdentity.Yahoo, "tom@yahoo.com" },
+#if __IOS__
                         { UserIdentity.IOSAdvertiserId, "C56A4180-65AA-42EC-A945-5FD21DEC0538" },
+#endif
                         { UserIdentity.CustomerId, "Other Identity" }
                     },
                     UserAliasHandler = ((previousUser, newUser) => newUser.SetUserAttributes(previousUser.GetUserAttributes()))
@@ -60,7 +62,9 @@ namespace mParticle.Xamarin.Sample.Shared
                 IdDisabled = false,
                 UploadInterval = 650,
                 SessionTimeout = 50,
+#if __ANDROID__
                 UnCaughtExceptionLogging = false,
+#endif
                 LogLevel = LogLevel.INFO,
                 AttributionListener = new AttributionListener()
                 {
@@ -120,13 +124,20 @@ namespace mParticle.Xamarin.Sample.Shared
 
             mparticle.SetATTStatus(MPATTAuthorizationStatus.Authorized, null);
 
+            // Upload bypass example tests
+            mparticle.LogEvent("Event 1 to upload", EventType.Other, new Dictionary<string, string>() { { "Coo1", "Beans1" } });
+            mparticle.LogEvent("Event 2 to upload", EventType.Other, new Dictionary<string, string>() { { "Cool", "Beans2" } }, true);
+            mparticle.LogEvent("Event 3 to NOT upload", EventType.Other, new Dictionary<string, string>() { { "Cool", "Beans3" } }, false);
+            mparticle.LogCommerceEvent(new CommerceEvent(ProductAction.AddToCart, new Product[] { new Product("Product 1 to upload", "product1", 1, 1) }));
+            mparticle.LogCommerceEvent(new CommerceEvent(ProductAction.AddToCart, new Product[] { new Product("Product 2 to upload", "product2", 2, 1) }), true);
+            mparticle.LogCommerceEvent(new CommerceEvent(ProductAction.AddToCart, new Product[] { new Product("Product 3 to NOT upload", "product3", 3, 1) }), false);
+
 #if __ANDROID__
             // This is highly discouraged and we make no guarantees about this but just to show it is possible.
             //var unsafeNativeSDK = mparticle.GetBindingInstance();
             //unsafeNativeSDK.GetType().GetMethod("setOptOut").Invoke(unsafeNativeSDK, new object[] { true });
 #endif
         }
-
 
         public static void ModifyUser()
         {

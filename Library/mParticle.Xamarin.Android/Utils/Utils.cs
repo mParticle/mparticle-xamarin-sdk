@@ -209,6 +209,7 @@ namespace mParticle.Xamarin.Android
             {
                 builder.PushRegistration(options.PushRegistration.AndroidInstanceId, options.PushRegistration.AndroidSenderId);
             }
+            builder.EnableUncaughtExceptionLogging(options.UnCaughtExceptionLogging);
             return builder.Build();
         }
 

@@ -22,8 +22,6 @@ namespace mParticle.Xamarin.iOS.Sample
 			// Override point for customization after application launch.
 			// If not required for your application you can safely delete this method
 
-			SampleCalls.Init();
-
 			return true;
 		}
 

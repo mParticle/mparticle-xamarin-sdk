@@ -1,8 +1,5 @@
 ﻿<metadata>
   <!-- Without these transformations, the project will not compile: -->
-  
-  <!-- C# gets confused between the inner UserAttribute class and the UserAttribute dictionary in the same class -->
-  <attr path="/api/package[@name='com.mparticle']/interface[@name='MParticle.UserAttributes']" name="managedName">MParticle.$UserAttributeMacros</attr>
     
   <!-- Same issue as above. LogLevel field name inside LogLevel class name would be problematic-->
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle.LogLevel']/field[@name='logLevel']" name="managedName">LogLevelValue</attr>
@@ -15,16 +12,10 @@
 
   <!-- No need to expose any of the internal stuff -->
   <remove-node path="/api/package[@name='com.mparticle.internal']" />
-  <remove-node path="/api/package[@name='com.mparticle.lints']" />
   <remove-node path="/api/package[@name='com.mparticle.messaging']" />
-  <remove-node path="/api/package[@name='com.mparticle.activity']" />
-  <remove-node path="/api/package[@name='com.mparticle.lints.detectors']" />
   
   <remove-node path="/api/package[@name='com.mparticle']/class[@name='MPService']" />
   <remove-node path="/api/package[@name='com.mparticle']/class[@name='MPReceiver']" />
-  <remove-node path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='getConfigManager']" />
-  <remove-node path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='getAppStateManager']" />
-  <remove-node path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='getKitManager']" />
   <remove-node path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='Messaging']" />
   <remove-node path="/api/package[@name='com.mparticle']/class[@name='MParticle']/field[@name='mConfigManager']" />
   <remove-node path="/api/package[@name='com.mparticle']/class[@name='MParticle']/field[@name='mMessageManager']" />
@@ -42,10 +33,6 @@
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='getKitInstance' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@type='int' and @name='p0']" name="name">serviceProviderId</attr>
   
   <!-- Commerce -->
-  <attr path="/api/package[@name='com.mparticle.commerce']/class[@name='CommerceApi']/method[@name='purchase' and count(parameter)=2 and parameter[1][@type='com.mparticle.commerce.TransactionAttributes'] and parameter[2][@type='boolean']]/parameter[@type='boolean']" name="name">clearCart</attr>
-  <attr path="/api/package[@name='com.mparticle.commerce']/class[@name='CommerceApi']/method[@name='refund' and count(parameter)=2 and parameter[1][@type='com.mparticle.commerce.TransactionAttributes'] and parameter[2][@type='boolean']]/parameter[@type='boolean']" name="name">clearCart</attr> 
-  <attr path="/api/package[@name='com.mparticle.commerce']/class[@name='CommerceApi']/method[@name='checkout' and count(parameter)=2 and parameter[1][@type='int'] and parameter[2][@type='java.lang.String']]/parameter[@type='int']" name="name">step</attr>
-  <attr path="/api/package[@name='com.mparticle.commerce']/class[@name='CommerceApi']/method[@name='checkout' and count(parameter)=2 and parameter[1][@type='int'] and parameter[2][@type='java.lang.String']]/parameter[@type='java.lang.String']" name="name">options</attr>
   <attr path="/api/package[@name='com.mparticle.commerce']/class[@name='CommerceEvent.Builder']/constructor[@name='CommerceEvent.Builder' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='com.mparticle.commerce.Promotion']]/parameter[@type='java.lang.String']" name="name">promotionAction</attr>
   <attr path="/api/package[@name='com.mparticle.commerce']/class[@name='CommerceEvent.Builder']/constructor[@name='CommerceEvent.Builder' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='com.mparticle.commerce.Product']]/parameter[@type='java.lang.String']" name="name">productAction</attr>
   <attr path="/api/package[@name='com.mparticle.commerce']/class[@name='Product.Builder']/constructor[@name='Product.Builder' and count(parameter)=3 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String'] and parameter[3][@type='double']]/parameter[@name='p0' and @type='java.lang.String']" name="name">name</attr>
@@ -56,7 +43,6 @@
   <attr path="/api/package[@name='com.mparticle.commerce']/class[@name='TransactionAttributes']/constructor[@name='TransactionAttributes' and count(parameter)=1 and parameter[1][@type='java.lang.String']]/parameter[@type='java.lang.String']" name="name">transactionId</attr> 
         
   <!-- Log* Methods -->
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='logEvent' and count(parameter)=1 and parameter[1][@type='com.mparticle.MParticle.BaseEvent']]/parameter[@name='p0']" name="name">event</attr>
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='logScreen']/parameter[@type='java.lang.String']" name="name">screenname</attr>
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='logScreen']/parameter[@type='java.util.Map&lt;java.lang.String, java.lang.String&gt;']" name="name">eventData</attr>
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='logError']/parameter[@type='java.lang.String']" name="name">message</attr>
@@ -79,16 +65,14 @@
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='logPushRegistration' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String']]/parameter[@name='p1']" name="name">senderId</attr>
 
   <!-- Set/Remove Attributes, Ids and other stuff-->
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='setUploadInterval' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@type='int']" name="name">uploadInterval</attr>
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='getSurveyUrl' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@type='int']" name="name">kitId</attr>
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='isKitActive' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@type='int']" name="name">serviceProvderId</attr>
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='isProviderActive' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@type='int']" name="name">serviceProvderId</attr>
   <attr path="/api/package[@name='com.mparticle']/class[@name='MParticle']/method[@name='leaveBreadcrumb' and count(parameter)=1 and parameter[1][@type='java.lang.String']]/parameter[@type='java.lang.String']" name="name">breadcrumb</attr>
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticleOptions.Builder']/method[@name='pushRegistration']/paramter[@name='p0']" name="name">instanceId</attr>
-  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticleOptions.Builder']/method[@name='pushRegistration']/paramter[@name='p1']" name="name">senderId</attr>
+  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticleOptions.Builder']/method[@name='pushRegistration']/parameter[@name='p0']" name="name">instanceId</attr>
+  <attr path="/api/package[@name='com.mparticle']/class[@name='MParticleOptions.Builder']/method[@name='pushRegistration']/parameter[@name='p1']" name="name">senderId</attr>
   <!--Renaming specific types in all package/classes/methods/constructors-->
   
-  <attr path="/api/package[@name='com.mparticle.commerce']/class[@name='ProductBagApi']/method[*]/parameter[@type='java.lang.String']" name="name">bagName</attr>
   <!-- Update this if we add any new methods to ProductBagApi that have string parameters that are not the bagname -->
   <attr path="/api/package[*]/class[*]/method[*]/parameter[@type='com.mparticle.commerce.Product']" name="name">product</attr>
   <attr path="/api/package[*]/class[*]/constructor[*]/parameter[@type='com.mparticle.commerce.Product']" name="name">product</attr>
@@ -96,7 +80,6 @@
   <attr path="/api/package[*]/class[*]/constructor[*]/parameter[@type='android.content.Context']" name="name">context</attr>
   <attr path="/api/package[*]/class[*]/method[*]/parameter[@type='com.mparticle.commerce.TransactionAttributes']" name="name">transactionAttributes</attr>
   <attr path="/api/package[*]/class[*]/constructor[*]/parameter[@type='com.mparticle.commerce.TransactionAttributes']" name="name">transactionAttributes</attr>
-  <attr path="/api/package[*]/class[*]/method[*]/parameter[@type='com.mparticle.commerce.CommerceEvent']" name="name">commerceEvent</attr>
   <attr path="/api/package[*]/class[*]/constructor[*]/parameter[@type='com.mparticle.commerce.CommerceEvent']" name="name">commerceEvent</attr>
   <attr path="/api/package[*]/class[*]/method[*]/parameter[@type='com.mparticle.commerce.Impression']" name="name">impression</attr>
   <attr path="/api/package[*]/class[*]/constructor[*]/parameter[@type='com.mparticle.commerce.Impression']" name="name">impression</attr>
@@ -119,9 +102,6 @@
   <attr path="/api/package[@name='com.mparticle']/interface[@name='AttributionListener']/method[@name='onResult']/parameter[@type='com.mparticle.AttributionResult']" name="name">attributionResult</attr>   
   <attr path="/api/package[@name='com.mparticle.identity']/interface[@name='UserAliasHandler']/method[@name='onUserAlias']/parameter[@name='p0']" name="name">previousUser</attr>
   <attr path="/api/package[@name='com.mparticle.identity']/interface[@name='UserAliasHandler']/method[@name='onUserAlias']/parameter[@name='p1']" name="name">newUser</attr>
-  <attr path="/api/package[@name='com.mparticle.identity']/class[@name='IdentityStateListener']/method[@name='onUserIdentified']/parameter[@name='p0']" name="name">user</attr>
-  <attr path="/api/package[@name='com.mparticle.identity']/class[@name='TaskFailureListener']/method[@name='onFailure']/parameter[@name='p0']" name="name">result</attr>
-  <attr path="/api/package[@name='com.mparticle.identity']/class[@name='TaskSuccessListener']/method[@name='onResult']/parameter[@name='p0']" name="name">result</attr>
 
     
     <!-- Resolve mismatches between Java Generics and C# -->

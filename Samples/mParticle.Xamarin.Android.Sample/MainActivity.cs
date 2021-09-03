@@ -24,7 +24,7 @@ namespace mParticle.Xamarin.Android.Sample
             SetContentView(Resource.Layout.Main);
 
             FindViewById<Button>(Resource.Id.add_to_cart_btn).Click += (sender, e) => BuyStuff();
-            FindViewById<Button>(Resource.Id.upload_btn).Click += (sender, e) => Upload();
+            FindViewById<Button>(Resource.Id.upload_btn).Click += (sender, e) => MParticle.Instance.Upload();
             Initialize = FindViewById<Button>(Resource.Id.initialize_btn);
             Initialize.Click += (sender, e) => Init();
             Login = FindViewById<Button>(Resource.Id.login_btn);
@@ -34,6 +34,7 @@ namespace mParticle.Xamarin.Android.Sample
             Modify.Click += (sender, e) => SampleCalls.ModifyUser();
             Modify.Visibility = ViewStates.Invisible;
             MakeTestCalls = FindViewById<Button>(Resource.Id.test_calls_btn);
+            MakeTestCalls.Click += (sender, e) => SampleCalls.MakeTestCalls();
             MakeTestCalls.Visibility = ViewStates.Invisible;
             OptedInButton = FindViewById<Button>(Resource.Id.opted_in_btn);
             OptedInText = FindViewById<TextView>(Resource.Id.opted_in_tv);
@@ -46,7 +47,8 @@ namespace mParticle.Xamarin.Android.Sample
             };
         }
 
-        public void BuyStuff() {
+        public void BuyStuff()
+        {
             MParticle.Instance.LogCommerceEvent(new CommerceEvent(ProductAction.AddToCart,
                 new Product[]
             {
@@ -54,21 +56,13 @@ namespace mParticle.Xamarin.Android.Sample
             }, new TransactionAttributes("999999")));
         }
 
-        public void Upload() {
-            MParticle.Instance.Upload();
-        }
-
-        public void Init() {
+        public void Init()
+        {
             SampleCalls.Init();
             MakeTestCalls.Visibility = ViewStates.Visible;
             Modify.Visibility = ViewStates.Visible;
             Login.Visibility = ViewStates.Visible;
             Initialize.Visibility = ViewStates.Gone;
-
-        }
-
-        public void MakeSampleCalls() {
-            SampleCalls.MakeTestCalls();
         }
     }
 }

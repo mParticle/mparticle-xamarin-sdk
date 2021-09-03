@@ -32,7 +32,7 @@ namespace mParticle.Xamarin
             AndroidBinding.MParticle.Instance.LeaveBreadcrumb(breadcrumbName);
         }
 
-        public override void LogCommerceEvent(CommerceEvent commerceEvent)
+        public override void LogCommerceEvent(CommerceEvent commerceEvent, bool shouldUploadEvent = true)
         {
             Android.CommerceBinding.CommerceEvent.Builder bindingCommerceEventBuilder = null;
 
@@ -99,13 +99,15 @@ namespace mParticle.Xamarin
                 }
             }
 
+            bindingCommerceEventBuilder.ShouldUploadEvent(shouldUploadEvent);
+
             AndroidBinding.MParticle.Instance.LogEvent(bindingCommerceEventBuilder.Build());
         }
 
-        public override void LogEvent(string eventName, EventType eventType, Dictionary<string, string> eventInfo)
+        public override void LogEvent(string eventName, EventType eventType, Dictionary<string, string> eventInfo, bool shouldUploadEvent = true)
         {
             var mpEventType = AndroidBinding.MParticle.EventType.ValueOf(eventType.ToString());
-            var mpEvent = new AndroidBinding.MPEvent.Builder(eventName, mpEventType).Info(eventInfo).Build();
+            var mpEvent = new AndroidBinding.MPEvent.Builder(eventName, mpEventType).CustomAttributes(eventInfo).ShouldUploadEvent(shouldUploadEvent).Build();
             AndroidBinding.MParticle.Instance.LogEvent(mpEvent);
         }
 

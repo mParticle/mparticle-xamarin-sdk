@@ -51,14 +51,6 @@ namespace mParticle.Xamarin
             {
                 mparticle.PushNotificationToken = options.PushRegistration.IOSToken;
             }
-            if (options.UnCaughtExceptionLogging)
-            {
-                mparticle.BeginUncaughtExceptionLogging();
-            }
-            else
-            {
-                mparticle.EndUncaughtExceptionLogging();
-            }
             return this;
         }
 
@@ -67,7 +59,7 @@ namespace mParticle.Xamarin
             iOSBinding.MParticle.SharedInstance.LeaveBreadcrumb(breadcrumbName);
         }
 
-        public override void LogCommerceEvent(CommerceEvent commerceEvent)
+        public override void LogCommerceEvent(CommerceEvent commerceEvent, bool shouldUploadEvent = true)
         {
             var bindingCommerceEvent = new iOSBinding.MPCommerceEvent();
 
@@ -76,7 +68,7 @@ namespace mParticle.Xamarin
 
             bindingCommerceEvent.ScreenName = commerceEvent.ScreenName;
             bindingCommerceEvent.Currency = commerceEvent.Currency;
-            bindingCommerceEvent.SetCustomAttributes(ConvertToNSDictionary<NSString, NSString>(commerceEvent.CustomAttributes));
+            bindingCommerceEvent.SetCustomAttributes(ConvertToNSDictionary<NSString, NSObject>(commerceEvent.CustomAttributes));
             bindingCommerceEvent.CheckoutOptions = commerceEvent.CheckoutOptions;
 
             if (commerceEvent.Products != null)
@@ -113,6 +105,8 @@ namespace mParticle.Xamarin
                     }
                 }
             }
+
+            bindingCommerceEvent.ShouldUploadEvent = shouldUploadEvent;
 
             iOSBinding.MParticle.SharedInstance.LogCommerceEvent(bindingCommerceEvent);
         }
@@ -168,9 +162,13 @@ namespace mParticle.Xamarin
             return bindingPromotion;
         }
 
-        public override void LogEvent(string eventName, EventType eventType, Dictionary<string, string> eventInfo)
+        public override void LogEvent(string eventName, EventType eventType, Dictionary<string, string> eventInfo, bool shouldUploadEvent = true)
         {
-            iOSBinding.MParticle.SharedInstance.LogEvent(eventName, (MPEventType)Enum.Parse(typeof(iOSBinding.MPEventType), eventType.ToString()), ConvertToNSDictionary<NSString, NSObject>(eventInfo));
+            var mpEventType = (MPEventType)Enum.Parse(typeof(iOSBinding.MPEventType), eventType.ToString());
+            var mpEvent = new MPEvent(eventName, mpEventType);
+            mpEvent.CustomAttributes = ConvertToNSDictionary<NSString, NSObject>(eventInfo);
+            mpEvent.ShouldUploadEvent = shouldUploadEvent;
+            iOSBinding.MParticle.SharedInstance.LogEvent(mpEvent);
         }
 
         public override void LogScreen(string screenName, Dictionary<string, string> eventInfo)

@@ -143,7 +143,7 @@ namespace mParticle.Xamarin
         public Boolean IdDisabled = false;
         public int UploadInterval = 600;  //seconds
         public int SessionTimeout = 60; //seconds
-        public Boolean UnCaughtExceptionLogging = false;
+        public Boolean UnCaughtExceptionLogging = false; // Android only
         public LogLevel LogLevel = LogLevel.DEBUG;
         public LocationTracking LocationTracking;
         public PushRegistration PushRegistration;
@@ -439,7 +439,8 @@ namespace mParticle.Xamarin
         /// Logs the commerce event.
         /// </summary>
         /// <param name="commerceEvent">Commerce event.</param>
-        public abstract void LogCommerceEvent(CommerceEvent commerceEvent);
+        /// <param name="shouldUploadEvent">Whether to upload event to mParticle or only pass to kits.</param>
+        public abstract void LogCommerceEvent(CommerceEvent commerceEvent, bool shouldUploadEvent = true);
 
         /// <summary>
         /// Logs the event.
@@ -447,7 +448,8 @@ namespace mParticle.Xamarin
         /// <param name="eventName">Event name.</param>
         /// <param name="eventType">Event type.</param>
         /// <param name="eventInfo">Event info.</param>
-        public abstract void LogEvent(string eventName, EventType eventType, Dictionary<string, string> eventInfo = null);
+        /// <param name="shouldUploadEvent">Whether to upload event to mParticle or only pass to kits.</param>
+        public abstract void LogEvent(string eventName, EventType eventType, Dictionary<string, string> eventInfo = null, bool shouldUploadEvent = true);
 
         /// <summary>
         /// Logs the screen.
