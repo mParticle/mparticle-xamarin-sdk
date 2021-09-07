@@ -1,3 +1,8 @@
+# Currently this workflow does not automatically pull in changes from internal or create a git tag or Github "Release". First 
+# make sure to manually create a release commit in internal/master updating the version number in the `Library/mparticle.nuspec`
+# file. Then push internal/master to public/master and run this workflow from public/master to build and release to nuget. 
+# After it's released to nuget, manually create a tag and "Release" in the public repo pointing to the release commit.
+
 name: Release SDK
 
 on:
@@ -21,10 +26,6 @@ jobs:
                     echo "You can only run a release from the master branch, you are trying to run it from ${BRANCHNAME}"
                     exit 1
                   fi
-
-    # All new code is stored in internal/development. Release from public/master will merge changes from internal/development into
-    # public/master, then run semantic-release on public/master to update changelog and release notes. Before semantic-release publishes
-    # to npm, it builds the dist/ folder. Finally, commits from public/master are synced back to internal/master and internal/development.
 
     release-to-nuget:
         name: Release and Sync Repos
