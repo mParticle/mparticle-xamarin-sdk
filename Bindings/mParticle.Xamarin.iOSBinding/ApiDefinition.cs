@@ -8,7 +8,6 @@ using WebKit;
 
 namespace mParticle.Xamarin.iOSBinding
 {
-
 	[BaseType(typeof(NSObject))]
 	[Protocol]
 	interface MPTransactionAttributes : INSCopying, INSCoding
@@ -38,8 +37,6 @@ namespace mParticle.Xamarin.iOSBinding
 		string TransactionId { get; set; }
 	}
 
-    
-
 	// @interface MPIHasher : NSObject
 	[BaseType(typeof(NSObject))]
 	[Protocol]
@@ -55,7 +52,6 @@ namespace mParticle.Xamarin.iOSBinding
 		[Export("hashString:")]
 		string HashString(string stringToHash);
 	}
-
 
 	// @protocol MPExtensionProtocol <NSObject>
 	[Protocol, Model]
@@ -333,8 +329,6 @@ namespace mParticle.Xamarin.iOSBinding
         [Export("addAllProducts:shouldLogEvents:")]
         void AddAllProducts(NSArray<MPProduct> products, bool shouldLogEvents);
 
-        // -(
-
 		// -(void)clear;
 		[Export("clear")]
 		void Clear();
@@ -443,7 +437,6 @@ namespace mParticle.Xamarin.iOSBinding
         // @property(nonatomic, strong, readwrite, nonnull) MParticleUser* user;
         [Export("user", ArgumentSemantic.Strong)]
         MParticleUser User { get; set; }
-
     }
 
     //typedef void (^MPIdentityApiResultCallback)(MPIdentityApiResult* _Nullable apiResult, NSError * _Nullable error);
@@ -454,7 +447,6 @@ namespace mParticle.Xamarin.iOSBinding
     [Protocol]
     interface MPIdentityApi
     {
-
         // @property(nonatomic, strong, readonly, nullable) MParticleUser* currentUser;
         [Export("currentUser")]
         [return: NullAllowed]
@@ -610,93 +602,8 @@ namespace mParticle.Xamarin.iOSBinding
 		void AddPromotion(MPPromotion promotion);
 	}
 
-	// @interface MPUserSegments : NSObject <NSCopying>
-	[BaseType(typeof(NSObject))]
-	interface MPUserSegments : INSCopying
-	{
-		// @property (readonly, nonatomic, strong) NSArray<MPSegment *> * _Nullable segmentsIds;
-		[NullAllowed, Export("segmentsIds", ArgumentSemantic.Strong)]
-		MPSegment[] SegmentsIds { get; }
-
-		// @property (readonly, nonatomic, strong) NSDate * _Nullable expiration;
-		[NullAllowed, Export("expiration", ArgumentSemantic.Strong)]
-		NSDate Expiration { get; }
-
-		// @property (readonly, nonatomic) BOOL expired;
-		[Export("expired")]
-		bool Expired { get; }
-
-		// -(NSString * _Nullable)commaSeparatedSegments;
-		[NullAllowed, Export("commaSeparatedSegments")]
-		string CommaSeparatedSegments { get; }
-	}
-
-	// This was added manually. For some reason, Sharpie didn't generate it.
-	// @interface MPDataModelAbstract : NSObject <NSCopying> 
-	[BaseType(typeof(NSObject))]
-	interface MPDataModelAbstract : INSCopying
-	{
-
-	}
-
-	// This was added manually. For some reason, Sharpie didn't generate it.
-	// @interface MPSegment : MPDataModelAbstract <NSCopying>
-	[BaseType(typeof(MPDataModelAbstract))]
-	interface MPSegment : INSCopying
-	{
-		// @property (nonatomic, strong) NSNumber * segmentId;
-		[Export("segmentId", ArgumentSemantic.Strong)]
-		NSNumber SegmentId { get; }
-
-		//@property(nonatomic, strong) NSArray* endpointIds;
-		[Export("endpointIds")]
-		NSObject[] EndpointIds { get; }
-
-		//@property(nonatomic, strong, readonly) NSDate* expiration;
-		[Export("expiration")]
-		NSDate Expiration { get; }
-
-		//@property(nonatomic, strong) NSString* name;
-		[Export("name")]
-		NSString Name { get; }
-
-		//@property(nonatomic, strong) NSArray<MPSegmentMembership*>* memberships;
-		[Export("memberships")]
-		MPSegmentMembership[] Memberships { get; }
-
-		//@property(nonatomic, unsafe_unretained, readonly) BOOL expired;
-		[Export("expired")]
-		bool Expired { get; }
-	}
-
-	// This was added manually. For some reason, Sharpie didn't generate it.
-	// @interface MPSegmentMembership : NSObject<NSCopying>
-	[BaseType(typeof(NSObject))]
-	interface MPSegmentMembership : INSCopying
-	{
-
-		//@property(nonatomic, unsafe_unretained) int64_t segmentId;
-		[Export("segmentId")]
-		ulong SegmentId { get; }
-
-		//@property(nonatomic, unsafe_unretained) int64_t segmentMembershipId;
-		[Export("segmentMembershipId")]
-		ulong SegmentMembershipId { get; }
-
-		//@property(nonatomic, unsafe_unretained) NSTimeInterval timestamp;
-		[Export("timestamp")]
-		double Timestamp { get; }
-
-		//@property(nonatomic, unsafe_unretained) MPSegmentMembershipAction action;
-		[Export("action")]
-		MPSegmentMembership Action { get; set; }
-	}
-
-	// typedef void (^MPUserSegmentsHandler)(MPUserSegments * _Nullable, NSError * _Nullable);
-	delegate void MPUserSegmentsHandler([NullAllowed] MPUserSegments arg0, [NullAllowed] NSError arg1);
-
-	// @interface MPCaseInsensitive (NSArray)
-	[Category]
+    // @interface MPCaseInsensitive (NSArray)
+    [Category]
 	[BaseType(typeof(NSArray))]
 	interface NSArray_MPCaseInsensitive
 	{
@@ -764,11 +671,6 @@ namespace mParticle.Xamarin.iOSBinding
         // - (void) removeUserAttribute:(NSString*) key;
         [Export("removeUserAttribute:")]
         void RemoveUserAttribute(NSString key);
-
-        // -(void)userSegments:(NSTimeInterval)timeout endpointId:(NSString * _Nonnull)endpointId completionHandler:(MPUserSegmentsHandler _Nonnull)completionHandler;
-        [Export("userSegments:endpointId:completionHandler:")]
-        void UserSegments(double timeout, string endpointId, MPUserSegmentsHandler completionHandler);
-
     }
 
     // @property(nonatomic, copy, nullable) void (^onUserAlias)(MParticleUser* previousUser, MParticleUser* newUser);
@@ -853,15 +755,18 @@ namespace mParticle.Xamarin.iOSBinding
         [Export("collectUserAgent", ArgumentSemantic.Assign)]
         bool CollectUserAgent { get; set; }
 
-        // @property(nonatomic, copy) void (^onIdentifyComplete)(MPIdentityApiResult* _Nullable apiResult, NSError *_Nullable error);
-        [Export("onIdentifyComplete")]
+		// @property (nonatomic, strong, readwrite, nullable) NSNumber *configMaxAgeSeconds;
+		[NullAllowed, Export("configMaxAgeSeconds", ArgumentSemantic.Strong)]
+		NSNumber ConfigMaxAgeSeconds { get; set; }
+
+		// @property(nonatomic, copy) void (^onIdentifyComplete)(MPIdentityApiResult* _Nullable apiResult, NSError *_Nullable error);
+		[Export("onIdentifyComplete")]
         OnIdentifyComplete OnIdentifyComplete { set; }
 
         // @property(nonatomic, copy) void (^onAttributionComplete)(MPAttributionResult* _Nullable attributionResult, NSError *_Nullable error);
         [Export("onAttributionComplete")]
         OnAttributionCompleted OnAttributionCompleted { set; }
-
-    }
+	}
 
     // void (^onIdentifyComplete)(MPIdentityApiResult* _Nullable apiResult, NSError *_Nullable error);
     delegate void OnIdentifyComplete([NullAllowed] MPIdentityApiResult request, [NullAllowed] NSError error);
@@ -941,6 +846,10 @@ namespace mParticle.Xamarin.iOSBinding
 		// @property (readonly, nonatomic, strong) NSString * _Nonnull version;
 		[Export("version", ArgumentSemantic.Strong)]
 		string Version { get; }
+
+		// @property (nonatomic, readonly, nullable) NSNumber *configMaxAgeSeconds;
+		[NullAllowed, Export("configMaxAgeSeconds")]
+		NSNumber ConfigMaxAgeSeconds { get; }
 
 		// +(instancetype _Nonnull)sharedInstance;
 		[Static]
