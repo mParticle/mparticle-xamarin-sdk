@@ -755,12 +755,12 @@ namespace mParticle.Xamarin.iOSBinding
         [Export("collectUserAgent", ArgumentSemantic.Assign)]
         bool CollectUserAgent { get; set; }
 
-		// @property (nonatomic, strong, readwrite, nullable) NSNumber *configMaxAgeSeconds;
-		[NullAllowed, Export("configMaxAgeSeconds", ArgumentSemantic.Strong)]
-		NSNumber ConfigMaxAgeSeconds { get; set; }
+	// @property (nonatomic, strong, readwrite, nullable) NSNumber *configMaxAgeSeconds;
+	[NullAllowed, Export("configMaxAgeSeconds", ArgumentSemantic.Strong)]
+	NSNumber ConfigMaxAgeSeconds { get; set; }
 
-		// @property(nonatomic, copy) void (^onIdentifyComplete)(MPIdentityApiResult* _Nullable apiResult, NSError *_Nullable error);
-		[Export("onIdentifyComplete")]
+	// @property(nonatomic, copy) void (^onIdentifyComplete)(MPIdentityApiResult* _Nullable apiResult, NSError *_Nullable error);
+	[Export("onIdentifyComplete")]
         OnIdentifyComplete OnIdentifyComplete { set; }
 
         // @property(nonatomic, copy) void (^onAttributionComplete)(MPAttributionResult* _Nullable attributionResult, NSError *_Nullable error);
