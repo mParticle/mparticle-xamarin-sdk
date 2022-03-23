@@ -57,6 +57,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly) NSString *UUID;
 
+/**
+ The session start time.
+ */
+@property (nonatomic, readonly) NSNumber *startTime;
+
 @end
 
 /**
@@ -292,6 +297,12 @@ Defaults to false. Prevents the eventsHost above from overwriting the alias endp
 @property (nonatomic, unsafe_unretained, readwrite) MPILogLevel logLevel;
 
 /**
+ A custom handler callback for mParticle log messages. If set, this block will be invoked each time mParticle would normally log a message to the console.
+ N.B.: The format/wording of mParticle log messages may change between releases--please avoid using this programatically to detect SDK behavior unless absolutely necessary, and then only as a temporary workaround.
+ */
+@property (nonatomic, copy, readwrite) void (^customLogger)(NSString *message);
+
+/**
  Upload interval.
  
  Batches of data are sent periodically to the mParticle servers at the rate defined by this property. Batches are also uploaded
@@ -352,6 +363,20 @@ Defaults to false. Prevents the eventsHost above from overwriting the alias endp
  Requires @attStatus to be set and is only set if the authorization state is different from the stored state.
  */
 @property (nonatomic, strong, readwrite, nullable) NSNumber *attStatusTimestampMillis;
+
+/**
+ Set a maximum threshold for stored configuration age, in seconds.
+ 
+ When the SDK starts, before we attempt to fetch a fresh config from the server, we
+ will load the most recent previous config from disk. when configMaxAgeSeconds is set, we will
+ check the timestamp on that config and, if its age is greater than the threshold, instead
+ of loading it we will delete it and wait for the fresh config to arrive.
+ 
+ This field is especially useful if your application often updates the kit/forwarding logic and
+ has a portion of user's who experience prolonged network interruptions. In these cases, a reasonable
+ configMaxAgeSeconds will prevent those users from potentially using very old forwarding logic.
+ */
+@property (nonatomic, strong, readwrite, nullable) NSNumber *configMaxAgeSeconds;
 
 /**
  Identify callback.
@@ -427,6 +452,13 @@ Defaults to false. Prevents the eventsHost above from overwriting the alias endp
  @see environment
  */
 @property (nonatomic, unsafe_unretained) MPILogLevel logLevel;
+
+/**
+ A custom handler callback for mParticle log messages. If set, this block will be invoked each time mParticle would normally log a message to the console.
+ N.B.: The format/wording of mParticle log messages may change between releases--please avoid using this programatically to detect SDK behavior unless absolutely necessary, and then only as a temporary workaround.
+ @see MParticleOptions
+ */
+@property (nonatomic, copy, readwrite) void (^customLogger)(NSString *message);
 
 /**
  Gets/Sets the opt-in/opt-out status for the application. Set it to YES to opt-out of event tracking. Set it to NO to opt-in of event tracking.
@@ -535,6 +567,12 @@ Defaults to false. Prevents the eventsHost above from overwriting the alias endp
  @see MParticleOptions
  */
 @property (nonatomic, readonly) MPDataPlanOptions *dataPlanOptions;
+
+/**
+ Maximum threshold for stored configuration age, in seconds.
+ @see MParticleOptions
+ */
+@property (nonatomic, readonly, nullable) NSNumber *configMaxAgeSeconds;
 
 #pragma mark - Initialization
 
@@ -709,6 +747,18 @@ Defaults to false. Prevents the eventsHost above from overwriting the alias endp
  @see logScreenEvent:
  */
 - (void)logScreen:(NSString *)screenName eventInfo:(nullable NSDictionary<NSString *, id> *)eventInfo;
+
+/**
+ Logs a screen event and gives developer option to choose whether this screen event should be uploaded to mParticle when logged or only passed to kits. This is a convenience method for logging simple screen events; internally it creates an instance
+ of MPEvent and calls logScreenEvent:
+ @param screenName The name of the screen to be logged (required not nil and up to 255 characters)
+ @param eventInfo A dictionary containing further information about the screen. This dictionary is limited to 100 key
+ value pairs. Keys must be strings (up to 255 characters) and values can be strings (up to 4096 characters), numbers,
+ booleans, or dates
+ @param shouldUploadEvent A boolean flag that indicates whether this screen event should be uploaded to mParticle when logged or only passed to kits
+ @see logScreenEvent:
+ */
+- (void)logScreen:(NSString *)screenName eventInfo:(nullable NSDictionary<NSString *, id> *)eventInfo shouldUploadEvent:(BOOL)shouldUploadEvent;
 
 /**
  Sets the ATT Authorization state with the supplied timestamp, or uses the current time if none is supplied.

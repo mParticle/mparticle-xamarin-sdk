@@ -143,6 +143,7 @@ namespace mParticle.Xamarin
         public Boolean IdDisabled = false;
         public int UploadInterval = 600;  //seconds
         public int SessionTimeout = 60; //seconds
+        public int? ConfigMaxAgeSeconds; // defaults to unlimited
         public Boolean UnCaughtExceptionLogging = false; // Android only
         public LogLevel LogLevel = LogLevel.DEBUG;
         public LocationTracking LocationTracking;

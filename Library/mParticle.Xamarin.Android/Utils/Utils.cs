@@ -216,6 +216,10 @@ namespace mParticle.Xamarin.Android
                 builder.PushRegistration(options.PushRegistration.AndroidInstanceId, options.PushRegistration.AndroidSenderId);
             }
             builder.EnableUncaughtExceptionLogging(options.UnCaughtExceptionLogging);
+            if (options.ConfigMaxAgeSeconds != null)
+            {
+                builder.ConfigMaxAgeSeconds(options.ConfigMaxAgeSeconds.Value);
+            }
             return builder.Build();
         }
 

@@ -74,6 +74,10 @@ namespace mParticle.Xamarin.iOS.Utils
             mpOptions.Environment = ConvertToMpEnvironment(options.Environment);
             mpOptions.ApiKey = options.ApiKey;
             mpOptions.ApiSecret = options.ApiSecret;
+            if (options.ConfigMaxAgeSeconds != null)
+            {
+                mpOptions.ConfigMaxAgeSeconds = options.ConfigMaxAgeSeconds.Value;
+            }
             if (options.IdentifyRequest != null)
             {
                 mpOptions.IdentifyRequest = ConvertToMpIdentityRequest(options.IdentifyRequest);
