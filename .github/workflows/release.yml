@@ -1,7 +1,7 @@
-# Currently this workflow does not automatically pull in changes from internal or create a git tag or Github "Release". First 
-# make sure to manually create a release commit in internal/master updating the version number in the `Library/mparticle.nuspec`
-# file. Then push internal/master to public/master and run this workflow from public/master to build and release to nuget. 
-# After it's released to nuget, manually create a tag and "Release" in the public repo pointing to the release commit.
+# Currently this workflow does not automatically pull in changes from development or create a git tag or Github "Release". First 
+# make sure to manually create a release commit in master updating the version number in the `Library/mparticle.nuspec`
+# file. Then run this workflow from master to build and release to nuget. After it's released to nuget, manually create a tag 
+# and Github "Release" in the public repo pointing to the release commit.
 
 name: Release SDK
 
@@ -29,7 +29,7 @@ jobs:
 
     release-to-nuget:
         name: Release and Sync Repos
-        runs-on: macos-latest
+        runs-on: macos-10.15
         needs: ['confirm-master-branch']
         steps:
             - name: Git checkout
