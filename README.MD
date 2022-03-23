@@ -9,7 +9,7 @@ This SDK is distributed via the public NuGet gallery: https://www.nuget.org/pack
 If you have both an iOS and an Android project, you should add the NuGet package to each following the Xamarin Add Package dialog. [See here](https://developer.xamarin.com/guides/cross-platform/xamarin-studio/nuget_walkthrough/) for a detailed walkthrough on using NuGet with a Xamarin project.
 
 ```bash
-Install-Package mParticle.Xamarin -Version 2.0.3
+Install-Package mParticle.Xamarin -Version 2.0.12
 ```
 
 ### mParticle Singleton
@@ -28,22 +28,23 @@ namespace MyProject
     {
         void Example ()
         {
-         //use the correct workspace API key and secret for iOS and Android
-         string apiKey = "";
-         string apiSecret = "";
-         #if __ANDROID__
-				apiKey = "REPLACE ME ANDROID KEY", ;
-				apiSecret = "REPLACE ME ANDROID SECRET"
-         #elif __IOS__
-          		apiKey = "REPLACE ME IOS KEY", ;
-				apiSecret = "REPLACE ME IOS SECRET"         
-		 #endif
-		 	
-	 	new MParticleSDK().Initialize(new MParticleOptions()
-        {
-        	ApiKey = apiKey,
-        	ApiSecret = apiSecret
-        });
+            //use the correct workspace API key and secret for iOS and Android
+            string apiKey = "";
+            string apiSecret = "";
+            #if __ANDROID__
+                apiKey = "REPLACE ME ANDROID KEY", ;
+                apiSecret = "REPLACE ME ANDROID SECRET"
+            #elif __IOS__
+                apiKey = "REPLACE ME IOS KEY", ;
+                apiSecret = "REPLACE ME IOS SECRET"         
+            #endif
+             
+            new MParticleSDK().Initialize(new MParticleOptions()
+            {
+                ApiKey = apiKey,
+                ApiSecret = apiSecret
+            });
+        }
     }
 }
 ```
