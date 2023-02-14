@@ -137,7 +137,9 @@ namespace mParticle.Xamarin.iOSBinding
         Radar = 117,
         Skyhook = 121,
         Iterable = 1003,
-        Button = 1022
+        Button = 1022,
+        GoogleAnalyticsFirebase = 136,        
+        GoogleAnalyticsFirebaseGA4 = 160
     }
 
     [Native]
