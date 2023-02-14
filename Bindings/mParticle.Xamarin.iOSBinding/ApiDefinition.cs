@@ -1,4 +1,5 @@
 ﻿using System;
+using CloudKit;
 using CoreLocation;
 using Foundation;
 using ObjCRuntime;
@@ -529,10 +530,6 @@ namespace mParticle.Xamarin.iOSBinding
 	[Protocol]
 	interface MPKitExecStatus
 	{
-		// @property (readonly, nonatomic, strong) NSNumber * _Nonnull kitCode;
-		[Export("kitCode", ArgumentSemantic.Strong)]
-		NSNumber KitCode { get; }
-
 		// @property (nonatomic, unsafe_unretained) MPKitReturnCode returnCode;
 		[Export("returnCode", ArgumentSemantic.Assign)]
 		MPKitReturnCode ReturnCode { get; set; }
@@ -547,11 +544,11 @@ namespace mParticle.Xamarin.iOSBinding
 
 		// -(instancetype _Nonnull)initWithSDKCode:(NSNumber * _Nonnull)kitCode returnCode:(MPKitReturnCode)returnCode;
 		[Export("initWithSDKCode:returnCode:")]
-		IntPtr Constructor(NSNumber kitCode, MPKitReturnCode returnCode);
+		IntPtr Constructor(NSNumber integrationId, MPKitReturnCode returnCode);
 
 		// -(instancetype _Nonnull)initWithSDKCode:(NSNumber * _Nonnull)kitCode returnCode:(MPKitReturnCode)returnCode forwardCount:(NSUInteger)forwardCount;
 		[Export("initWithSDKCode:returnCode:forwardCount:")]
-		IntPtr Constructor(NSNumber kitCode, MPKitReturnCode returnCode, nuint forwardCount);
+		IntPtr Constructor(NSNumber integrationId, MPKitReturnCode returnCode, nuint forwardCount);
 
 		// -(void)incrementForwardCount;
 		[Export("incrementForwardCount")]
@@ -1082,4 +1079,481 @@ namespace mParticle.Xamarin.iOSBinding
 		[Export("processWebViewLogEvent:")]
 		void ProcessWebViewLogEvent(NSUrl requestUrl);
 	}
+
+	/// <summary>
+    /// Following binding are requried to enabling the kits binding
+    /// </summary>
+
+    // @interface MPKitAPI : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MPKitAPI
+    {
+        // -(void)logError:(NSString * _Nullable)format, ...;
+        [Internal]
+        [Export("logError:", IsVariadic = true)]
+        void LogError([NullAllowed] string format, IntPtr varArgs);
+
+        // -(void)logWarning:(NSString * _Nullable)format, ...;
+        [Internal]
+        [Export("logWarning:", IsVariadic = true)]
+        void LogWarning([NullAllowed] string format, IntPtr varArgs);
+
+        // -(void)logDebug:(NSString * _Nullable)format, ...;
+        [Internal]
+        [Export("logDebug:", IsVariadic = true)]
+        void LogDebug([NullAllowed] string format, IntPtr varArgs);
+
+        // -(void)logVerbose:(NSString * _Nullable)format, ...;
+        [Internal]
+        [Export("logVerbose:", IsVariadic = true)]
+        void LogVerbose([NullAllowed] string format, IntPtr varArgs);
+
+        // -(NSDictionary<NSString *,NSString *> * _Nullable)integrationAttributes;
+        [NullAllowed, Export("integrationAttributes")]        
+        NSDictionary<NSString, NSString> IntegrationAttributes { get; }
+
+        // -(void)onAttributionCompleteWithResult:(MPAttributionResult * _Nullable)result error:(NSError * _Nullable)error;
+        [Export("onAttributionCompleteWithResult:error:")]
+        void OnAttributionCompleteWithResult([NullAllowed] MPAttributionResult result, [NullAllowed] NSError error);
+
+        // -(FilteredMParticleUser * _Nonnull)getCurrentUserWithKit:(id<MPKitProtocol> _Nonnull)kit;
+        [Export("getCurrentUserWithKit:")]
+        FilteredMParticleUser GetCurrentUserWithKit(MPKitProtocol kit);
+
+        // -(NSNumber * _Nullable)incrementUserAttribute:(NSString * _Nonnull)key byValue:(NSNumber * _Nonnull)value forUser:(FilteredMParticleUser * _Nonnull)filteredUser;
+        [Export("incrementUserAttribute:byValue:forUser:")]
+        [return: NullAllowed]
+        NSNumber IncrementUserAttribute(string key, NSNumber value, FilteredMParticleUser filteredUser);
+
+        // -(void)setUserAttribute:(NSString * _Nonnull)key value:(id _Nonnull)value forUser:(FilteredMParticleUser * _Nonnull)filteredUser;
+        [Export("setUserAttribute:value:forUser:")]
+        void SetUserAttribute(string key, NSObject value, FilteredMParticleUser filteredUser);
+
+        // -(void)setUserAttributeList:(NSString * _Nonnull)key values:(NSArray<NSString *> * _Nonnull)values forUser:(FilteredMParticleUser * _Nonnull)filteredUser;
+        [Export("setUserAttributeList:values:forUser:")]
+        void SetUserAttributeList(string key, string[] values, FilteredMParticleUser filteredUser);
+
+        // -(void)setUserTag:(NSString * _Nonnull)tag forUser:(FilteredMParticleUser * _Nonnull)filteredUser;
+        [Export("setUserTag:forUser:")]
+        void SetUserTag(string tag, FilteredMParticleUser filteredUser);
+
+        // -(void)removeUserAttribute:(NSString * _Nonnull)key forUser:(FilteredMParticleUser * _Nonnull)filteredUser;
+        [Export("removeUserAttribute:forUser:")]
+        void RemoveUserAttribute(string key, FilteredMParticleUser filteredUser);
+    }
+
+    // @interface FilteredMParticleUser : NSObject
+    [BaseType(typeof(NSObject))]
+    interface FilteredMParticleUser
+    {
+        // @property (readonly, strong) NSNumber * _Nonnull userId;
+        [Export("userId", ArgumentSemantic.Strong)]
+        NSNumber UserId { get; }
+
+        // @property (readonly) BOOL isLoggedIn;
+        [Export("isLoggedIn")]
+        bool IsLoggedIn { get; }
+
+        // @property (readonly, strong) NSDictionary<NSNumber *,NSString *> * _Nonnull userIdentities;
+        [Export("userIdentities", ArgumentSemantic.Strong)]
+        NSDictionary<NSNumber, NSString> UserIdentities { get; }
+
+        // @property (readonly, strong) NSDictionary<NSString *,id> * _Nonnull userAttributes;
+        [Export("userAttributes", ArgumentSemantic.Strong)]
+        NSDictionary<NSString, NSObject> UserAttributes { get; }
+
+        // -(instancetype _Nonnull)initWithMParticleUser:(MParticleUser * _Nonnull)user kitConfiguration:(MPKitConfiguration * _Nonnull)kitConfiguration;
+        //[Export("initWithMParticleUser:kitConfiguration:")]
+        //NativeHandle Constructor(MParticleUser user, MPKitConfiguration kitConfiguration);
+    }
+
+    // @interface FilteredMPIdentityApiRequest : NSObject
+    [BaseType(typeof(NSObject))]
+    interface FilteredMPIdentityApiRequest
+    {
+        // @property (readonly, nonatomic, strong) NSString * _Nullable email;
+        [NullAllowed, Export("email", ArgumentSemantic.Strong)]
+        string Email { get; }
+
+        // @property (readonly, nonatomic, strong) NSString * _Nullable customerId;
+        [NullAllowed, Export("customerId", ArgumentSemantic.Strong)]
+        string CustomerId { get; }
+
+        // @property (readonly, nonatomic, strong) NSDictionary<NSNumber *,NSString *> * _Nullable userIdentities;
+        [NullAllowed, Export("userIdentities", ArgumentSemantic.Strong)]
+        NSDictionary<NSNumber, NSString> UserIdentities { get; }
+
+        //// -(instancetype _Nonnull)initWithIdentityRequest:(MPIdentityApiRequest * _Nonnull)request kitConfiguration:(MPKitConfiguration * _Nonnull)kitConfiguration;
+        //[Export("initWithIdentityRequest:kitConfiguration:")]
+        //NativeHandle Constructor(MPIdentityApiRequest request, MPKitConfiguration kitConfiguration);
+    }
+
+    // @interface MPConsentState : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MPConsentState
+    {
+        // -(NSDictionary<NSString *,MPGDPRConsent *> * _Nullable)gdprConsentState;
+        [NullAllowed, Export("gdprConsentState")]        
+        NSDictionary<NSString, MPGDPRConsent> GdprConsentState { get; }
+
+        // -(void)addGDPRConsentState:(MPGDPRConsent * _Nonnull)consent purpose:(NSString * _Nonnull)purpose;
+        [Export("addGDPRConsentState:purpose:")]
+        void AddGDPRConsentState(MPGDPRConsent consent, string purpose);
+
+        // -(void)removeGDPRConsentStateWithPurpose:(NSString * _Nonnull)purpose;
+        [Export("removeGDPRConsentStateWithPurpose:")]
+        void RemoveGDPRConsentStateWithPurpose(string purpose);
+
+        // -(void)setGDPRConsentState:(NSDictionary<NSString *,MPGDPRConsent *> * _Nullable)consentState;
+        [Export("setGDPRConsentState:")]
+        void SetGDPRConsentState([NullAllowed] NSDictionary<NSString, MPGDPRConsent> consentState);
+
+        // -(MPCCPAConsent * _Nullable)ccpaConsentState;
+        [NullAllowed, Export("ccpaConsentState")]        
+        MPCCPAConsent CcpaConsentState { get; }
+
+        // -(void)setCCPAConsentState:(MPCCPAConsent * _Nonnull)consent;
+        [Export("setCCPAConsentState:")]
+        void SetCCPAConsentState(MPCCPAConsent consent);
+
+        // -(void)removeCCPAConsentState;
+        [Export("removeCCPAConsentState")]
+        void RemoveCCPAConsentState();
+    }
+
+    // @interface MPGDPRConsent : NSObject <NSCopying>
+    [BaseType(typeof(NSObject))]
+    interface MPGDPRConsent : INSCopying
+    {
+        // @property (nonatomic) BOOL consented;
+        [Export("consented")]
+        bool Consented { get; set; }
+
+        // @property (copy, nonatomic) NSString * _Nullable document;
+        [NullAllowed, Export("document")]
+        string Document { get; set; }
+
+        // @property (copy, nonatomic) NSDate * _Nonnull timestamp;
+        [Export("timestamp", ArgumentSemantic.Copy)]
+        NSDate Timestamp { get; set; }
+
+        // @property (copy, nonatomic) NSString * _Nullable location;
+        [NullAllowed, Export("location")]
+        string Location { get; set; }
+
+        // @property (copy, nonatomic) NSString * _Nullable hardwareId;
+        [NullAllowed, Export("hardwareId")]
+        string HardwareId { get; set; }
+    }
+
+    // @interface MPCCPAConsent : NSObject <NSCopying>
+    [BaseType(typeof(NSObject))]
+    interface MPCCPAConsent : INSCopying
+    {
+        // @property (nonatomic) BOOL consented;
+        [Export("consented")]
+        bool Consented { get; set; }
+
+        // @property (copy, nonatomic) NSString * _Nullable document;
+        [NullAllowed, Export("document")]
+        string Document { get; set; }
+
+        // @property (copy, nonatomic) NSDate * _Nonnull timestamp;
+        [Export("timestamp", ArgumentSemantic.Copy)]
+        NSDate Timestamp { get; set; }
+
+        // @property (copy, nonatomic) NSString * _Nullable location;
+        [NullAllowed, Export("location")]
+        string Location { get; set; }
+
+        // @property (copy, nonatomic) NSString * _Nullable hardwareId;
+        [NullAllowed, Export("hardwareId")]
+        string HardwareId { get; set; }
+    }
+
+    // @interface MPForwardRecord : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MPForwardRecord
+    {
+        // @property (nonatomic) uint64_t forwardRecordId;
+        [Export("forwardRecordId")]
+        ulong ForwardRecordId { get; set; }
+
+        // @property (nonatomic, strong) NSMutableDictionary * _Nonnull dataDictionary;
+        [Export("dataDictionary", ArgumentSemantic.Strong)]
+        NSMutableDictionary DataDictionary { get; set; }
+
+        // @property (nonatomic, strong) NSNumber * _Nonnull mpid;
+        [Export("mpid", ArgumentSemantic.Strong)]
+        NSNumber Mpid { get; set; }
+
+        // @property (nonatomic, strong) NSNumber * _Nonnull timestamp;
+        [Export("timestamp", ArgumentSemantic.Strong)]
+        NSNumber Timestamp { get; set; }
+
+        // -(instancetype _Nonnull)initWithId:(int64_t)forwardRecordId dataDictionary:(NSDictionary * _Nonnull)dataDictionary mpid:(NSNumber * _Nonnull)mpid;
+        //[Export("initWithId:dataDictionary:mpid:")]
+        //NativeHandle Constructor(long forwardRecordId, NSDictionary dataDictionary, NSNumber mpid);
+    }
+
+    // @protocol MPKitProtocol <NSObject>
+    /*
+  Check whether adding [Model] to this declaration is appropriate.
+  [Model] is used to generate a C# class that implements this protocol,
+  and might be useful for protocols that consumers are supposed to implement,
+  since consumers can subclass the generated class instead of implementing
+  the generated interface. If consumers are not supposed to implement this
+  protocol, then [Model] is redundant and will generate code that will never
+  be used.
+*/
+    [Protocol]
+    [BaseType(typeof(NSObject))]
+    interface MPKitProtocol
+    {
+        // @required @property (readonly, nonatomic) BOOL started;
+        [Abstract]
+        [Export("started")]
+        bool Started { get; }
+
+        // @required -(MPKitExecStatus * _Nonnull)didFinishLaunchingWithConfiguration:(NSDictionary * _Nonnull)configuration;
+        [Abstract]
+        [Export("didFinishLaunchingWithConfiguration:")]
+        MPKitExecStatus DidFinishLaunchingWithConfiguration(NSDictionary configuration);
+
+		// @required +(NSNumber * _Nonnull)kitCode;
+		[Abstract, Static]
+		[Export("kitCode")]
+		NSNumber KitCode { get; set; } 
+
+        // @optional @property (nonatomic, strong) NSDictionary * _Nonnull configuration;
+        [Export("configuration", ArgumentSemantic.Strong)]
+        NSDictionary Configuration { get; set; }
+
+        // @optional @property (nonatomic, strong) NSDictionary * _Nullable launchOptions;
+        [NullAllowed, Export("launchOptions", ArgumentSemantic.Strong)]
+        NSDictionary LaunchOptions { get; set; }
+
+        // @optional @property (readonly, nonatomic, strong) id _Nullable providerKitInstance;
+        [NullAllowed, Export("providerKitInstance", ArgumentSemantic.Strong)]
+        NSObject ProviderKitInstance { get; }
+
+        // @optional @property (nonatomic, strong) MPKitAPI * _Nullable kitApi;
+        [NullAllowed, Export("kitApi", ArgumentSemantic.Strong)]
+        MPKitAPI KitApi { get; set; }
+
+        // @optional -(void)start;
+        [Export("start")]
+        void Start();
+
+        // @optional -(void)deinit;
+        [Export("deinit")]
+        void Deinit();
+
+        // @optional -(MPKitExecStatus * _Nonnull)continueUserActivity:(NSUserActivity * _Nonnull)userActivity restorationHandler:(void (^ _Nonnull)(NSArray * _Nullable))restorationHandler;
+        [Export("continueUserActivity:restorationHandler:")]
+        MPKitExecStatus ContinueUserActivity(NSUserActivity userActivity, Action<NSArray> restorationHandler);
+
+        // @optional -(MPKitExecStatus * _Nonnull)didUpdateUserActivity:(NSUserActivity * _Nonnull)userActivity;
+        [Export("didUpdateUserActivity:")]
+        MPKitExecStatus DidUpdateUserActivity(NSUserActivity userActivity);
+
+        // @optional -(MPKitExecStatus * _Nonnull)didBecomeActive;
+        [Export("didBecomeActive")]        
+        MPKitExecStatus DidBecomeActive { get; }
+
+        // @optional -(MPKitExecStatus * _Nonnull)failedToRegisterForUserNotifications:(NSError * _Nullable)error;
+        [Export("failedToRegisterForUserNotifications:")]
+        MPKitExecStatus FailedToRegisterForUserNotifications([NullAllowed] NSError error);
+
+        // @optional -(MPKitExecStatus * _Nonnull)handleActionWithIdentifier:(NSString * _Nonnull)identifier forRemoteNotification:(NSDictionary * _Nonnull)userInfo;
+        [Export("handleActionWithIdentifier:forRemoteNotification:")]
+        MPKitExecStatus HandleActionWithIdentifier(string identifier, NSDictionary userInfo);
+
+        // @optional -(MPKitExecStatus * _Nonnull)handleActionWithIdentifier:(NSString * _Nullable)identifier forRemoteNotification:(NSDictionary * _Nonnull)userInfo withResponseInfo:(NSDictionary * _Nonnull)responseInfo;
+        [Export("handleActionWithIdentifier:forRemoteNotification:withResponseInfo:")]
+        MPKitExecStatus HandleActionWithIdentifier([NullAllowed] string identifier, NSDictionary userInfo, NSDictionary responseInfo);
+
+        // @optional -(MPKitExecStatus * _Nonnull)openURL:(NSURL * _Nonnull)url options:(NSDictionary<NSString *,id> * _Nullable)options;
+        [Export("openURL:options:")]
+        MPKitExecStatus OpenURL(NSUrl url, [NullAllowed] NSDictionary<NSString, NSObject> options);
+
+        // @optional -(MPKitExecStatus * _Nonnull)openURL:(NSURL * _Nonnull)url sourceApplication:(NSString * _Nullable)sourceApplication annotation:(id _Nullable)annotation;
+        [Export("openURL:sourceApplication:annotation:")]
+        MPKitExecStatus OpenURL(NSUrl url, [NullAllowed] string sourceApplication, [NullAllowed] NSObject annotation);
+
+        // @optional -(MPKitExecStatus * _Nonnull)receivedUserNotification:(NSDictionary * _Nonnull)userInfo;
+        [Export("receivedUserNotification:")]
+        MPKitExecStatus ReceivedUserNotification(NSDictionary userInfo);
+
+        // @optional -(MPKitExecStatus * _Nonnull)setDeviceToken:(NSData * _Nonnull)deviceToken;
+        [Export("setDeviceToken:")]
+        MPKitExecStatus SetDeviceToken(NSData deviceToken);
+
+        // @optional -(MPKitExecStatus * _Nonnull)userNotificationCenter:(UNUserNotificationCenter * _Nonnull)center willPresentNotification:(UNNotification * _Nonnull)notification __attribute__((availability(ios, introduced=10.0)));
+        [iOS(10, 0)]
+        [Export("userNotificationCenter:willPresentNotification:")]
+        MPKitExecStatus UserNotificationCenter(UNUserNotificationCenter center, UNNotification notification);
+
+        // @optional -(MPKitExecStatus * _Nonnull)userNotificationCenter:(UNUserNotificationCenter * _Nonnull)center didReceiveNotificationResponse:(UNNotificationResponse * _Nonnull)response __attribute__((availability(ios, introduced=10.0)));
+        [iOS(10, 0)]
+        [Export("userNotificationCenter:didReceiveNotificationResponse:")]
+        MPKitExecStatus UserNotificationCenter(UNUserNotificationCenter center, UNNotificationResponse response);
+
+        // @optional -(MPKitExecStatus * _Nonnull)beginLocationTracking:(CLLocationAccuracy)accuracy minDistance:(CLLocationDistance)distanceFilter;
+        [Export("beginLocationTracking:minDistance:")]
+        MPKitExecStatus BeginLocationTracking(double accuracy, double distanceFilter);
+
+        // @optional -(MPKitExecStatus * _Nonnull)endLocationTracking;
+        [Export("endLocationTracking")]        
+        MPKitExecStatus EndLocationTracking { get; }
+
+        // @optional -(MPKitExecStatus * _Nonnull)setLocation:(CLLocation * _Nonnull)location;
+        [Export("setLocation:")]
+        MPKitExecStatus SetLocation(CLLocation location);
+
+        // @optional -(MPKitExecStatus * _Nonnull)beginSession;
+        [Export("beginSession")]        
+        MPKitExecStatus BeginSession { get; }
+
+        // @optional -(MPKitExecStatus * _Nonnull)endSession;
+        [Export("endSession")]        
+        MPKitExecStatus EndSession { get; }
+
+        // @optional -(MPKitExecStatus * _Nonnull)incrementUserAttribute:(NSString * _Nonnull)key byValue:(NSNumber * _Nonnull)value;
+        [Export("incrementUserAttribute:byValue:")]
+        MPKitExecStatus IncrementUserAttribute(string key, NSNumber value);
+
+        // @optional -(MPKitExecStatus * _Nonnull)removeUserAttribute:(NSString * _Nonnull)key;
+        [Export("removeUserAttribute:")]
+        MPKitExecStatus RemoveUserAttribute(string key);
+
+        // @optional -(MPKitExecStatus * _Nonnull)setUserAttribute:(NSString * _Nonnull)key value:(id _Nonnull)value;
+        [Export("setUserAttribute:value:")]
+        MPKitExecStatus SetUserAttribute(string key, NSObject value);
+
+        // @optional -(MPKitExecStatus * _Nonnull)setUserAttribute:(NSString * _Nonnull)key values:(NSArray * _Nonnull)values;
+        [Export("setUserAttribute:values:")]        
+        MPKitExecStatus SetUserAttribute(string key, NSObject[] values);
+
+		// @optional -(MPKitExecStatus * _Nonnull)setUserIdentity:(NSString * _Nullable)identityString identityType:(MPUserIdentity)identityType;
+		[Export("setUserIdentity:identityType:")]
+		MPKitExecStatus SetUserIdentity([NullAllowed] string identityString, MPUserIdentity identityType);
+
+		// @optional -(MPKitExecStatus * _Nonnull)setUserTag:(NSString * _Nonnull)tag;
+		[Export("setUserTag:")]
+        MPKitExecStatus SetUserTag(string tag);
+
+        // @optional -(MPKitExecStatus * _Nonnull)onIncrementUserAttribute:(FilteredMParticleUser * _Nonnull)user;
+        [Export("onIncrementUserAttribute:")]
+        MPKitExecStatus OnIncrementUserAttribute(FilteredMParticleUser user);
+
+        // @optional -(MPKitExecStatus * _Nonnull)onRemoveUserAttribute:(FilteredMParticleUser * _Nonnull)user;
+        [Export("onRemoveUserAttribute:")]
+        MPKitExecStatus OnRemoveUserAttribute(FilteredMParticleUser user);
+
+        // @optional -(MPKitExecStatus * _Nonnull)onSetUserAttribute:(FilteredMParticleUser * _Nonnull)user;
+        [Export("onSetUserAttribute:")]
+        MPKitExecStatus OnSetUserAttribute(FilteredMParticleUser user);
+
+        // @optional -(MPKitExecStatus * _Nonnull)onSetUserTag:(FilteredMParticleUser * _Nonnull)user;
+        [Export("onSetUserTag:")]
+        MPKitExecStatus OnSetUserTag(FilteredMParticleUser user);
+
+        // @optional -(MPKitExecStatus * _Nonnull)onIdentifyComplete:(FilteredMParticleUser * _Nonnull)user request:(FilteredMPIdentityApiRequest * _Nonnull)request;
+        [Export("onIdentifyComplete:request:")]
+        MPKitExecStatus OnIdentifyComplete(FilteredMParticleUser user, FilteredMPIdentityApiRequest request);
+
+        // @optional -(MPKitExecStatus * _Nonnull)onLoginComplete:(FilteredMParticleUser * _Nonnull)user request:(FilteredMPIdentityApiRequest * _Nonnull)request;
+        [Export("onLoginComplete:request:")]
+        MPKitExecStatus OnLoginComplete(FilteredMParticleUser user, FilteredMPIdentityApiRequest request);
+
+        // @optional -(MPKitExecStatus * _Nonnull)onLogoutComplete:(FilteredMParticleUser * _Nonnull)user request:(FilteredMPIdentityApiRequest * _Nonnull)request;
+        [Export("onLogoutComplete:request:")]
+        MPKitExecStatus OnLogoutComplete(FilteredMParticleUser user, FilteredMPIdentityApiRequest request);
+
+        // @optional -(MPKitExecStatus * _Nonnull)onModifyComplete:(FilteredMParticleUser * _Nonnull)user request:(FilteredMPIdentityApiRequest * _Nonnull)request;
+        [Export("onModifyComplete:request:")]
+        MPKitExecStatus OnModifyComplete(FilteredMParticleUser user, FilteredMPIdentityApiRequest request);
+
+        // @optional -(MPKitExecStatus * _Nonnull)setConsentState:(MPConsentState * _Nullable)state;
+        [Export("setConsentState:")]
+        MPKitExecStatus SetConsentState([NullAllowed] MPConsentState state);
+
+        // @optional -(MPKitExecStatus * _Nonnull)logCommerceEvent:(MPCommerceEvent * _Nonnull)commerceEvent __attribute__((deprecated("")));
+        [Export("logCommerceEvent:")]
+        MPKitExecStatus LogCommerceEvent(MPCommerceEvent commerceEvent);
+
+        // @optional -(MPKitExecStatus * _Nonnull)logLTVIncrease:(double)increaseAmount event:(MPEvent * _Nonnull)event;
+        [Export("logLTVIncrease:event:")]
+        MPKitExecStatus LogLTVIncrease(double increaseAmount, MPEvent @event);
+
+        // @optional -(MPKitExecStatus * _Nonnull)logBaseEvent:(MPBaseEvent * _Nonnull)event;
+        [Export("logBaseEvent:")]
+        MPKitExecStatus LogBaseEvent(MPBaseEvent @event);
+
+        // @optional -(MPKitExecStatus * _Nonnull)logEvent:(MPEvent * _Nonnull)event __attribute__((deprecated("")));
+        [Export("logEvent:")]
+        MPKitExecStatus LogEvent(MPEvent @event);
+
+        // @optional -(MPKitExecStatus * _Nonnull)logInstall;
+        [Export("logInstall")]        
+        MPKitExecStatus LogInstall { get; }
+
+        // @optional -(MPKitExecStatus * _Nonnull)logout;
+        [Export("logout")]        
+        MPKitExecStatus Logout { get; }
+
+        // @optional -(MPKitExecStatus * _Nonnull)logScreen:(MPEvent * _Nonnull)event;
+        [Export("logScreen:")]
+        MPKitExecStatus LogScreen(MPEvent @event);
+
+        // @optional -(MPKitExecStatus * _Nonnull)logUpdate;
+        [Export("logUpdate")]        
+        MPKitExecStatus LogUpdate { get; }
+
+        // @optional -(MPKitExecStatus * _Nonnull)setATTStatus:(MPATTAuthorizationStatus)status withATTStatusTimestampMillis:(NSNumber * _Nullable)attStatusTimestampMillis;
+        [Export("setATTStatus:withATTStatusTimestampMillis:")]
+        MPKitExecStatus SetATTStatus(MPATTAuthorizationStatus status, [NullAllowed] NSNumber attStatusTimestampMillis);
+
+        // @optional -(MPKitExecStatus * _Nonnull)beginTimedEvent:(MPEvent * _Nonnull)event;
+        [Export("beginTimedEvent:")]
+        MPKitExecStatus BeginTimedEvent(MPEvent @event);
+
+        // @optional -(MPKitExecStatus * _Nonnull)endTimedEvent:(MPEvent * _Nonnull)event;
+        [Export("endTimedEvent:")]
+        MPKitExecStatus EndTimedEvent(MPEvent @event);
+
+        // @optional -(MPKitExecStatus * _Nonnull)leaveBreadcrumb:(MPEvent * _Nonnull)event;
+        [Export("leaveBreadcrumb:")]
+        MPKitExecStatus LeaveBreadcrumb(MPEvent @event);
+
+        // @optional -(MPKitExecStatus * _Nonnull)logError:(NSString * _Nullable)message eventInfo:(NSDictionary * _Nullable)eventInfo;
+        [Export("logError:eventInfo:")]
+        MPKitExecStatus LogError([NullAllowed] string message, [NullAllowed] NSDictionary eventInfo);
+
+        // @optional -(MPKitExecStatus * _Nonnull)logException:(NSException * _Nonnull)exception;
+        [Export("logException:")]
+        MPKitExecStatus LogException(NSException exception);
+
+        // @optional -(MPKitExecStatus * _Nonnull)setKitAttribute:(NSString * _Nonnull)key value:(id _Nullable)value;
+        [Export("setKitAttribute:value:")]
+        MPKitExecStatus SetKitAttribute(string key, [NullAllowed] NSObject value);
+
+        // @optional -(MPKitExecStatus * _Nonnull)setOptOut:(BOOL)optOut;
+        [Export("setOptOut:")]
+        MPKitExecStatus SetOptOut(bool optOut);
+
+        // @optional -(NSString * _Nullable)surveyURLWithUserAttributes:(NSDictionary * _Nonnull)userAttributes;
+        [Export("surveyURLWithUserAttributes:")]
+        [return: NullAllowed]
+        string SurveyURLWithUserAttributes(NSDictionary userAttributes);
+
+        // @optional -(BOOL)shouldDelayMParticleUpload;
+        [Export("shouldDelayMParticleUpload")]        
+        bool ShouldDelayMParticleUpload { get; }
+
+        // @optional -(NSArray<MPForwardRecord *> * _Nonnull)logBatch:(NSDictionary * _Nonnull)batch;
+        [Export("logBatch:")]
+        MPForwardRecord[] LogBatch(NSDictionary batch);
+    }
 }
