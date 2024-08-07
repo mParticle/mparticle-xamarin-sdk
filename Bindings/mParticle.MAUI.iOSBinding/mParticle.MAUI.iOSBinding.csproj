@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-ios</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>true</ImplicitUsings>
+    <IsBindingProject>true</IsBindingProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
+    <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <NativeReference Include="mParticle_Apple_SDK.framework">
+      <Kind>Framework</Kind>
+      <SmartLink>False</SmartLink>
+    </NativeReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="mParticle_Apple_SDK.framework\mParticle_Apple_SDK" />
+    <None Remove="mParticle_Apple_SDK.framework\Modules\module.modulemap" />
+    <None Remove="mParticle_Apple_SDK.framework\Info.plist" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPEvent.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPBaseEvent.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPForwardRecord.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPKitProtocol.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\mParticle.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPExtensionProtocol.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\FilteredMParticleUser.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPListenerProtocol.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPPromotion.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPGDPRConsent.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPKitAPI.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPTransactionAttributes.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPCommerceEventInstruction.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPListenerController.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPIdentityApi.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPCCPAConsent.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPUserSegments.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\NSDictionary+MPCaseInsensitive.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MParticleUser.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\NSArray+MPCaseInsensitive.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPCommerceEvent.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPAliasResponse.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPIHasher.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPIdentityApiRequest.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPAliasRequest.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPDateFormatter.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\FilteredMPIdentityApiRequest.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPEnums.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPKitExecStatus.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPCommerceEvent+Dictionary.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPConsentState.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPKitRegister.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPProduct+Dictionary.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPProduct.h" />
+    <None Remove="mParticle_Apple_SDK.framework\Headers\MPTransactionAttributes+Dictionary.h" />
+  </ItemGroup>
+</Project>

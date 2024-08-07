@@ -2,21 +2,21 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
    <metadata minClientVersion="2.8.1">
        <id>mParticle.Xamarin</id>
-       <version>2.0.12</version>
-       <title>mParticle Xamarin SDK</title>
-       <authors>Wasi Haider, Sam Dozor, Will Passidomo, mParticle Inc.</authors>
+       <version>2.1.0</version>
+       <title>mParticle .Net SDK</title>
+       <authors>Wasi Haider, Sam Dozor, Will Passidomo, Brandon Stalnaker, mParticle Inc.</authors>
        <owners>mParticle Inc.</owners>
        <licenseUrl>https://github.com/mParticle/mparticle-xamarin-sdk/blob/master/LICENSE</licenseUrl>
        <projectUrl>https://github.com/mparticle/mparticle-xamarin-sdk</projectUrl>
        <requireLicenseAcceptance>false</requireLicenseAcceptance>
        <iconUrl>https://static.mparticle.com/sdk/nuget_logo.png</iconUrl>
        <description>
-         mParticle Xamarin SDK
+         mParticle .Net SDK
        </description>
        <summary>
-         mParticle Xamarin SDK
+         mParticle .Net SDK
        </summary>
-       <tags>mparticle, analytics, marketing, xamarin, xamarin.forms, android, ios, plugin for xamarin</tags>
+       <tags>mparticle, analytics, marketing, maui, xamarin, xamarin.forms, android, ios, plugin for xamarin</tags>
     <dependencies>
       <group targetFramework="net">
       </group>
@@ -25,6 +25,8 @@
       <group targetFramework="Xamarin.iOS10">
       </group>
        <group targetFramework="portable-net45+win+wpa81+wp80">
+      </group>
+       <group targetFramework="net8.0-ios">
       </group>
     </dependencies>
    </metadata>
@@ -38,6 +40,9 @@
      
      <!--Xamarin.iOS-->
      <file src="mParticle.Xamarin.iOS/bin/Release/mParticle.*" target="lib/Xamarin.iOS10" />
+
+     <!--MAUI.iOS-->
+     <file src="mParticle.MAUI.iOS/bin/Release/mParticle.*" target="lib/net8.0-ios" />
 
 
    </files>
