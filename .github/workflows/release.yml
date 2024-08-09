@@ -15,7 +15,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Git checkout
-              uses: actions/checkout@v2
+              uses: actions/checkout@v4
             - name: Branch name
               run: |
                   BRANCHNAME=${GITHUB_REF##*/}
@@ -29,11 +29,11 @@ jobs:
 
     release-to-nuget:
         name: Release and Sync Repos
-        runs-on: macos-10.15
+        runs-on: macos-13
         needs: ['confirm-master-branch']
         steps:
             - name: Git checkout
-              uses: actions/checkout@v2
+              uses: actions/checkout@v4
             - name: Build artifacts
               run: ./build.sh
             - name: Release to Nuget

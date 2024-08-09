@@ -6,9 +6,7 @@ msbuild Library/mParticle.Xamarin.Abstractions/mParticle.Xamarin.Abstractions.cs
 msbuild Library/mParticle.Xamarin.Android/mParticle.Xamarin.Android.csproj /p:Configuration=Release /t:Rebuild
 msbuild Library/mParticle.Xamarin.iOS/mParticle.Xamarin.iOS.csproj /p:Configuration=Release /t:Rebuild
 
-msbuild Bindings/mParticle.MAUI.iOSBinding/mParticle.MAUI.iOSBinding.csproj /p:Configuration=Release /t:Rebuild
-msbuild Library/mParticle.MAUI.Abstractions/mParticle.MAUI.Abstractions.csproj /p:Configuration=Release /t:Rebuild
-msbuild Library/mParticle.MAUI.iOS/mParticle.MAUI.iOS.csproj /p:Configuration=Release /t:Rebuild
+
 
 msbuild Samples/mParticle.Xamarin.Android.Sample/mParticle.Xamarin.Android.Sample.csproj /p:Configuration=Debug /t:Rebuild
 msbuild Samples/mParticle.Xamarin.Forms.Sample.Droid/mParticle.Xamarin.Forms.Sample.Droid.csproj /p:Configuration=Debug /t:Rebuild

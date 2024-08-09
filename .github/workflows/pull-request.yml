@@ -5,28 +5,28 @@ on:
 
 jobs:
   Build: 
-    runs-on: macos-10.15
+    runs-on: macOS-13
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
     - name: Build artifacts
       run: ./build.sh
       
   Android:
-    runs-on: macos-10.15
+    runs-on: macos-13
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
     - name: Android
       run: |
-        nuget restore
+        dotnet restore
         cd Samples/mParticle.Xamarin.Android.Sample
-        msbuild
+        dotnet build
         
   iOS:
-    runs-on: macos-10.15
+    runs-on: macos-13
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
     - name: iOS
       run: |
-        nuget restore
+        dotnet restore
         cd Samples/mParticle.Xamarin.iOS.Sample
-        msbuild
+        dotnet build
