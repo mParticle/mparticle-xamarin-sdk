@@ -28,6 +28,7 @@
     <DeviceSpecificBuild>false</DeviceSpecificBuild>
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchHttpClientHandler></MtouchHttpClientHandler>
+    <MtouchArch>ARM64</MtouchArch>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -40,6 +41,7 @@
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchHttpClientHandler></MtouchHttpClientHandler>
+    <MtouchArch>ARM64</MtouchArch>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
