@@ -24,7 +24,7 @@ namespace mParticle.Xamarin.Sample.Shared
             _identityStateListener = newUser =>
             {
                 MParticle.Instance.Identity.RemoveIdentityStateListener(_identityStateListener);
-                    if (newUser != null)
+                if (newUser != null)
                 {
                     Console.WriteLine("New User Identified\n" + newUser.ToString());
                     newUser.SetUserAttribute("uattr_array", new string[] { "You get an attribute", "And you get an atrribute" }.ToList().Aggregate((arg1, arg2) => arg1 + arg2 + ", "));
@@ -50,12 +50,12 @@ namespace mParticle.Xamarin.Sample.Shared
                 IdentifyRequest = new IdentityApiRequest()
                 {
                     UserIdentities = new Dictionary<UserIdentity, string>() {
-                        //{ UserIdentity.Yahoo, "tom@yahoo.com" },
+                    //{ UserIdentity.Yahoo, "tom@yahoo.com" },
 #if __IOS__
-                        { UserIdentity.IOSAdvertiserId, "C56A4180-65AA-42EC-A945-5FD21DEC0538" },
+                    { UserIdentity.IOSAdvertiserId, "C56A4180-65AA-42EC-A945-5FD21DEC0538" },
 #endif
-                        { UserIdentity.CustomerId, "Other Identity" }
-                    },
+                    { UserIdentity.CustomerId, "Other Identity" }
+                },
                     UserAliasHandler = ((previousUser, newUser) => newUser.SetUserAttributes(previousUser.GetUserAttributes()))
                 },
                 DevicePerformanceMetricsDisabled = false,
@@ -66,6 +66,7 @@ namespace mParticle.Xamarin.Sample.Shared
                 UnCaughtExceptionLogging = false,
 #endif
                 LogLevel = LogLevel.INFO,
+                ConfigMaxAgeSeconds = 60,
                 AttributionListener = new AttributionListener()
                 {
                     OnAttributionError = error => Console.WriteLine("AttributionError\n" + "Error Message = " + error.Message + "\nService Provider = " + error.ServiceProviderId),
@@ -124,6 +125,12 @@ namespace mParticle.Xamarin.Sample.Shared
 
             mparticle.SetATTStatus(MPATTAuthorizationStatus.Authorized, null);
 
+            new CommerceEvent(ProductAction.AddToCart, new Product[] { new Product("Product 1 to upload", "product1", 1, 1) })
+            {
+                NonInteractive = true,
+                CheckoutOptions = "sdfsdf"
+            };
+
             // Upload bypass example tests
             mparticle.LogEvent("Event 1 to upload", EventType.Other, new Dictionary<string, string>() { { "Coo1", "Beans1" } });
             mparticle.LogEvent("Event 2 to upload", EventType.Other, new Dictionary<string, string>() { { "Cool", "Beans2" } }, true);
@@ -133,9 +140,9 @@ namespace mParticle.Xamarin.Sample.Shared
             mparticle.LogCommerceEvent(new CommerceEvent(ProductAction.AddToCart, new Product[] { new Product("Product 3 to NOT upload", "product3", 3, 1) }), false);
 
 #if __ANDROID__
-            // This is highly discouraged and we make no guarantees about this but just to show it is possible.
-            //var unsafeNativeSDK = mparticle.GetBindingInstance();
-            //unsafeNativeSDK.GetType().GetMethod("setOptOut").Invoke(unsafeNativeSDK, new object[] { true });
+        // This is highly discouraged and we make no guarantees about this but just to show it is possible.
+        //var unsafeNativeSDK = mparticle.GetBindingInstance();
+        //unsafeNativeSDK.GetType().GetMethod("setOptOut").Invoke(unsafeNativeSDK, new object[] { true });
 #endif
         }
 
@@ -161,19 +168,19 @@ namespace mParticle.Xamarin.Sample.Shared
                     }
                 }
             })
-                     .AddFailureListener(result =>
-                    {
-                        Console.WriteLine("ModifyError!!");
-                        LoginNewUser();
-                    })
-                     .AddSuccessListener(user =>
-                    {
-                        Console.WriteLine("Modified User Identified\n" + user.ToString());
-                        LoginNewUser();
-                    });
+            .AddFailureListener(result =>
+            {
+                Console.WriteLine("ModifyError!!");
+                LoginNewUser();
+            })
+            .AddSuccessListener(user =>
+            {
+                Console.WriteLine("Modified User Identified\n" + user.ToString());
+                LoginNewUser();
+            });
         }
 
-        public static void LoginNewUser() 
+        public static void LoginNewUser()
         {
             Thread.Sleep(2000);
             var mparticle = MParticle.Instance;
@@ -187,8 +194,8 @@ namespace mParticle.Xamarin.Sample.Shared
                     }
                 },
             })
-                     .AddFailureListener(failure => Console.WriteLine("Http Code = " + failure.HttpCode + "/nErrors = " + failure.Errors.Aggregate("", (composit, nextError) => composit += nextError.Message + ", ")))
-                     .AddSuccessListener(success => Console.WriteLine("Task callback" + success.User != null ? success.User.ToString() : "User is null :<("));
+            .AddFailureListener(failure => Console.WriteLine("Http Code = " + failure.HttpCode + "/nErrors = " + failure.Errors.Aggregate("", (composit, nextError) => composit += nextError.Message + ", ")))
+            .AddSuccessListener(success => Console.WriteLine("Task callback" + success.User != null ? success.User.ToString() : "User is null :<("));
 
 
             mparticle.Identity.CurrentUser.GetUserAttributes().Remove(ConstantUserAttribute);

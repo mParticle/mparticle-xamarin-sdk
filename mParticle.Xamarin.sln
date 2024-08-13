@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mParticle.MAUI.Abstractions
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "mParticle.Xamarin.Sample.Shared", "Samples\mParticle.Xamarin.Sample.Shared\mParticle.Xamarin.Sample.Shared.shproj", "{581AC67A-8536-4DC8-95E3-A52CFD4F5A8A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mParticle.MAUI.iOS.Sample", "Samples\mParticle.MAUI.iOS.Sample\mParticle.MAUI.iOS.Sample.csproj", "{3A11AA5C-D9E3-412A-9DAA-9325A964C542}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -161,6 +163,18 @@ Global
 		{65E54351-BC5D-40B4-94E4-8E60CC624A19}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{65E54351-BC5D-40B4-94E4-8E60CC624A19}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{65E54351-BC5D-40B4-94E4-8E60CC624A19}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{3A11AA5C-D9E3-412A-9DAA-9325A964C542}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A11AA5C-D9E3-412A-9DAA-9325A964C542}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A11AA5C-D9E3-412A-9DAA-9325A964C542}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A11AA5C-D9E3-412A-9DAA-9325A964C542}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A11AA5C-D9E3-412A-9DAA-9325A964C542}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{3A11AA5C-D9E3-412A-9DAA-9325A964C542}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{3A11AA5C-D9E3-412A-9DAA-9325A964C542}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{3A11AA5C-D9E3-412A-9DAA-9325A964C542}.Release|iPhone.Build.0 = Release|Any CPU
+		{3A11AA5C-D9E3-412A-9DAA-9325A964C542}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{3A11AA5C-D9E3-412A-9DAA-9325A964C542}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{3A11AA5C-D9E3-412A-9DAA-9325A964C542}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{3A11AA5C-D9E3-412A-9DAA-9325A964C542}.Debug|iPhone.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -177,5 +191,6 @@ Global
 		{6DEAA05B-0ED6-4C92-9FE9-8A7FCCFC46D1} = {78CEF67C-E338-4172-B367-6F4BA1C59D0E}
 		{65E54351-BC5D-40B4-94E4-8E60CC624A19} = {EEC83D55-F89E-4847-980E-2D69046B1ED4}
 		{581AC67A-8536-4DC8-95E3-A52CFD4F5A8A} = {217F201D-2D30-4E52-BABC-872D139F35AA}
+		{3A11AA5C-D9E3-412A-9DAA-9325A964C542} = {217F201D-2D30-4E52-BABC-872D139F35AA}
 	EndGlobalSection
 EndGlobal

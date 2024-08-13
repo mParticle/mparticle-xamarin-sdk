@@ -1,35 +1,33 @@
-﻿using System;
-namespace mParticle.Xamarin
+﻿namespace mParticle.MAUI;
+
+public static class MParticle
 {
-    public static class MParticle
+    static Lazy<MParticleSDK> TTS = new Lazy<MParticleSDK>(() => CreateInstance(), System.Threading.LazyThreadSafetyMode.PublicationOnly);
+
+    public static MParticleSDK Instance
     {
-        static Lazy<MParticleSDK> TTS = new Lazy<MParticleSDK>(() => CreateInstance(), System.Threading.LazyThreadSafetyMode.PublicationOnly);
-
-        public static MParticleSDK Instance
+        get
         {
-            get
+            var ret = TTS.Value;
+            if (ret == null)
             {
-                var ret = TTS.Value;
-                if (ret == null)
-                {
-                    throw NotImplementedInReferenceAssembly();
-                }
-                return ret;
+                throw NotImplementedInReferenceAssembly();
             }
+            return ret;
         }
+    }
 
-        static MParticleSDK CreateInstance()
-        {
-            #if PORTABLE
-                return null;
-            #else
-                return new MParticleSDKImpl();
-            #endif
-        }
+    static MParticleSDK CreateInstance()
+    {
+        #if PORTABLE
+            return null;
+        #else
+            return new MParticleSDKImpl();
+        #endif
+    }
 
-        internal static Exception NotImplementedInReferenceAssembly()
-        {
-            return new NotImplementedException("This functionality is not implemented in the portable version of this assembly.  You should reference the mParticle.Xamarin NuGet package from your main application project in order to reference the platform-specific implementation.");
-        }
+    internal static Exception NotImplementedInReferenceAssembly()
+    {
+        return new NotImplementedException("This functionality is not implemented in the portable version of this assembly.  You should reference the mParticle.Xamarin NuGet package from your main application project in order to reference the platform-specific implementation.");
     }
 }
