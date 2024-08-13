@@ -3,6 +3,7 @@ using mParticle.Xamarin.Android.Wrappers;
 using mParticle.Xamarin.Android;
 using Java.Lang;
 using System;
+using System.Linq;
 
 namespace mParticle.Xamarin
 {
@@ -107,7 +108,8 @@ namespace mParticle.Xamarin
         public override void LogEvent(string eventName, EventType eventType, Dictionary<string, string> eventInfo, bool shouldUploadEvent = true)
         {
             var mpEventType = AndroidBinding.MParticle.EventType.ValueOf(eventType.ToString());
-            var mpEvent = new AndroidBinding.MPEvent.Builder(eventName, mpEventType).CustomAttributes(eventInfo).ShouldUploadEvent(shouldUploadEvent).Build();
+            IDictionary<string, object> castedEventInfo = eventInfo.ToDictionary(kvp => kvp.Key, kvp => (object)kvp.Value);
+            var mpEvent = new AndroidBinding.MPEvent.Builder(eventName, mpEventType).CustomAttributes(castedEventInfo).ShouldUploadEvent(shouldUploadEvent).Build();
             AndroidBinding.MParticle.Instance.LogEvent(mpEvent);
         }
 

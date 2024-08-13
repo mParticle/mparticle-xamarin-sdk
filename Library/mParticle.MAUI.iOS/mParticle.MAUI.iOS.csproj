@@ -13,7 +13,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Bindings\mParticle.MAUI.iOSBinding\mParticle.MAUI.iOSBinding.csproj">
     </ProjectReference>
-    <ProjectReference Include="..\mParticle.MAUI.Abstractions\mParticle.MAUI.Abstractions.csproj">
-    </ProjectReference>
+    <ProjectReference Include="..\mParticle.MAUI.Abstractions\mParticle.MAUI.Abstractions.csproj" />
   </ItemGroup>
 </Project>

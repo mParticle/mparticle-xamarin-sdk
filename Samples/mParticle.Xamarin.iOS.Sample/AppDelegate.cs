@@ -1,5 +1,4 @@
 ﻿using Foundation;
-using mParticle.Xamarin.Sample.Shared;
 using UIKit;
 
 namespace mParticle.Xamarin.iOS.Sample
