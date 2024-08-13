@@ -56,14 +56,12 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MParticleSDKImpl.cs" />
-    <Compile Include="..\mParticle.Xamarin\MParticle.cs">
-      <Link>MParticle.cs</Link>
-    </Compile>
     <Compile Include="Utils\Utils.cs" />
     <Compile Include="Utils\IdentityApiWrapper.cs" />
     <Compile Include="Utils\MParticleUserWrapper.cs" />
     <Compile Include="Utils\CartApiWrapper.cs" />
     <Compile Include="Utils\BaseTaskWrapper.cs" />
+    <Compile Include="MParticle.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Bindings\mParticle.Xamarin.iOSBinding\mParticle.Xamarin.iOSBinding.csproj">

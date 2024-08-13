@@ -1,12 +1,12 @@
-﻿namespace mParticle.MAUI.iOS.Sample;
+﻿namespace mParticle.MAUI.Android.Sample;
 
 public class SampleCalls
 {
     private const string ConstantUserAttribute = "Test Attribute Key";
     public static void Init()
     {
-        string key = "REPLACE WITH iOS APP KEY";
-        string secret = "REPLACE WITH iOS APP SECRET";
+        string key = "REPLACE WITH ANDROID APP KEY";
+        string secret = "REPLACE WITH ANDROID APP SECRET";
 
         OnUserIdentified _identityStateListener = null;
         _identityStateListener = newUser =>
@@ -39,7 +39,6 @@ public class SampleCalls
             {
                 UserIdentities = new Dictionary<UserIdentity, string>() {
                 //{ UserIdentity.Yahoo, "tom@yahoo.com" },
-                { UserIdentity.IOSAdvertiserId, "C56A4180-65AA-42EC-A945-5FD21DEC0538" },
                 { UserIdentity.CustomerId, "Other Identity" }
             },
                 UserAliasHandler = ((previousUser, newUser) => newUser.SetUserAttributes(previousUser.GetUserAttributes()))
@@ -48,6 +47,7 @@ public class SampleCalls
             IdDisabled = false,
             UploadInterval = 650,
             SessionTimeout = 50,
+            UnCaughtExceptionLogging = false,
             LogLevel = LogLevel.INFO,
             ConfigMaxAgeSeconds = 60,
             AttributionListener = new AttributionListener()
@@ -121,6 +121,10 @@ public class SampleCalls
         mparticle.LogCommerceEvent(new CommerceEvent(ProductAction.AddToCart, new Product[] { new Product("Product 1 to upload", "product1", 1, 1) }));
         mparticle.LogCommerceEvent(new CommerceEvent(ProductAction.AddToCart, new Product[] { new Product("Product 2 to upload", "product2", 2, 1) }), true);
         mparticle.LogCommerceEvent(new CommerceEvent(ProductAction.AddToCart, new Product[] { new Product("Product 3 to NOT upload", "product3", 3, 1) }), false);
+
+        // This is highly discouraged and we make no guarantees about this but just to show it is possible.
+        //var unsafeNativeSDK = mparticle.GetBindingInstance();
+        //unsafeNativeSDK.GetType().GetMethod("setOptOut").Invoke(unsafeNativeSDK, new object[] { true });
     }
 
     public static void ModifyUser()

@@ -1,4 +1,6 @@
-﻿namespace mParticle.MAUI;
+﻿using System;
+
+namespace mParticle.MAUI;
 
 public static class MParticle
 {
@@ -19,11 +21,11 @@ public static class MParticle
 
     static MParticleSDK CreateInstance()
     {
-        #if PORTABLE
-            return null;
-        #else
-            return new MParticleSDKImpl();
-        #endif
+#if PORTABLE
+        return null;
+#else
+        return new MParticleSDKImpl();
+#endif
     }
 
     internal static Exception NotImplementedInReferenceAssembly()
@@ -31,3 +33,4 @@ public static class MParticle
         return new NotImplementedException("This functionality is not implemented in the portable version of this assembly.  You should reference the mParticle.Xamarin NuGet package from your main application project in order to reference the platform-specific implementation.");
     }
 }
+

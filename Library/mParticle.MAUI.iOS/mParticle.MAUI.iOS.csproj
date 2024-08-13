@@ -15,9 +15,4 @@
     </ProjectReference>
     <ProjectReference Include="..\mParticle.MAUI.Abstractions\mParticle.MAUI.Abstractions.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\mParticle.Xamarin\MParticle.cs">
-      <Link>MParticle.cs</Link>
-    </Compile>
-  </ItemGroup>
 </Project>
