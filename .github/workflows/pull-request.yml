@@ -5,14 +5,14 @@ on:
 
 jobs:
   Build: 
-    runs-on: macOS-13
+    runs-on: macOS-14
     steps:
     - uses: actions/checkout@v4
     - name: Build artifacts
       run: ./build.sh
       
   Android:
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
     - uses: actions/checkout@v4
     - name: Android
@@ -22,7 +22,7 @@ jobs:
         dotnet build
         
   iOS:
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
     - uses: actions/checkout@v4
     - name: iOS

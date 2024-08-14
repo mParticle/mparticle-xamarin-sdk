@@ -9,28 +9,15 @@ on:
     workflow_dispatch:
 
 jobs:
-    # SDK release is done from public/master branch.
-    confirm-master-branch:
-        name: Confirm release is run on public/master branch
-        runs-on: ubuntu-latest
-        steps:
-            - name: Git checkout
-              uses: actions/checkout@v4
-            - name: Branch name
-              run: |
-                  BRANCHNAME=${GITHUB_REF##*/}
-                  echo "pulling branch name, branch name is:"
-                  echo $BRANCHNAME
-                  if [ $BRANCHNAME != "master" ]
-                  then
-                    echo "You can only run a release from the master branch, you are trying to run it from ${BRANCHNAME}"
-                    exit 1
-                  fi
+    # SDK release is done from main branch.
+    confirm-main-branch:
+      name: Confirm release is run from main branch
+      uses: mParticle/mparticle-workflows/.github/workflows/sdk-release-repo-branch-check.yml@stable
 
     release-to-nuget:
         name: Release and Sync Repos
-        runs-on: macos-13
-        needs: ['confirm-master-branch']
+        runs-on: macos-14
+        needs: ['confirm-main-branch']
         steps:
             - name: Git checkout
               uses: actions/checkout@v4
