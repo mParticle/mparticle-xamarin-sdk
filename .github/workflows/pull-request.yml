@@ -9,7 +9,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Install Mono Framework
-      run: brew install mono
+      run: |
+        curl https://download.mono-project.com/archive/6.12.0/macos-10-universal/MonoFramework-MDK-6.12.0.206.macos10.xamarin.universal.pkg -o /tmp/MonoFramework-MDK-6.12.0.206.macos10.xamarin.universal.pkg
+        sudo installer -pkg /tmp/MonoFramework-MDK-6.12.0.206.macos10.xamarin.universal.pkg -target /
     - name: Install MAUI workload
       run: dotnet workload install maui
     - name: Build artifacts
