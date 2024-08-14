@@ -9,7 +9,7 @@ This SDK is distributed via the public NuGet gallery: https://www.nuget.org/pack
 If you have both an iOS and an Android project, you should add the NuGet package to each following the Xamarin Add Package dialog. [See here](https://developer.xamarin.com/guides/cross-platform/xamarin-studio/nuget_walkthrough/) for a detailed walkthrough on using NuGet with a Xamarin project.
 
 ```bash
-Install-Package mParticle.Xamarin -Version 2.0.12
+Install-Package mParticle.Xamarin -Version 2.1.0
 ```
 
 ### mParticle Singleton
