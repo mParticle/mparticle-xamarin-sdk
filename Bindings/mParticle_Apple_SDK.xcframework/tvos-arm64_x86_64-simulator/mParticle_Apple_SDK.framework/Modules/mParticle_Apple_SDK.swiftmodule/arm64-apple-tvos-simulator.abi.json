@@ -1,0 +1,1980 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "TopLevel",
+    "printedName": "TopLevel",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "mParticle_Apple_SDK",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "mParticle_Apple_SDK",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "MPSideloadedKit",
+        "printedName": "MPSideloadedKit",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "kitInstance",
+            "printedName": "kitInstance",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "MPKitProtocol",
+                "printedName": "mParticle_Apple_SDK.MPKitProtocol",
+                "usr": "c:objc(pl)MPKitProtocol"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPSideloadedKit(py)kitInstance",
+            "mangledName": "$s19mParticle_Apple_SDK15MPSideloadedKitC11kitInstanceSo13MPKitProtocol_pvp",
+            "moduleName": "mParticle_Apple_SDK",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MPKitProtocol",
+                    "printedName": "mParticle_Apple_SDK.MPKitProtocol",
+                    "usr": "c:objc(pl)MPKitProtocol"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPSideloadedKit(im)kitInstance",
+                "mangledName": "$s19mParticle_Apple_SDK15MPSideloadedKitC11kitInstanceSo13MPKitProtocol_pvg",
+                "moduleName": "mParticle_Apple_SDK",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MPKitProtocol",
+                    "printedName": "mParticle_Apple_SDK.MPKitProtocol",
+                    "usr": "c:objc(pl)MPKitProtocol"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPSideloadedKit(im)setKitInstance:",
+                "mangledName": "$s19mParticle_Apple_SDK15MPSideloadedKitC11kitInstanceSo13MPKitProtocol_pvs",
+                "moduleName": "mParticle_Apple_SDK",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:19mParticle_Apple_SDK15MPSideloadedKitC11kitInstanceSo13MPKitProtocol_pvM",
+                "mangledName": "$s19mParticle_Apple_SDK15MPSideloadedKitC11kitInstanceSo13MPKitProtocol_pvM",
+                "moduleName": "mParticle_Apple_SDK",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(kitInstance:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "MPSideloadedKit",
+                "printedName": "mParticle_Apple_SDK.MPSideloadedKit",
+                "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPSideloadedKit"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MPKitProtocol",
+                "printedName": "mParticle_Apple_SDK.MPKitProtocol",
+                "usr": "c:objc(pl)MPKitProtocol"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPSideloadedKit(im)initWithKitInstance:",
+            "mangledName": "$s19mParticle_Apple_SDK15MPSideloadedKitC11kitInstanceACSo13MPKitProtocol_p_tcfc",
+            "moduleName": "mParticle_Apple_SDK",
+            "objc_name": "initWithKitInstance:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "addEventTypeFilter",
+            "printedName": "addEventTypeFilter(eventType:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MPEventType",
+                "printedName": "mParticle_Apple_SDK.MPEventType",
+                "usr": "c:@E@MPEventType"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPSideloadedKit(im)addEventTypeFilterWithEventType:",
+            "mangledName": "$s19mParticle_Apple_SDK15MPSideloadedKitC18addEventTypeFilter05eventH0ySo07MPEventH0V_tF",
+            "moduleName": "mParticle_Apple_SDK",
+            "objc_name": "addEventTypeFilterWithEventType:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "addEventNameFilter",
+            "printedName": "addEventNameFilter(eventType:eventName:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MPEventType",
+                "printedName": "mParticle_Apple_SDK.MPEventType",
+                "usr": "c:@E@MPEventType"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPSideloadedKit(im)addEventNameFilterWithEventType:eventName:",
+            "mangledName": "$s19mParticle_Apple_SDK15MPSideloadedKitC18addEventNameFilter9eventType0jH0ySo07MPEventK0V_SStF",
+            "moduleName": "mParticle_Apple_SDK",
+            "objc_name": "addEventNameFilterWithEventType:eventName:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "addScreenNameFilter",
+            "printedName": "addScreenNameFilter(screenName:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPSideloadedKit(im)addScreenNameFilterWithScreenName:",
+            "mangledName": "$s19mParticle_Apple_SDK15MPSideloadedKitC19addScreenNameFilter06screenH0ySS_tF",
+            "moduleName": "mParticle_Apple_SDK",
+            "objc_name": "addScreenNameFilterWithScreenName:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "addEventAttributeFilter",
+            "printedName": "addEventAttributeFilter(eventType:eventName:customAttributeKey:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MPEventType",
+                "printedName": "mParticle_Apple_SDK.MPEventType",
+                "usr": "c:@E@MPEventType"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPSideloadedKit(im)addEventAttributeFilterWithEventType:eventName:customAttributeKey:",
+            "mangledName": "$s19mParticle_Apple_SDK15MPSideloadedKitC23addEventAttributeFilter9eventType0J4Name06customH3KeyySo07MPEventK0V_S2StF",
+            "moduleName": "mParticle_Apple_SDK",
+            "objc_name": "addEventAttributeFilterWithEventType:eventName:customAttributeKey:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "addScreenAttributeFilter",
+            "printedName": "addScreenAttributeFilter(screenName:customAttributeKey:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPSideloadedKit(im)addScreenAttributeFilterWithScreenName:customAttributeKey:",
+            "mangledName": "$s19mParticle_Apple_SDK15MPSideloadedKitC24addScreenAttributeFilter10screenName06customH3KeyySS_SStF",
+            "moduleName": "mParticle_Apple_SDK",
+            "objc_name": "addScreenAttributeFilterWithScreenName:customAttributeKey:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "addUserIdentityFilter",
+            "printedName": "addUserIdentityFilter(userIdentity:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MPUserIdentity",
+                "printedName": "mParticle_Apple_SDK.MPUserIdentity",
+                "usr": "c:@E@MPUserIdentity"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPSideloadedKit(im)addUserIdentityFilterWithUserIdentity:",
+            "mangledName": "$s19mParticle_Apple_SDK15MPSideloadedKitC21addUserIdentityFilter04userH0ySo06MPUserH0V_tF",
+            "moduleName": "mParticle_Apple_SDK",
+            "objc_name": "addUserIdentityFilterWithUserIdentity:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "addUserAttributeFilter",
+            "printedName": "addUserAttributeFilter(userAttributeKey:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPSideloadedKit(im)addUserAttributeFilterWithUserAttributeKey:",
+            "mangledName": "$s19mParticle_Apple_SDK15MPSideloadedKitC22addUserAttributeFilter04userH3KeyySS_tF",
+            "moduleName": "mParticle_Apple_SDK",
+            "objc_name": "addUserAttributeFilterWithUserAttributeKey:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "addCommerceEventAttributeFilter",
+            "printedName": "addCommerceEventAttributeFilter(eventType:eventAttributeKey:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MPEventType",
+                "printedName": "mParticle_Apple_SDK.MPEventType",
+                "usr": "c:@E@MPEventType"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPSideloadedKit(im)addCommerceEventAttributeFilterWithEventType:eventAttributeKey:",
+            "mangledName": "$s19mParticle_Apple_SDK15MPSideloadedKitC31addCommerceEventAttributeFilter9eventType0kI3KeyySo07MPEventL0V_SStF",
+            "moduleName": "mParticle_Apple_SDK",
+            "objc_name": "addCommerceEventAttributeFilterWithEventType:eventAttributeKey:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "addCommerceEventEntityTypeFilter",
+            "printedName": "addCommerceEventEntityTypeFilter(commerceEventKind:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MPCommerceEventKind",
+                "printedName": "mParticle_Apple_SDK.MPCommerceEventKind",
+                "usr": "c:@E@MPCommerceEventKind"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPSideloadedKit(im)addCommerceEventEntityTypeFilterWithCommerceEventKind:",
+            "mangledName": "$s19mParticle_Apple_SDK15MPSideloadedKitC32addCommerceEventEntityTypeFilter08commerceH4KindySo010MPCommercehM0V_tF",
+            "moduleName": "mParticle_Apple_SDK",
+            "objc_name": "addCommerceEventEntityTypeFilterWithCommerceEventKind:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "addCommerceEventAppFamilyAttributeFilter",
+            "printedName": "addCommerceEventAppFamilyAttributeFilter(attributeKey:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPSideloadedKit(im)addCommerceEventAppFamilyAttributeFilterWithAttributeKey:",
+            "mangledName": "$s19mParticle_Apple_SDK15MPSideloadedKitC40addCommerceEventAppFamilyAttributeFilter12attributeKeyySS_tF",
+            "moduleName": "mParticle_Apple_SDK",
+            "objc_name": "addCommerceEventAppFamilyAttributeFilterWithAttributeKey:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "setEventAttributeConditionalForwarding",
+            "printedName": "setEventAttributeConditionalForwarding(attributeName:attributeValue:onlyForward:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPSideloadedKit(im)setEventAttributeConditionalForwardingWithAttributeName:attributeValue:onlyForward:",
+            "mangledName": "$s19mParticle_Apple_SDK15MPSideloadedKitC38setEventAttributeConditionalForwarding13attributeName0K5Value11onlyForwardySS_SSSbtF",
+            "moduleName": "mParticle_Apple_SDK",
+            "objc_name": "setEventAttributeConditionalForwardingWithAttributeName:attributeValue:onlyForward:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "addMessageTypeFilter",
+            "printedName": "addMessageTypeFilter(messageTypeConstant:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPSideloadedKit(im)addMessageTypeFilterWithMessageTypeConstant:",
+            "mangledName": "$s19mParticle_Apple_SDK15MPSideloadedKitC20addMessageTypeFilter07messageH8ConstantySS_tF",
+            "moduleName": "mParticle_Apple_SDK",
+            "objc_name": "addMessageTypeFilterWithMessageTypeConstant:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getKitFilters",
+            "printedName": "getKitFilters()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Dictionary",
+                "printedName": "[Swift.String : Any]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:SD"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPSideloadedKit(im)getKitFilters",
+            "mangledName": "$s19mParticle_Apple_SDK15MPSideloadedKitC03getE7FiltersSDySSypGyF",
+            "moduleName": "mParticle_Apple_SDK",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "MPSideloadedKit",
+                "printedName": "mParticle_Apple_SDK.MPSideloadedKit",
+                "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPSideloadedKit"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPSideloadedKit(im)init",
+            "mangledName": "$s19mParticle_Apple_SDK15MPSideloadedKitCACycfc",
+            "moduleName": "mParticle_Apple_SDK",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPSideloadedKit",
+        "mangledName": "$s19mParticle_Apple_SDK15MPSideloadedKitC",
+        "moduleName": "mParticle_Apple_SDK",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "mParticle_Apple_SDK",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "MPIHasher",
+        "printedName": "MPIHasher",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "hashFNV1a",
+            "printedName": "hashFNV1a(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int64",
+                "printedName": "Swift.Int64",
+                "usr": "s:s5Int64V"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPIHasher(cm)hashFNV1a:",
+            "mangledName": "$s19mParticle_Apple_SDK9MPIHasherC9hashFNV1ays5Int64V10Foundation4DataVFZ",
+            "moduleName": "mParticle_Apple_SDK",
+            "static": true,
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "hashString",
+            "printedName": "hashString(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPIHasher(cm)hashString:",
+            "mangledName": "$s19mParticle_Apple_SDK9MPIHasherC10hashStringyS2SFZ",
+            "moduleName": "mParticle_Apple_SDK",
+            "static": true,
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "hashStringUTF16",
+            "printedName": "hashStringUTF16(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPIHasher(cm)hashStringUTF16:",
+            "mangledName": "$s19mParticle_Apple_SDK9MPIHasherC15hashStringUTF16yS2SFZ",
+            "moduleName": "mParticle_Apple_SDK",
+            "static": true,
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "hashEventType",
+            "printedName": "hashEventType(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MPEventType",
+                "printedName": "mParticle_Apple_SDK.MPEventType",
+                "usr": "c:@E@MPEventType"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPIHasher(cm)hashEventType:",
+            "mangledName": "$s19mParticle_Apple_SDK9MPIHasherC13hashEventTypeySSSo07MPEventG0VFZ",
+            "moduleName": "mParticle_Apple_SDK",
+            "static": true,
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "eventType",
+            "printedName": "eventType(forHash:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "MPEventType",
+                "printedName": "mParticle_Apple_SDK.MPEventType",
+                "usr": "c:@E@MPEventType"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPIHasher(cm)eventTypeForHash:",
+            "mangledName": "$s19mParticle_Apple_SDK9MPIHasherC9eventType7forHashSo07MPEventF0VSS_tFZ",
+            "moduleName": "mParticle_Apple_SDK",
+            "static": true,
+            "objc_name": "eventTypeForHash:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "hashEventType",
+            "printedName": "hashEventType(_:eventName:isLogScreen:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MPEventType",
+                "printedName": "mParticle_Apple_SDK.MPEventType",
+                "usr": "c:@E@MPEventType"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPIHasher(cm)hashEventType:eventName:isLogScreen:",
+            "mangledName": "$s19mParticle_Apple_SDK9MPIHasherC13hashEventType_9eventName11isLogScreenSSSo07MPEventG0V_SSSbtFZ",
+            "moduleName": "mParticle_Apple_SDK",
+            "static": true,
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "hashEventAttributeKey",
+            "printedName": "hashEventAttributeKey(_:eventName:customAttributeName:isLogScreen:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MPEventType",
+                "printedName": "mParticle_Apple_SDK.MPEventType",
+                "usr": "c:@E@MPEventType"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPIHasher(cm)hashEventAttributeKey:eventName:customAttributeName:isLogScreen:",
+            "mangledName": "$s19mParticle_Apple_SDK9MPIHasherC21hashEventAttributeKey_9eventName06customgJ011isLogScreenSSSo11MPEventTypeV_S2SSbtFZ",
+            "moduleName": "mParticle_Apple_SDK",
+            "static": true,
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "hashUserAttributeKey",
+            "printedName": "hashUserAttributeKey(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPIHasher(cm)hashUserAttributeKey:",
+            "mangledName": "$s19mParticle_Apple_SDK9MPIHasherC20hashUserAttributeKeyyS2SFZ",
+            "moduleName": "mParticle_Apple_SDK",
+            "static": true,
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "hashUserAttributeValue",
+            "printedName": "hashUserAttributeValue(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPIHasher(cm)hashUserAttributeValue:",
+            "mangledName": "$s19mParticle_Apple_SDK9MPIHasherC22hashUserAttributeValueyS2SFZ",
+            "moduleName": "mParticle_Apple_SDK",
+            "static": true,
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "hashUserIdentity",
+            "printedName": "hashUserIdentity(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MPUserIdentity",
+                "printedName": "mParticle_Apple_SDK.MPUserIdentity",
+                "usr": "c:@E@MPUserIdentity"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPIHasher(cm)hashUserIdentity:",
+            "mangledName": "$s19mParticle_Apple_SDK9MPIHasherC16hashUserIdentityySSSo06MPUserG0VFZ",
+            "moduleName": "mParticle_Apple_SDK",
+            "static": true,
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "hashConsentPurpose",
+            "printedName": "hashConsentPurpose(_:purpose:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPIHasher(cm)hashConsentPurpose:purpose:",
+            "mangledName": "$s19mParticle_Apple_SDK9MPIHasherC18hashConsentPurpose_7purposeS2S_SStFZ",
+            "moduleName": "mParticle_Apple_SDK",
+            "static": true,
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "hashCommerceEventAttribute",
+            "printedName": "hashCommerceEventAttribute(_:key:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MPEventType",
+                "printedName": "mParticle_Apple_SDK.MPEventType",
+                "usr": "c:@E@MPEventType"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPIHasher(cm)hashCommerceEventAttribute:key:",
+            "mangledName": "$s19mParticle_Apple_SDK9MPIHasherC26hashCommerceEventAttribute_3keySSSo11MPEventTypeV_SStFZ",
+            "moduleName": "mParticle_Apple_SDK",
+            "static": true,
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "hashTriggerEventName",
+            "printedName": "hashTriggerEventName(_:eventType:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPIHasher(cm)hashTriggerEventName:eventType:",
+            "mangledName": "$s19mParticle_Apple_SDK9MPIHasherC20hashTriggerEventName_9eventTypeS2S_SStFZ",
+            "moduleName": "mParticle_Apple_SDK",
+            "static": true,
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "MPIHasher",
+                "printedName": "mParticle_Apple_SDK.MPIHasher",
+                "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPIHasher"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPIHasher(im)init",
+            "mangledName": "$s19mParticle_Apple_SDK9MPIHasherCACycfc",
+            "moduleName": "mParticle_Apple_SDK",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@mParticle_Apple_SDK@objc(cs)MPIHasher",
+        "mangledName": "$s19mParticle_Apple_SDK9MPIHasherC",
+        "moduleName": "mParticle_Apple_SDK",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "NSNumber",
+        "printedName": "NSNumber",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "formatWithNonScientificNotation",
+            "printedName": "formatWithNonScientificNotation()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "NSNumber",
+                "printedName": "Foundation.NSNumber",
+                "usr": "c:objc(cs)NSNumber"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@mParticle_Apple_SDK@@objc(cs)NSNumber(im)formatWithNonScientificNotation",
+            "mangledName": "$sSo8NSNumberC19mParticle_Apple_SDKE31formatWithNonScientificNotationAByF",
+            "moduleName": "mParticle_Apple_SDK",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:objc(cs)NSNumber",
+        "moduleName": "Foundation",
+        "isOpen": true,
+        "objc_name": "NSNumber",
+        "declAttributes": [
+          "ObjC",
+          "SynthesizedProtocol",
+          "NonSendable",
+          "Sendable",
+          "Dynamic"
+        ],
+        "superclassUsr": "c:objc(cs)NSValue",
+        "isExternal": true,
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "Foundation.NSValue",
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "ExpressibleByFloatLiteral",
+            "printedName": "ExpressibleByFloatLiteral",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "FloatLiteralType",
+                "printedName": "FloatLiteralType",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:s25ExpressibleByFloatLiteralP",
+            "mangledName": "$ss25ExpressibleByFloatLiteralP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "ExpressibleByIntegerLiteral",
+            "printedName": "ExpressibleByIntegerLiteral",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "IntegerLiteralType",
+                "printedName": "IntegerLiteralType",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:s27ExpressibleByIntegerLiteralP",
+            "mangledName": "$ss27ExpressibleByIntegerLiteralP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "ExpressibleByBooleanLiteral",
+            "printedName": "ExpressibleByBooleanLiteral",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "BooleanLiteralType",
+                "printedName": "BooleanLiteralType",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:s27ExpressibleByBooleanLiteralP",
+            "mangledName": "$ss27ExpressibleByBooleanLiteralP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_HasCustomAnyHashableRepresentation",
+            "printedName": "_HasCustomAnyHashableRepresentation",
+            "usr": "s:s35_HasCustomAnyHashableRepresentationP",
+            "mangledName": "$ss35_HasCustomAnyHashableRepresentationP"
+          }
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/NSNumber+MPFormatter.swift",
+      "kind": "FloatLiteral",
+      "offset": 303,
+      "length": 6,
+      "value": "1.0E-5"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/NSNumber+MPFormatter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 405,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/NSNumber+MPFormatter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 618,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "Dictionary",
+      "offset": 265,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "Dictionary",
+      "offset": 318,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "Dictionary",
+      "offset": 376,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "Dictionary",
+      "offset": 431,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "Dictionary",
+      "offset": 485,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "Dictionary",
+      "offset": 544,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "Dictionary",
+      "offset": 600,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "Dictionary",
+      "offset": 657,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "Dictionary",
+      "offset": 723,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "Dictionary",
+      "offset": 790,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "Dictionary",
+      "offset": 865,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "Dictionary",
+      "offset": 925,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "Dictionary",
+      "offset": 1093,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "Dictionary",
+      "offset": 1154,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "Dictionary",
+      "offset": 1219,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "Dictionary",
+      "offset": 1335,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "Dictionary",
+      "offset": 1393,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1634,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1828,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1838,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2019,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2028,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2309,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2319,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2587,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2596,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2757,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2924,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3157,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3344,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3542,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "StringLiteral",
+      "offset": 4006,
+      "length": 3,
+      "value": "\"a\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "StringLiteral",
+      "offset": 4096,
+      "length": 3,
+      "value": "\"v\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "StringLiteral",
+      "offset": 4189,
+      "length": 3,
+      "value": "\"i\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4420,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "Dictionary",
+      "offset": 4528,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "StringLiteral",
+      "offset": 4551,
+      "length": 4,
+      "value": "\"et\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "StringLiteral",
+      "offset": 4600,
+      "length": 4,
+      "value": "\"ec\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "StringLiteral",
+      "offset": 4649,
+      "length": 4,
+      "value": "\"ea\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "StringLiteral",
+      "offset": 4703,
+      "length": 4,
+      "value": "\"mt\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "StringLiteral",
+      "offset": 4754,
+      "length": 6,
+      "value": "\"svec\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "StringLiteral",
+      "offset": 4806,
+      "length": 6,
+      "value": "\"svea\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "StringLiteral",
+      "offset": 4863,
+      "length": 5,
+      "value": "\"uid\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "StringLiteral",
+      "offset": 4916,
+      "length": 4,
+      "value": "\"ua\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "StringLiteral",
+      "offset": 4969,
+      "length": 5,
+      "value": "\"cea\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "StringLiteral",
+      "offset": 5032,
+      "length": 5,
+      "value": "\"ent\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "StringLiteral",
+      "offset": 5096,
+      "length": 5,
+      "value": "\"afa\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "StringLiteral",
+      "offset": 5168,
+      "length": 5,
+      "value": "\"avf\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "StringLiteral",
+      "offset": 5234,
+      "length": 5,
+      "value": "\"eaa\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "StringLiteral",
+      "offset": 5289,
+      "length": 5,
+      "value": "\"ear\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "StringLiteral",
+      "offset": 5347,
+      "length": 5,
+      "value": "\"eas\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "StringLiteral",
+      "offset": 5418,
+      "length": 5,
+      "value": "\"reg\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "StringLiteral",
+      "offset": 5476,
+      "length": 5,
+      "value": "\"pur\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Kits\/MPSideloadedKit.swift",
+      "kind": "StringLiteral",
+      "offset": 135,
+      "length": 15,
+      "value": "\"mParticle_Apple_SDK.MPSideloadedKit\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "IntegerLiteral",
+      "offset": 248,
+      "length": 18,
+      "value": "0xcbf29ce484222325"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "IntegerLiteral",
+      "offset": 355,
+      "length": 13,
+      "value": "0x100000001B3"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "StringLiteral",
+      "offset": 557,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "StringLiteral",
+      "offset": 740,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "IntegerLiteral",
+      "offset": 787,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "IntegerLiteral",
+      "offset": 851,
+      "length": 1,
+      "value": "5"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "StringLiteral",
+      "offset": 1109,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1433,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "StringLiteral",
+      "offset": 1866,
+      "length": 15,
+      "value": "\"0\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "StringLiteral",
+      "offset": 1880,
+      "length": 1,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "StringLiteral",
+      "offset": 1930,
+      "length": 35,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "StringLiteral",
+      "offset": 1952,
+      "length": 1,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "StringLiteral",
+      "offset": 1964,
+      "length": 1,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "StringLiteral",
+      "offset": 2275,
+      "length": 37,
+      "value": "\"0\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "StringLiteral",
+      "offset": 2289,
+      "length": 1,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "StringLiteral",
+      "offset": 2311,
+      "length": 1,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "StringLiteral",
+      "offset": 2361,
+      "length": 57,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "StringLiteral",
+      "offset": 2383,
+      "length": 1,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "StringLiteral",
+      "offset": 2395,
+      "length": 1,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "StringLiteral",
+      "offset": 2417,
+      "length": 1,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "StringLiteral",
+      "offset": 3196,
+      "length": 31,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "StringLiteral",
+      "offset": 3216,
+      "length": 1,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "StringLiteral",
+      "offset": 3226,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "StringLiteral",
+      "offset": 3376,
+      "length": 37,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "StringLiteral",
+      "offset": 3406,
+      "length": 1,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "StringLiteral",
+      "offset": 3412,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "StringLiteral",
+      "offset": 3549,
+      "length": 26,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "StringLiteral",
+      "offset": 3562,
+      "length": 1,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/mparticle-apple-sdk\/mparticle-apple-sdk\/mParticle-Apple-SDK\/Utils\/MPIHasher.swift",
+      "kind": "StringLiteral",
+      "offset": 3574,
+      "length": 2,
+      "value": "\"\""
+    }
+  ]
+}

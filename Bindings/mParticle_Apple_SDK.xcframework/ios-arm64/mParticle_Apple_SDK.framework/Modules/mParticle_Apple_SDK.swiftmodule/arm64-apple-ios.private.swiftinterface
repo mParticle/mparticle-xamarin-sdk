@@ -1,0 +1,48 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)
+// swift-module-flags: -target arm64-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name mParticle_Apple_SDK
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import Foundation
+import Swift
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@_exported import mParticle_Apple_SDK
+@objc extension Foundation.NSNumber {
+  @objc dynamic public func formatWithNonScientificNotation() -> Foundation.NSNumber
+}
+@objc public class MPSideloadedKit : ObjectiveC.NSObject {
+  @objc public var kitInstance: any mParticle_Apple_SDK.MPKitProtocol
+  @objc public init(kitInstance: any mParticle_Apple_SDK.MPKitProtocol)
+  @objc public func addEventTypeFilter(eventType: mParticle_Apple_SDK.MPEventType)
+  @objc public func addEventNameFilter(eventType: mParticle_Apple_SDK.MPEventType, eventName: Swift.String)
+  @objc public func addScreenNameFilter(screenName: Swift.String)
+  @objc public func addEventAttributeFilter(eventType: mParticle_Apple_SDK.MPEventType, eventName: Swift.String, customAttributeKey: Swift.String)
+  @objc public func addScreenAttributeFilter(screenName: Swift.String, customAttributeKey: Swift.String)
+  @objc public func addUserIdentityFilter(userIdentity: mParticle_Apple_SDK.MPUserIdentity)
+  @objc public func addUserAttributeFilter(userAttributeKey: Swift.String)
+  @objc public func addCommerceEventAttributeFilter(eventType: mParticle_Apple_SDK.MPEventType, eventAttributeKey: Swift.String)
+  @objc public func addCommerceEventEntityTypeFilter(commerceEventKind: mParticle_Apple_SDK.MPCommerceEventKind)
+  @objc public func addCommerceEventAppFamilyAttributeFilter(attributeKey: Swift.String)
+  @objc public func setEventAttributeConditionalForwarding(attributeName: Swift.String, attributeValue: Swift.String, onlyForward: Swift.Bool)
+  @objc public func addMessageTypeFilter(messageTypeConstant: Swift.String)
+  @objc public func getKitFilters() -> [Swift.String : Any]
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc public class MPIHasher : ObjectiveC.NSObject {
+  @objc public class func hashFNV1a(_ data: Foundation.Data) -> Swift.Int64
+  @objc public class func hashString(_ stringToHash: Swift.String) -> Swift.String
+  @objc public class func hashStringUTF16(_ stringToHash: Swift.String) -> Swift.String
+  @objc public class func hashEventType(_ eventType: mParticle_Apple_SDK.MPEventType) -> Swift.String
+  @objc public class func eventType(forHash hashString: Swift.String) -> mParticle_Apple_SDK.MPEventType
+  @objc public class func hashEventType(_ eventType: mParticle_Apple_SDK.MPEventType, eventName: Swift.String, isLogScreen: Swift.Bool) -> Swift.String
+  @objc public class func hashEventAttributeKey(_ eventType: mParticle_Apple_SDK.MPEventType, eventName: Swift.String, customAttributeName: Swift.String, isLogScreen: Swift.Bool) -> Swift.String
+  @objc public class func hashUserAttributeKey(_ userAttributeKey: Swift.String) -> Swift.String
+  @objc public class func hashUserAttributeValue(_ userAttributeValue: Swift.String) -> Swift.String
+  @objc public class func hashUserIdentity(_ userIdentity: mParticle_Apple_SDK.MPUserIdentity) -> Swift.String
+  @objc public class func hashConsentPurpose(_ regulationPrefix: Swift.String, purpose: Swift.String) -> Swift.String
+  @objc public class func hashCommerceEventAttribute(_ commerceEventType: mParticle_Apple_SDK.MPEventType, key: Swift.String) -> Swift.String
+  @objc public class func hashTriggerEventName(_ eventName: Swift.String, eventType: Swift.String) -> Swift.String
+  @objc override dynamic public init()
+  @objc deinit
+}

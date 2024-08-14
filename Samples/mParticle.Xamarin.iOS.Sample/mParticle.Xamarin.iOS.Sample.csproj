@@ -25,7 +25,7 @@
     <MtouchFastDev>true</MtouchFastDev>
     <IOSDebuggerPort>15886</IOSDebuggerPort>
     <MtouchLink>SdkOnly</MtouchLink>
-    <MtouchArch>i386, x86_64</MtouchArch>
+    <MtouchArch>x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
@@ -40,7 +40,7 @@
     <MtouchFloat32>true</MtouchFloat32>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>None</MtouchLink>
-    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <MtouchArch>ARM64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
@@ -55,7 +55,7 @@
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
     <MtouchLink>None</MtouchLink>
-    <MtouchArch>i386, x86_64</MtouchArch>
+    <MtouchArch>x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
@@ -75,7 +75,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <IOSDebuggerPort>56293</IOSDebuggerPort>
     <MtouchLink>None</MtouchLink>
-    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <MtouchArch>ARM64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
   </PropertyGroup>
   <ItemGroup>
@@ -112,8 +112,10 @@
       <Project>{87D8714A-2E66-487D-860D-72448B61601D}</Project>
       <Name>mParticle.Xamarin.iOS</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Bindings\mParticle.Xamarin.iOSBinding\mParticle.Xamarin.iOSBinding.csproj">
+      <Name>mParticle.Xamarin.iOSBinding</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Library\mParticle.Xamarin.Abstractions\mParticle.Xamarin.Abstractions.csproj">
-      <Project>{0AC58B2A-AE07-49FE-A35C-916AAD11F4D9}</Project>
       <Name>mParticle.Xamarin.Abstractions</Name>
     </ProjectReference>
   </ItemGroup>

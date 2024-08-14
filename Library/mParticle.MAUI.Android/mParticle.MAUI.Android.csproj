@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Bindings\mParticle.MAUI.AndroidBinding\mParticle.MAUI.AndroidBinding.csproj" />
+    <ProjectReference Include="..\mParticle.MAUI.Abstractions\mParticle.MAUI.Abstractions.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Utils\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Utils\" />
+  </ItemGroup>
+</Project>

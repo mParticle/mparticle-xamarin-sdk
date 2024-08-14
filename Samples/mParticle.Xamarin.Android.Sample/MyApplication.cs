@@ -1,7 +1,6 @@
 ﻿using System;
 using Android.App;
 using Android.Runtime;
-using mParticle.Xamarin.Sample.Shared;
 
 namespace mParticle.Xamarin.Android.Sample
 {
@@ -10,12 +9,6 @@ namespace mParticle.Xamarin.Android.Sample
 	{
 		public MyApplication(IntPtr handle, JniHandleOwnership ownerShip) : base(handle, ownerShip)
 		{
-		}
-
-		public override void OnCreate()
-		{
-            base.OnCreate();
-			SampleCalls.Init();
 		}
 	}
 }

@@ -41,8 +41,11 @@
   <ItemGroup>
     <ObjcBindingCoreSource Include="Structs.cs" />
   </ItemGroup>
+  <PropertyGroup>
+    <NoBindingEmbedding>true</NoBindingEmbedding>
+  </PropertyGroup>
   <ItemGroup>
-    <NativeReference Include="mParticle_Apple_SDK.framework">
+    <NativeReference Include="..\mParticle_Apple_SDK.xcframework">
       <Kind>Framework</Kind>
       <SmartLink>False</SmartLink>
     </NativeReference>

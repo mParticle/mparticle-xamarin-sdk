@@ -5,28 +5,22 @@ on:
 
 jobs:
   Build: 
-    runs-on: macos-10.15
+    runs-on: macOS-14
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
+    - name: Install Mono Framework
+      run: |
+        curl https://download.mono-project.com/archive/6.12.0/macos-10-universal/MonoFramework-MDK-6.12.0.206.macos10.xamarin.universal.pkg -o /tmp/MonoFramework-MDK-6.12.0.206.macos10.xamarin.universal.pkg
+        sudo installer -pkg /tmp/MonoFramework-MDK-6.12.0.206.macos10.xamarin.universal.pkg -target /
+    - name: Install Xamarin Android Framework
+      run: |
+        curl https://download.visualstudio.microsoft.com/download/pr/8cbf56b1-ef0d-466f-8cfe-fae4ba8c5080/e9e853fee3169b1c5128098942f19120/xamarin.android-13.2.2.0.pkg -o /tmp/xamarin.android-13.2.2.0.pkg
+        sudo installer -pkg /tmp/xamarin.android-13.2.2.0.pkg -target /
+    - name: Install Xamarin iOS Framework
+      run: |
+        curl https://download.visualstudio.microsoft.com/download/pr/ceb0ea3f-4db8-46b4-8dc3-8049d27c0107/3960868aa9b1946a6c77668c3f3334ee/xamarin.ios-16.4.0.23.pkg -o /tmp/xamarin.ios-16.4.0.23.pkg
+        sudo installer -pkg /tmp/xamarin.ios-16.4.0.23.pkg -target /
+    - name: Install MAUI workload
+      run: dotnet workload install maui
     - name: Build artifacts
       run: ./build.sh
-      
-  Android:
-    runs-on: macos-10.15
-    steps:
-    - uses: actions/checkout@v1
-    - name: Android
-      run: |
-        nuget restore
-        cd Samples/mParticle.Xamarin.Android.Sample
-        msbuild
-        
-  iOS:
-    runs-on: macos-10.15
-    steps:
-    - uses: actions/checkout@v1
-    - name: iOS
-      run: |
-        nuget restore
-        cd Samples/mParticle.Xamarin.iOS.Sample
-        msbuild
