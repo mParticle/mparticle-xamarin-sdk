@@ -8,25 +8,9 @@ jobs:
     runs-on: macOS-14
     steps:
     - uses: actions/checkout@v4
+    - name: Install Mono Framework
+      run: brew install mono
+    - name: Install MAUI workload
+      run: dotnet workload install maui
     - name: Build artifacts
       run: ./build.sh
-      
-  Android:
-    runs-on: macos-14
-    steps:
-    - uses: actions/checkout@v4
-    - name: Android
-      run: |
-        dotnet restore
-        cd Samples/mParticle.Xamarin.Android.Sample
-        dotnet build
-        
-  iOS:
-    runs-on: macos-14
-    steps:
-    - uses: actions/checkout@v4
-    - name: iOS
-      run: |
-        dotnet restore
-        cd Samples/mParticle.Xamarin.iOS.Sample
-        dotnet build
