@@ -11,22 +11,25 @@
        <requireLicenseAcceptance>false</requireLicenseAcceptance>
        <iconUrl>https://static.mparticle.com/sdk/nuget_logo.png</iconUrl>
        <description>
-         mParticle .Net SDK
+         mParticle .NET SDK
        </description>
        <summary>
-         mParticle .Net SDK
+         mParticle .NET SDK
        </summary>
        <tags>mparticle, analytics, marketing, maui, xamarin, xamarin.forms, android, ios, plugin for xamarin</tags>
     <dependencies>
       <group targetFramework="net">
-      </group>
-      <group targetFramework="MonoAndroid10">
-      </group>
-      <group targetFramework="Xamarin.iOS10">
-      </group>
-       <group targetFramework="portable-net45+win+wpa81+wp80">
-      </group>
-       <group targetFramework="net8.0-ios">
+        </group>
+        <group targetFramework="MonoAndroid10">
+        </group>
+        <group targetFramework="Xamarin.iOS10">
+        </group>
+        <group targetFramework="portable-net45+win+wpa81+wp80">
+        </group>
+        <group targetFramework="net8.0-ios">
+        </group>
+        <group targetFramework="net8.0-android">
+        </group>
       </group>
     </dependencies>
    </metadata>
@@ -43,6 +46,9 @@
 
      <!--MAUI.iOS-->
      <file src="mParticle.MAUI.iOS/bin/Release/mParticle.*" target="lib/net8.0-ios" />
+
+     <!--MAUI.Android-->
+     <file src="mParticle.MAUI.Android/bin/Release/mParticle.*" target="lib/net8.0-android" />
 
 
    </files>
