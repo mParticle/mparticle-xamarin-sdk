@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+   <metadata minClientVersion="2.8.1">
+       <id>mParticle.MAUI</id>
+       <version>3.0.0</version>
+       <title>mParticle .NET MAUI SDK</title>
+       <authors>Wasi Haider, Sam Dozor, Will Passidomo, Brandon Stalnaker, mParticle Inc.</authors>
+       <owners>mParticle Inc.</owners>
+       <licenseUrl>https://github.com/mParticle/mparticle-maui-sdk/blob/master/LICENSE</licenseUrl>
+       <projectUrl>https://github.com/mparticle/mparticle-maui-sdk</projectUrl>
+       <requireLicenseAcceptance>false</requireLicenseAcceptance>
+       <iconUrl>https://static.mparticle.com/sdk/nuget_logo.png</iconUrl>
+       <description>
+         mParticle .NET MAUI SDK
+       </description>
+       <summary>
+         mParticle .NET MAUI SDK
+       </summary>
+       <tags>mparticle, analytics, marketing, maui, xamarin, xamarin.forms, android, ios, plugin for xamarin</tags>
+    <dependencies>
+      <group targetFramework="net8.0-ios17.5"></group>
+      <group targetFramework="net8.0-android33.0"></group>
+    </dependencies>
+   </metadata>
+   <files>
+     
+     <!--MAUI.iOS-->
+     <file src="Library/mParticle.MAUI.iOS/bin/Release/net8.0-ios/mParticle.*" target="lib/net8.0-ios17.5" />
+
+     <!--MAUI.Android-->
+     <file src="Library/mParticle.MAUI.Android/bin/Release/net8.0-android/mParticle.*" target="lib/net8.0-android33.0" />
+
+   </files>
+</package>
