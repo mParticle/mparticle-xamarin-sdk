@@ -1,3 +1,7 @@
+# Xamarin is now EOL (End of Life) and is no longer supported. Please see the mParticle MAUI SDK for continued C# mobile development support: https://github.com/mParticle/mparticle-maui-sdk
+
+-------
+
 # mParticle Xamarin SDK
 
 This is the repository of the mParticle Xamarin SDK, which is compatible with iOS and Android apps. The SDK consists of a common C# API layer and two Xamarin binding libraries for mParticle's native iOS and Android SDKs.
